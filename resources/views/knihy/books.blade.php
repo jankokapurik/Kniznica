@@ -6,23 +6,7 @@
             <div class="mb-4 flex justify-start">
                 @if($books->count())
                     @foreach($books as $book)
-                        <div class="bg-gray-200 m-2 rounded-lg p-2 ">
-                            <p>{{ $book->authors->firstName }} {{ $book->authors->lastName }}</p>
-                            <p>{{ $book->title }}</p>
-                            <p>{{ $book->languages->language }}</p>
-                            <p>{{ $book->quantity }}</p>
-                        </div>
-                    @endforeach
-                    @foreach($books as $book)
-                        <div class="bg-gray-200 m-2 rounded-lg p-2 ">
-                            <p>{{ $book->authors->firstName }} {{ $book->authors->lastName }}</p>
-                            <p>{{ $book->title }}</p>
-                            <p>{{ $book->languages->language }}</p>
-                            <p>{{ $book->quantity }}</p>
-                        </div>
-                    @endforeach
-                    @foreach($books as $book)
-                        <div class="bg-gray-200 m-2 rounded-lg p-2 ">
+                        <div class="bg-gray-200 m-2 rounded-lg p-2 w-1/4">
                             <p>{{ $book->authors->firstName }} {{ $book->authors->lastName }}</p>
                             <p>{{ $book->title }}</p>
                             <p>{{ $book->languages->language }}</p>

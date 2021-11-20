@@ -38,7 +38,7 @@ class RegisterController extends Controller
             'lname' =>'required|max:255',
             'username' =>'required|max:255',
             'email' =>'required|email|max:255',
-            'password' =>'required|confirmed',
+            'password' =>'required|confirmed|min:6|max:20',
             'schools_id' => 'required', 
             'classrooms_id' => 'required', 
         ]);

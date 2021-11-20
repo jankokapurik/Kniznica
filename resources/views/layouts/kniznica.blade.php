@@ -20,7 +20,13 @@
                 <a href="{{ route('books') }}" class="p-3 hover:text-purple-600">Library</a>
             </li>
         </ul>
-
+        <div>
+            <form action="" method="post" class="flex items-center">
+                <label for="search" class="sr-only">Name</label>
+                <input type="text" name="search" placeholder="Vyhľadaj" class="bg-gray-100 border-2 w-full p-1 rounded-lg mr-2">
+                <button type="submit" class="bg-blue-500 text-white p-1 rounded font-medium  hover:opacity-50">Hľadaj</button>
+            </form>
+        </div>
         <ul class="flex items-center ">
             @auth
                 <li>
