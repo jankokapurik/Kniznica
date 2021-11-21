@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\PostController;   
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\UserKnihaController;
@@ -43,3 +44,6 @@ Route::post('/knihy/ {kniha} /likes', [PostLikeController::class, 'store'])->nam
 Route::delete('/knihy/ {kniha} /likes', [PostLikeController::class, 'destroy'])->name('knihy.likes');
 
 Route::get('/books', [BooksController::class, 'index'])->name('books');
+
+// Route::get('/search', [SearchController::class, 'index'])->name('search');
+
