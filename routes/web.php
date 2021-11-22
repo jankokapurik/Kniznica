@@ -6,7 +6,6 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\PostController;   
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\UserKnihaController;
-use App\Http\Controllers\ClassroomsController;
 use App\Http\Controllers\Auth\LoginController; 
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;   
@@ -45,5 +44,5 @@ Route::delete('/knihy/ {kniha} /likes', [PostLikeController::class, 'destroy'])-
 
 Route::get('/books', [BooksController::class, 'index'])->name('books');
 
-// Route::get('/search', [SearchController::class, 'index'])->name('search');
+Route::post('/search', [SearchController::class, 'index'])->name('knihy.welcome');
 
