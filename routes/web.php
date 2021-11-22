@@ -46,3 +46,6 @@ Route::get('/books', [BooksController::class, 'index'])->name('books');
 
 Route::post('/search', [SearchController::class, 'index'])->name('knihy.welcome');
 
+
+Route::get('/search2', [SearchController::class, 'index'])->name('search2');
+
