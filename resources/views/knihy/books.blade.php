@@ -28,6 +28,8 @@
                             <p>{{ $book->quantity }}</p>
                         </div>
                     @endforeach
+
+                    {{ $books->links() }}
                 @else
                     <p>Nie je ziadna kniha</p>
                 @endif
