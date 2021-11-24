@@ -12,9 +12,15 @@ class BooksController extends Controller
         $books = Books::latest()->paginate(10);
 
 
-        return view('knihy.books', [
+        return view('books.books', [
             'books' => $books
         ]);
-    }
 
+    }
+    public function show(Books $book) {
+    
+        return view('books.show', [
+            'book' => $book
+        ]);
+    }
 }

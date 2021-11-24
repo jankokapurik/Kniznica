@@ -12,9 +12,9 @@ class SearchController extends Controller
 {
     public function index(){
         $text = $_GET['search'];
-         $results = Books::where('title', 'LIKE', '%'.$text.'%')->get();
+         $results = Books::where('title', 'LIKE', '%'.$text.'%')->latest()->paginate();
 
-        return view('knihy.books',[
+        return view('books.books',[
             'books' => $results
         ]);
     }

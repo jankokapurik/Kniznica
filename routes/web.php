@@ -43,9 +43,13 @@ Route::post('/knihy/ {kniha} /likes', [PostLikeController::class, 'store'])->nam
 Route::delete('/knihy/ {kniha} /likes', [PostLikeController::class, 'destroy'])->name('knihy.likes');
 
 Route::get('/books', [BooksController::class, 'index'])->name('books');
-
-Route::post('/search', [SearchController::class, 'index'])->name('knihy.welcome');
-
+// Route::get('/books/{book}', [BooksController::class, 'show'])->name('books.show');
 
 Route::get('/search2', [SearchController::class, 'index'])->name('search2');
+
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('/admin', function () {
+      return view('admin.dashboard');
+    })->name('dashboard');
+  });
 

@@ -1,4 +1,4 @@
-@extends('layouts.kniznica')
+@extends('layouts.userLayout')
 
 @section('content')
     <div class="flex justify-center">
@@ -21,12 +21,7 @@
             <div class="p-4 mb-4 w-full divide-y divide-gray-300">
                 @if($books->count())
                     @foreach($books as $book)
-                        <div class="p-2 w-full ">
-                            <p>{{ $book->authors->firstName }} {{ $book->authors->lastName }}</p>
-                            <p>{{ $book->title }}</p>
-                            <p>{{ $book->languages->language }}</p>
-                            <p>{{ $book->quantity }}</p>
-                        </div>
+                        <x-book :book="$book" />
                     @endforeach
 
                     {{ $books->links() }}

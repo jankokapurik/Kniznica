@@ -1,4 +1,4 @@
-@extends('layouts.kniznica')
+@extends('layouts.userLayout')
 
 @section('content')
     <div class="flex justify-center">

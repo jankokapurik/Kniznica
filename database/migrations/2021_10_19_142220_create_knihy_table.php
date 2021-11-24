@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKnihiesTable extends Migration
+class CreateKnihyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateKnihiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('knihies', function (Blueprint $table) {
+        Schema::create('knihy', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('users_id')->constrained()->onDelete('cascade');
             $table->text('body');
             $table->timestamps();
         });
