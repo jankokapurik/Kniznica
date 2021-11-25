@@ -11,15 +11,8 @@ class PostController extends Controller
         $knihy = Knihy::latest()->with(['user', 'likes'])->paginate(10);
 
 
-        return view('knihy.knihy', [
+        return view('books.show', [
             'knihy' => $knihy
-        ]);
-    }
-
-    public function show(Knihy $kniha) {
-        
-        return view('knihy.show', [
-            'kniha' => $kniha
         ]);
     }
 

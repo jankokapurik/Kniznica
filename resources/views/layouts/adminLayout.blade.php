@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body class="bg-gray-200">
-    <nav class="p-6 bg-white flex justify-between mb-6">
+    <nav class="p-6 bg-white flex justify-between">
         <ul class="flex items-center">
             <li>
                 <a href="{{ route('dashboard') }}" class="p-3 hover:text-purple-600">Dashboard</a>
@@ -48,6 +48,28 @@
            
         </ul>
     </nav>
-    @yield('content')
+    <div class="flex flex-row  ">
+        <div class="">
+            <nav class="p-6 bg-white h-screen py-6">
+                <ul class="">
+                    <li>
+                        <a href="{{ route('dashboard') }}" class="p-3 hover:text-purple-600">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('books') }}" class="p-3 hover:text-purple-600">Library</a>
+                    </li>
+                </ul>
+                <ul class="">
+                    <li>
+                        <a href="" class="p-3 hover:text-purple-600">Dashboard</a>
+                    </li> 
+                    <li>
+                        <a href="" class="p-3 hover:text-purple-600">catalog</a>
+                    </li> 
+                </ul>
+            </nav>
+        </div>
+        @yield('content')
+    </div>
 </body>
 </html>

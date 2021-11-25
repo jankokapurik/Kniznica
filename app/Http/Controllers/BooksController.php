@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Authors;
 use App\Models\Books;
 use Illuminate\Http\Request;
 

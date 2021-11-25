@@ -20,7 +20,7 @@ class AdminMiddleware
             return $next($request);
         } 
         else {
-            return redirect('/');
+            return redirect('/dashboard');
         }
     }
 }
