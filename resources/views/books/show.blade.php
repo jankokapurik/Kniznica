@@ -1,11 +1,22 @@
 @extends('layouts.userLayout')
 
 @section('content')
-    <div class="flex justify-center">
-        <div class="w-8/12 bg-white p-6 rounded-lg" >
-            <x-book :book="$book" />
+
+    <div class="flex flex-col justify-center">
+        <div class="w-8/12 bg-white p-6 rounded-lg m-10" >
+            <x-book :book="$book" />            
         </div>
+
+    
+        @foreach ($book->comments() as $comment)
+            <div class="w-8/12 bg-white p-6 rounded-lg m-10" >
+                <x-comment :comment="$comment" />
+                {{-- <a>{{ $comment->id }}</a> --}}
+            </div>
+        @endforeach
     </div>
+    
+
 
     {{-- <div class="flex justify-center">
         <div class="w-8/12 bg-white p-6 rounded-lg" >

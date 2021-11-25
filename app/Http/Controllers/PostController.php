@@ -9,8 +9,6 @@ class PostController extends Controller
 {
     public function index() {
         $knihy = Knihy::latest()->with(['user', 'likes'])->paginate(10);
-
-
         return view('books.show', [
             'knihy' => $knihy
         ]);

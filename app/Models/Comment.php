@@ -13,7 +13,6 @@ class Comment extends Model
     protected $fillable = [
         'rating',
         'comment' 
-
     ];
 
     public function likedBy(User $user) {
@@ -26,7 +25,6 @@ class Comment extends Model
     }
 
     public function book() {
-
         return $this->belongsTo(Books::class);
     }
 
