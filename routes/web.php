@@ -10,13 +10,13 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;   
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CommentController;
 
 Route::get('/', function() {
     return view('home');
 })->name('home');   
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/users/{user:username}/knihy', [UserKnihaController::class, 'index'])->name('users.knihy');
 
@@ -34,15 +34,12 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/register', [RegisterController::class, 'show'])->name('register');
 
-Route::get('/knihy', [PostController::class, 'index'])->name('knihy');
-Route::post('/knihy', [PostController::class, 'store']);
+  // Route::get('/knihy', [PostController::class, 'index'])->name('knihy');
+  // Route::post('/knihy', [PostController::class, 'store']);
 Route::delete('/knihy/{kniha}', [PostController::class, 'destroy'])->name('knihy.destroy');
 
 Route::post('/knihy/ {kniha} /likes', [PostLikeController::class, 'store'])->name('knihy.likes');
 Route::delete('/knihy/ {kniha} /likes', [PostLikeController::class, 'destroy'])->name('knihy.likes');
-
-Route::get('/books', [BooksController::class, 'index'])->name('books');
-Route::get('/books/{book}', [BooksController::class, 'show'])->name('books.show');
 
 Route::get('/search2', [SearchController::class, 'index'])->name('search2');
 
@@ -61,3 +58,8 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     })->name('userManagement');
   });
 
+Route::get('/books', [BooksController::class, 'index'])->name('books');
+Route::get('/books/{book}', [BooksController::class, 'show'])->name('books.show');
+
+Route::get('/knihy', [CommentController::class, 'index'])->name('knihy');
+Route::post('/knihy', [CommentController::class, 'store']);

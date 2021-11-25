@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Books extends Model
 {
     use HasFactory;
-
     
     public function authors()
     {
@@ -19,4 +18,10 @@ class Books extends Model
     {
         return $this->belongsTo(Language::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->get();
+    }
+
 }

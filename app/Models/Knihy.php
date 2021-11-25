@@ -12,7 +12,6 @@ class Knihy extends Model
     
     protected $fillable = [
         'body' 
-
     ];
 
     public function likedBy(User $user) {
