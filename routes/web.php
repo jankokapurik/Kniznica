@@ -47,11 +47,17 @@ Route::get('/books/{book}', [BooksController::class, 'show'])->name('books.show'
 Route::get('/search2', [SearchController::class, 'index'])->name('search2');
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
-    Route::get('/admin', function () {
+    Route::get('/dashboard', function () {
       return view('admin.dashboard');
     })->name('dashboard');
     Route::get('/', function () {
       return view('admin.home');
     })->name('home');
+    Route::get('/booksManagement', function () {
+      return view('admin.booksManagement');
+    })->name('booksManagement');
+    Route::get('/userManagement', function () {
+      return view('admin.userManagement');
+    })->name('userManagement');
   });
 

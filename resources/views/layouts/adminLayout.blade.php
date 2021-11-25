@@ -36,36 +36,22 @@
                         <button class="p-3 hover:text-purple-600" type="submit">Odhlásiť sa</button>
                     </form>
                 </li>
-            @endauth
-            @guest
-                <li>
-                    <a href="{{route('login')}}" class="p-3 hover:text-purple-600">Prihlásiť sa</a>
-                </li>
-                <li>
-                    <a href="{{route('register')}}" class="p-3 hover:text-purple-600">Zaregistrovať sa</a>
-                </li>
-            @endguest
-           
+            @endauth           
         </ul>
     </nav>
     <div class="flex flex-row  ">
-        <div class="">
-            <nav class="p-6 bg-white h-screen py-6">
-                <ul class="">
-                    <li>
-                        <a href="{{ route('dashboard') }}" class="p-3 hover:text-purple-600">Dashboard</a>
+        <div class="mt-6 p-3 h-screen rounded-tr-lg bg-white">
+            <nav class="w-max ">
+                <ul class="divide-y">
+                    <li class="p-1 hover:bg-gray-200">
+                        <a href="{{ route('dashboard') }}" class=" hover:text-purple-600">Dashboard</a>
                     </li>
-                    <li>
-                        <a href="{{ route('books') }}" class="p-3 hover:text-purple-600">Library</a>
+                    <li class="p-1 hover:bg-gray-200">
+                        <a href="{{ route('booksManagement') }}" class=" hover:text-purple-600">Manažment kníh</a>
                     </li>
-                </ul>
-                <ul class="">
-                    <li>
-                        <a href="" class="p-3 hover:text-purple-600">Dashboard</a>
-                    </li> 
-                    <li>
-                        <a href="" class="p-3 hover:text-purple-600">catalog</a>
-                    </li> 
+                    <li class="p-1 hover:bg-gray-200">
+                        <a href="{{ route('userManagement') }}" class=" hover:text-purple-600">Manažment užívateľov</a>
+                    </li>
                 </ul>
             </nav>
         </div>

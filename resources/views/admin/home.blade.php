@@ -1,9 +1,8 @@
 @extends('layouts.adminLayout')
 
 @section('content')
-    <div class="flex justify-center">
-        <div class="w-8/12 bg-white p-6 rounded-lg" >
+    <div class="flex w-full">
+        <div class="w-full m-6 bg-white p-6 rounded-lg" >
             Admin home
-        </div>
     </div>
 @endsection
