@@ -3,10 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;   
 use App\Http\Controllers\PostLikeController;
+use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\UserKnihaController;
 use App\Http\Controllers\Auth\LoginController; 
 use App\Http\Controllers\Auth\LogoutController;
@@ -54,10 +56,21 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/booksManagement', function () {
       return view('admin.booksManagement');
     })->name('booksManagement');
+
     Route::get('/userManagement', [UserController::class, 'index'])->name('userManagement');
     Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
     Route::get('/user/{user}', [UserController::class, 'edit'])->name('user.edit');
-    Route::put('/user/{user}', [UserController::class, 'update']);
+    Route::put('/user/{user}', [UserController::class, 'update'])->name('user.update');
+
+    Route::get('/classroomManagement', [ClassroomController::class, 'index'])->name('classroomManagement');
+    // Route::delete('/classroom/{classroom}', [ClassroomController::class, 'destroy'])->name('classroom.destroy');
+    // Route::get('/classroom/{classroom}', [ClassroomController::class, 'edit'])->name('classroom.edit');
+    // Route::put('/classroom/{classroom}', [ClassroomController::class, 'update'])->name('classroom.update');
+
+    // Route::get('/schoolManagement', [SchoolController::class, 'index'])->name('classroomManagement');
+    // Route::delete('/school/{school}', [SchoolController::class, 'destroy'])->name('school.destroy');
+    // Route::get('/school/{school}', [SchoolController::class, 'edit'])->name('school.edit');
+    // Route::put('/school/{school}', [SchoolController::class, 'update'])->name('school.update');
   });
 
 Route::get('/books', [BooksController::class, 'index'])->name('books');
