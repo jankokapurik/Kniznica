@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Classroom;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class ClassroomController extends Controller
 {
     public function index() {
 
-        $users = User::get();
+        $classrooms = Classroom::get();
         
-        return view('admin.userManagement', ['users' => $users]);
+        return view('admin.classroomManagement', ['classrooms' => $classrooms]);
     }
 
     public function destroy(User $user) {
@@ -42,4 +42,3 @@ class UserController extends Controller
         return redirect()->route('userManagement')->with('success','Product updated successfully');
     }
 }
-
