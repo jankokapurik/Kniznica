@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\AdminMiddleware;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -27,9 +28,9 @@ class UserController extends Controller
         return view('admin.editUser', ['user' => $user]);
     }
 
-    public function update(User $user) {
+    public function update(User $user, Request $request) {
 
-        request()->validate([
+        $this->validate($request,[
             'username' =>'required|max:255',
             'fname' =>'required|max:255',
             'lname' =>'required|max:255',
@@ -37,13 +38,14 @@ class UserController extends Controller
             'user_type' =>'required||max:255',
         ]);
         
-        $user->update([
-            'username' => request('username'),
-            'fname' => request('fname'),
-            'lname' => request('lname'),
-            'email' => request('email'),
-            'user_type' => request('user_type'),
+       $user->update([
+            'username' => $request('username'),
+            'fname' => $request('fname'),
+            'lname' => $request('lname'),
+            'email' => $request('email'),
+            'user_type' => $request('user_type'),
         ]);
+
     }
 }
 
