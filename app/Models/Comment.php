@@ -12,7 +12,8 @@ class Comment extends Model
     
     protected $fillable = [
         'rating',
-        'comment' 
+        'comment',
+        'books_id'
     ];
 
     public function likedBy(User $user) {
@@ -20,7 +21,6 @@ class Comment extends Model
     }
 
     public function user() {
-
         return $this->belongsTo(User::class);
     }
 

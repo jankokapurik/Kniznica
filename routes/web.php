@@ -36,30 +36,35 @@ Route::get('/register', [RegisterController::class, 'show'])->name('register');
 
   // Route::get('/knihy', [PostController::class, 'index'])->name('knihy');
   // Route::post('/knihy', [PostController::class, 'store']);
-Route::delete('/knihy/{kniha}', [PostController::class, 'destroy'])->name('knihy.destroy');
+
 
 Route::post('/knihy/ {kniha} /likes', [PostLikeController::class, 'store'])->name('knihy.likes');
 Route::delete('/knihy/ {kniha} /likes', [PostLikeController::class, 'destroy'])->name('knihy.likes');
 
 Route::get('/search2', [SearchController::class, 'index'])->name('search2');
 
-Route::middleware(['auth', 'isAdmin'])->group(function () {
-    Route::get('/dashboard', function () {
-      return view('admin.dashboard');
-    })->name('dashboard');
-    Route::get('/', function () {
-      return view('admin.home');
-    })->name('home');
-    Route::get('/booksManagement', function () {
-      return view('admin.booksManagement');
-    })->name('booksManagement');
-    Route::get('/userManagement', function () {
-      return view('admin.userManagement');
-    })->name('userManagement');
-  });
+// Route::middleware(['auth', 'isAdmin'])->group(function () {
+//     Route::get('/dashboard', function () {
+//       return view('admin.dashboard');
+//     })->name('dashboard');
+//     Route::get('/', function () {
+//       return view('admin.home');
+//     })->name('home');
+//     Route::get('/booksManagement', function () {
+//       return view('admin.booksManagement');
+//     })->name('booksManagement');
+//     Route::get('/userManagement', function () {
+//       return view('admin.userManagement');
+//     })->name('userManagement');
+//   });
 
 Route::get('/books', [BooksController::class, 'index'])->name('books');
 Route::get('/books/{book}', [BooksController::class, 'show'])->name('books.show');
 
-Route::get('/knihy', [CommentController::class, 'index'])->name('knihy');
-Route::post('/knihy', [CommentController::class, 'store']);
+Route::get('/comments', [CommentController::class, 'index'])->name('comments');
+Route::post('/comments', [CommentController::class, 'store']);
+
+Route::delete('/comment.destroy/{comment}',[CommentController::class, 'destroy'])->name('comment.destroy');
+
+Route::get('/comment.edit/{comment}',[CommentController::class, 'show'])->name('comment.edit');
+Route::patch('/comment.edit/{comment}',[CommentController::class, 'edit'])->name('comment.edit');
