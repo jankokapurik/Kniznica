@@ -13,4 +13,9 @@ class Classroom extends Model
     protected $fillable = [
     ];
 
+    public function user()
+    {
+        return $this->hasOne(Classroom::class);
+    }
+
 }

@@ -27,6 +27,7 @@ class User extends Authenticatable
         'username',
         'schools_id',
         'classrooms_id',
+        'user_type',
     ];
 
     /**
@@ -60,5 +61,15 @@ class User extends Authenticatable
     public function recievedLikes() {
 
         return $this->hasManyThrough(Like::class, Knihy::class);
+    }
+
+    public function classrooms()
+    {
+        return $this->belongsTo(Classroom::class);
+    }
+    
+    public function schools()
+    {
+        return $this->belongsTo(School::class);
     }
 }

@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;   
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\UserKnihaController;
@@ -10,10 +12,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;   
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\CommentController;
 
 Route::get('/', function() {
-    return view('home');
+    return view('users.home');
 })->name('home');   
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -44,18 +45,19 @@ Route::delete('/knihy/ {kniha} /likes', [PostLikeController::class, 'destroy'])-
 Route::get('/search2', [SearchController::class, 'index'])->name('search2');
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
-    Route::get('/dashboard', function () {
+    Route::get('/adminDashboard', function () {
       return view('admin.dashboard');
     })->name('dashboard');
-    Route::get('/', function () {
+    Route::get('/admin', function () {
       return view('admin.home');
     })->name('home');
     Route::get('/booksManagement', function () {
       return view('admin.booksManagement');
     })->name('booksManagement');
-    Route::get('/userManagement', function () {
-      return view('admin.userManagement');
-    })->name('userManagement');
+    Route::get('/userManagement', [UserController::class, 'index'])->name('userManagement');
+    Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::get('/user/{user}', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/user/{user}', [UserController::class, 'update']);
   });
 
 Route::get('/books', [BooksController::class, 'index'])->name('books');
