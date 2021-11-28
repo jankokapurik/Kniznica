@@ -21,7 +21,7 @@ class Books extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class)->get();
+        // return $this->hasMany(Comment::class)->latest()->get();
+        return $this->hasMany(Comment::class);
     }
-
 }

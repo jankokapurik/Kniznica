@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class BooksController extends Controller
 {
     public function index() {
+        
         $books = Books::latest()->paginate(10);
 
         return view('books.books', [
@@ -15,11 +16,10 @@ class BooksController extends Controller
         ]);
 
     }
-    public function show(Books $book) {
-        
+    public function show(Books $book) {     
         return view('books.show', [
             'book' => $book,
-            'comments' => $book->comments()
+            'comments' => $book->comments()->latest()->get()
         ]);
     }
 }
