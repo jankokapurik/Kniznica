@@ -8,7 +8,7 @@
                     <th class="border border-gray-600 p-1">Užívaťeľské meno</th>
                     <th class="border border-gray-600 p-1">Email</th>
                     <th class="border border-gray-600 p-1">Meno</th>
-                    <th class="border border-gray-600 p-1">Priezvysko</th>
+                    <th class="border border-gray-600 p-1">Priezvisko</th>
                     <th class="border border-gray-600 p-1">Škola</th>
                     <th class="border border-gray-600 p-1">Trieda</th>
                     <th class="border border-gray-600 p-1">Typ užívateľa</th>

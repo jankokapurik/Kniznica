@@ -9,6 +9,10 @@ class School extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+    ];
+
     public function user() {
 
         return $this->hasOne(User::class);

@@ -9,4 +9,8 @@ class Language extends Model
 {
     use HasFactory;
 
+    public function book() {
+
+        return $this->hasOne(Book::class);
+    }
 }

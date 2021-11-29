@@ -57,20 +57,30 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
       return view('admin.booksManagement');
     })->name('booksManagement');
 
+    //  manazment pouzivatelov
     Route::get('/userManagement', [UserController::class, 'index'])->name('userManagement');
     Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
     Route::get('/user/{user}', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/user/{user}', [UserController::class, 'update'])->name('user.update');
 
-    Route::get('/classroomManagement', [ClassroomController::class, 'index'])->name('classroomManagement');
-    // Route::delete('/classroom/{classroom}', [ClassroomController::class, 'destroy'])->name('classroom.destroy');
-    // Route::get('/classroom/{classroom}', [ClassroomController::class, 'edit'])->name('classroom.edit');
-    // Route::put('/classroom/{classroom}', [ClassroomController::class, 'update'])->name('classroom.update');
 
-    // Route::get('/schoolManagement', [SchoolController::class, 'index'])->name('classroomManagement');
-    // Route::delete('/school/{school}', [SchoolController::class, 'destroy'])->name('school.destroy');
-    // Route::get('/school/{school}', [SchoolController::class, 'edit'])->name('school.edit');
-    // Route::put('/school/{school}', [SchoolController::class, 'update'])->name('school.update');
+    //  manazment tried
+    Route::get('/classroomManagement', [ClassroomController::class, 'index'])->name('classroomManagement');
+    Route::delete('/classroom/{classroom}', [ClassroomController::class, 'destroy'])->name('classroom.destroy');
+    Route::get('/classroom/{classroom}', [ClassroomController::class, 'edit'])->name('classroom.edit');
+    Route::put('/classroom/{classroom}', [ClassroomController::class, 'update'])->name('classroom.update');
+
+    //  manazment skol
+    Route::get('/schoolManagement', [SchoolController::class, 'index'])->name('schoolManagement');
+    Route::delete('/school/{school}', [SchoolController::class, 'destroy'])->name('school.destroy');
+    Route::get('/school/{school}', [SchoolController::class, 'edit'])->name('school.edit');
+    Route::put('/school/{school}', [SchoolController::class, 'update'])->name('school.update');
+
+    //  manzament knih
+    Route::get('/bookManagement', [BooksController::class, 'adminindex'])->name('bookManagement');
+    Route::delete('/book/{book}', [BooksController::class, 'destroy'])->name('book.destroy');
+    Route::get('/book/{book}', [BooksController::class, 'edit'])->name('book.edit');
+    Route::put('/book/{book}', [BooksController::class, 'update'])->name('book.update');
   });
 
 Route::get('/books', [BooksController::class, 'index'])->name('books');
