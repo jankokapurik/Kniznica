@@ -14,31 +14,33 @@ class ClassroomController extends Controller
         return view('admin.classroomManagement', ['classrooms' => $classrooms]);
     }
 
-    public function destroy(User $user) {
+    public function destroy(Classroom $classroom) {
         
-        // $this->authorize('delete', $user);
+        // $this->authorize('delete', $classroom);
 
-        $user->delete();
+        $classroom->delete();
         return back();
     }
 
-    public function edit(User $user) {
+    public function edit(Classroom $classroom) {
         
-        return view('admin.editUser', ['user' => $user]);
+        return view('admin.editClassroom', ['classroom' => $classroom]);
     }
 
-    public function update(User $user, Request $request) {
+    public function update(Classroom $classroom, Request $request) {
 
         $request->validate([
-            'username' =>'required|max:255',
-            'fname' =>'required|max:255',
-            'lname' =>'required|max:255',
-            'email' =>'required|email|max:255',
-            'user_type' =>'required||max:255',
+            'name' =>'required|max:255',
         ]);
         
-        $user->update($request->all());
+        $classroom->update($request->all());
 
-        return redirect()->route('userManagement')->with('success','Product updated successfully');
+        return redirect()->route('classroomManagement')->with('success','Product updated successfully');
+    }
+
+    public function store(Request $request) {
+        $request->validate([
+            'name' =>'required|max:255',
+        ]);
     }
 }

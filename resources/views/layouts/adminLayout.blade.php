@@ -55,6 +55,9 @@
                     <li class="p-1 hover:bg-gray-200">
                         <a href="{{ route('classroomManagement') }}" class=" hover:text-purple-600">Manažment tried</a>
                     </li>
+                    <li class="p-1 hover:bg-gray-200">
+                        <a href="{{ route('schoolManagement') }}" class=" hover:text-purple-600">Manažment škôl</a>
+                    </li>
                 </ul>
             </nav>
         </div>
