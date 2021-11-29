@@ -11,13 +11,26 @@ class ClassroomController extends Controller
 
         $classrooms = Classroom::get();
         
-        return view('admin.classroomManagement', ['classrooms' => $classrooms]);
+        return view('admin.manageClassrooms', ['classrooms' => $classrooms]);
+    }
+
+    public function create() {
+        
+        return view('admin.createClassroom');
+    }
+    
+    public function store(Request $request) {
+        $request->validate([
+            'name' =>'required|max:255',
+        ]);
+
+        Classroom::create($request->all());
+     
+        return redirect()->route('classroomManagement');
     }
 
     public function destroy(Classroom $classroom) {
         
-        // $this->authorize('delete', $classroom);
-
         $classroom->delete();
         return back();
     }
@@ -36,11 +49,5 @@ class ClassroomController extends Controller
         $classroom->update($request->all());
 
         return redirect()->route('classroomManagement')->with('success','Product updated successfully');
-    }
-
-    public function store(Request $request) {
-        $request->validate([
-            'name' =>'required|max:255',
-        ]);
     }
 }

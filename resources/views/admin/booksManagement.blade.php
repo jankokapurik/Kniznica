@@ -3,6 +3,10 @@
 @section('content')
     <div class="flex w-full">
         <div class="w-full mt-6 ml-6 bg-white p-6 rounded-tl-lg" >
+            <form action="" method="post" class="mb-4">
+                @csrf
+                <button type="submit" class="bg-green-500 p-2 rounded-md text-white">Pridať novú knihu</button>
+            </form> 
             <table class="border border-gray-800 w-full">
                 <tr>
                     <th class="border border-gray-600 p-1">Autor</th>
@@ -44,7 +48,7 @@
                         </tr>
                     @endforeach
                 @else
-                    <p>Nie sú žiadny používatelia</p>
+                    <p>Nie sú žiadne knihy</p>
                 @endif
                 </div>
             </table>

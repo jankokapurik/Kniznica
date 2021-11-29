@@ -69,19 +69,54 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::delete('/classroom/{classroom}', [ClassroomController::class, 'destroy'])->name('classroom.destroy');
     Route::get('/classroom/{classroom}', [ClassroomController::class, 'edit'])->name('classroom.edit');
     Route::put('/classroom/{classroom}', [ClassroomController::class, 'update'])->name('classroom.update');
+    Route::get('/classroom', [ClassroomController::class, 'create'])->name('classroom.create');
+    Route::post('/classroom', [ClassroomController::class, 'store'])->name('classroom.store');
+
 
     //  manazment skol
     Route::get('/schoolManagement', [SchoolController::class, 'index'])->name('schoolManagement');
     Route::delete('/school/{school}', [SchoolController::class, 'destroy'])->name('school.destroy');
     Route::get('/school/{school}', [SchoolController::class, 'edit'])->name('school.edit');
     Route::put('/school/{school}', [SchoolController::class, 'update'])->name('school.update');
+    // Route::get('/classroom', [ClassroomController::class, 'create'])->name('classroom.create');
+    // Route::post('/classroom', [ClassroomController::class, 'store'])->name('classroom.store');
+
 
     //  manzament knih
-    Route::get('/bookManagement', [BooksController::class, 'adminindex'])->name('bookManagement');
+    Route::get('/booksManagement', [BooksController::class, 'manage'])->name('booksManagement');
     Route::delete('/book/{book}', [BooksController::class, 'destroy'])->name('book.destroy');
     Route::get('/book/{book}', [BooksController::class, 'edit'])->name('book.edit');
     Route::put('/book/{book}', [BooksController::class, 'update'])->name('book.update');
-  });
+    // Route::get('/classroom', [ClassroomController::class, 'create'])->name('classroom.create');
+    // Route::post('/classroom', [ClassroomController::class, 'store'])->name('classroom.store');
+
+
+    //  manazment zanrov
+  //   Route::get('/classroomManagement', [ClassroomController::class, 'index'])->name('classroomManagement');
+  //   Route::delete('/classroom/{classroom}', [ClassroomController::class, 'destroy'])->name('classroom.destroy');
+  //   Route::get('/classroom/{classroom}', [ClassroomController::class, 'edit'])->name('classroom.edit');
+  //   Route::put('/classroom/{classroom}', [ClassroomController::class, 'update'])->name('classroom.update');
+  //   Route::get('/classroom', [ClassroomController::class, 'create'])->name('classroom.create');
+  //   Route::post('/classroom', [ClassroomController::class, 'store'])->name('classroom.store');
+  
+
+    //  manazment jazykov
+  //   Route::get('/classroomManagement', [ClassroomController::class, 'index'])->name('classroomManagement');
+  //   Route::delete('/classroom/{classroom}', [ClassroomController::class, 'destroy'])->name('classroom.destroy');
+  //   Route::get('/classroom/{classroom}', [ClassroomController::class, 'edit'])->name('classroom.edit');
+  //   Route::put('/classroom/{classroom}', [ClassroomController::class, 'update'])->name('classroom.update');
+  //   Route::get('/classroom', [ClassroomController::class, 'create'])->name('classroom.create');
+  //   Route::post('/classroom', [ClassroomController::class, 'store'])->name('classroom.store');
+
+    //  manazment autorov
+  //   Route::get('/classroomManagement', [ClassroomController::class, 'index'])->name('classroomManagement');
+  //   Route::delete('/classroom/{classroom}', [ClassroomController::class, 'destroy'])->name('classroom.destroy');
+  //   Route::get('/classroom/{classroom}', [ClassroomController::class, 'edit'])->name('classroom.edit');
+  //   Route::put('/classroom/{classroom}', [ClassroomController::class, 'update'])->name('classroom.update');
+  //   Route::get('/classroom', [ClassroomController::class, 'create'])->name('classroom.create');
+  //   Route::post('/classroom', [ClassroomController::class, 'store'])->name('classroom.store');
+  
+});
 
 Route::get('/books', [BooksController::class, 'index'])->name('books');
 Route::get('/books/{book}', [BooksController::class, 'show'])->name('books.show');

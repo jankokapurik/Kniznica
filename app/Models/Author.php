@@ -5,12 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Language extends Model
+class Author extends Model
 {
     use HasFactory;
 
-    public function book() {
-
+    public function books()
+    {
         return $this->hasMany(Book::class);
     }
+    // public function books()
+    // {
+    //     return $this->hasOne(Book::class);
+    // }
 }

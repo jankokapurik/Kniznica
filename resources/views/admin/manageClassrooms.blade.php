@@ -3,8 +3,7 @@
 @section('content')
     <div class="flex w-full">
         <div class="w-full mt-6 ml-6 bg-white p-6 rounded-tl-lg" >
-            {{-- {{ route('classroom.create') }} --}}
-            <form action="" method="post" class="mb-4">
+            <form action="{{ route('classroom.create') }}" class="mb-4">
                 @csrf
                 <button type="submit" class="bg-green-500 p-2 rounded-md text-white">Vytvoriť novú triedu</button>
             </form> 
