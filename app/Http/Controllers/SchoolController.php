@@ -21,7 +21,7 @@ class SchoolController extends Controller
     
     public function store(Request $request) {
         $request->validate([
-            'name' =>'required|max:255',
+            'name' =>'required|max:100',
         ]);
 
         School::create($request->all());
@@ -44,7 +44,7 @@ class SchoolController extends Controller
     public function update(School $school, Request $request) {
 
         $request->validate([
-            'name' =>'required|max:255',
+            'name' =>'required|max:100',
         ]);
         
         $school->update($request->all());

@@ -65,6 +65,9 @@
                         <a href="{{ route('languageManagement') }}" class=" hover:text-purple-600">Manažment jazykov</a>
                     </li>
                     <li class="p-1 hover:bg-gray-200">
+                        <a href="{{ route('authorManagement') }}" class=" hover:text-purple-600">Manažment autorov</a>
+                    </li>
+                    <li class="p-1 hover:bg-gray-200">
                         <a href="" class=" hover:text-purple-600">Reporty</a>
                     </li>
                 </ul>

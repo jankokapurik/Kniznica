@@ -4,13 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\PostController;   
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\CommentController;  
 use App\Http\Controllers\UserKnihaController;
 use App\Http\Controllers\Auth\LoginController; 
 use App\Http\Controllers\Auth\LogoutController;
@@ -109,12 +109,12 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::post('/language', [LanguageController::class, 'store'])->name('language.store');
 
     //  manazment autorov
-  //   Route::get('/classroomManagement', [ClassroomController::class, 'index'])->name('classroomManagement');
-  //   Route::delete('/classroom/{classroom}', [ClassroomController::class, 'destroy'])->name('classroom.destroy');
-  //   Route::get('/classroom/{classroom}', [ClassroomController::class, 'edit'])->name('classroom.edit');
-  //   Route::put('/classroom/{classroom}', [ClassroomController::class, 'update'])->name('classroom.update');
-  //   Route::get('/classroom', [ClassroomController::class, 'create'])->name('classroom.create');
-  //   Route::post('/classroom', [ClassroomController::class, 'store'])->name('classroom.store');
+    Route::get('/authorManagement', [AuthorController::class, 'index'])->name('authorManagement');
+    Route::delete('/author/{author}', [AuthorController::class, 'destroy'])->name('author.destroy');
+    Route::get('/author/{author}', [AuthorController::class, 'edit'])->name('author.edit');
+    Route::put('/author/{author}', [AuthorController::class, 'update'])->name('author.update');
+    Route::get('/author', [AuthorController::class, 'create'])->name('author.create');
+    Route::post('/author', [AuthorController::class, 'store'])->name('author.store');
   
 });
 
