@@ -3,10 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;   
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\UserKnihaController;
@@ -63,7 +65,6 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/user/{user}', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/user/{user}', [UserController::class, 'update'])->name('user.update');
 
-
     //  manazment tried
     Route::get('/classroomManagement', [ClassroomController::class, 'index'])->name('classroomManagement');
     Route::delete('/classroom/{classroom}', [ClassroomController::class, 'destroy'])->name('classroom.destroy');
@@ -72,14 +73,13 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/classroom', [ClassroomController::class, 'create'])->name('classroom.create');
     Route::post('/classroom', [ClassroomController::class, 'store'])->name('classroom.store');
 
-
     //  manazment skol
     Route::get('/schoolManagement', [SchoolController::class, 'index'])->name('schoolManagement');
     Route::delete('/school/{school}', [SchoolController::class, 'destroy'])->name('school.destroy');
     Route::get('/school/{school}', [SchoolController::class, 'edit'])->name('school.edit');
     Route::put('/school/{school}', [SchoolController::class, 'update'])->name('school.update');
-    // Route::get('/classroom', [ClassroomController::class, 'create'])->name('classroom.create');
-    // Route::post('/classroom', [ClassroomController::class, 'store'])->name('classroom.store');
+    Route::get('/school', [SchoolController::class, 'create'])->name('school.create');
+    Route::post('/school', [SchoolController::class, 'store'])->name('school.store');
 
 
     //  manzament knih
@@ -92,21 +92,21 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
 
     //  manazment zanrov
-  //   Route::get('/classroomManagement', [ClassroomController::class, 'index'])->name('classroomManagement');
-  //   Route::delete('/classroom/{classroom}', [ClassroomController::class, 'destroy'])->name('classroom.destroy');
-  //   Route::get('/classroom/{classroom}', [ClassroomController::class, 'edit'])->name('classroom.edit');
-  //   Route::put('/classroom/{classroom}', [ClassroomController::class, 'update'])->name('classroom.update');
-  //   Route::get('/classroom', [ClassroomController::class, 'create'])->name('classroom.create');
-  //   Route::post('/classroom', [ClassroomController::class, 'store'])->name('classroom.store');
+    Route::get('/genreManagement', [GenreController::class, 'index'])->name('genreManagement');
+    Route::delete('/genre/{genre}', [GenreController::class, 'destroy'])->name('genre.destroy');
+    Route::get('/genre/{genre}', [GenreController::class, 'edit'])->name('genre.edit');
+    Route::put('/genre/{genre}', [GenreController::class, 'update'])->name('genre.update');
+    Route::get('/genre', [GenreController::class, 'create'])->name('genre.create');
+    Route::post('/genre', [GenreController::class, 'store'])->name('genre.store');
   
 
     //  manazment jazykov
-  //   Route::get('/classroomManagement', [ClassroomController::class, 'index'])->name('classroomManagement');
-  //   Route::delete('/classroom/{classroom}', [ClassroomController::class, 'destroy'])->name('classroom.destroy');
-  //   Route::get('/classroom/{classroom}', [ClassroomController::class, 'edit'])->name('classroom.edit');
-  //   Route::put('/classroom/{classroom}', [ClassroomController::class, 'update'])->name('classroom.update');
-  //   Route::get('/classroom', [ClassroomController::class, 'create'])->name('classroom.create');
-  //   Route::post('/classroom', [ClassroomController::class, 'store'])->name('classroom.store');
+    Route::get('/languageManagement', [LanguageController::class, 'index'])->name('languageManagement');
+    Route::delete('/language/{language}', [LanguageController::class, 'destroy'])->name('language.destroy');
+    Route::get('/language/{language}', [LanguageController::class, 'edit'])->name('language.edit');
+    Route::put('/language/{language}', [LanguageController::class, 'update'])->name('language.update');
+    Route::get('/language', [LanguageController::class, 'create'])->name('language.create');
+    Route::post('/language', [LanguageController::class, 'store'])->name('language.store');
 
     //  manazment autorov
   //   Route::get('/classroomManagement', [ClassroomController::class, 'index'])->name('classroomManagement');

@@ -12,13 +12,11 @@ class UserController extends Controller
 
         $users = User::get();
         
-        return view('admin.userManagement', ['users' => $users]);
+        return view('admin.manageUsers', ['users' => $users]);
     }
 
     public function destroy(User $user) {
         
-        // $this->authorize('delete', $user);
-
         $user->delete();
         return back();
     }

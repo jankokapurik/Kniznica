@@ -1,6 +1,6 @@
 @props(['book' => $book])
 
-<div class="w-8/12 bg-white p-6 rounded-lg m-10">
+<div class="w-8/12 bg-white rounded-lg">
     <form action="{{ route('comments') }}" method="post" class="mb-4">
         @csrf
         <input type="hidden" name="book" value="{{ $book->id }}" />

@@ -30,7 +30,7 @@ class CommentController extends Controller
 
         $request->user()->comments()->create([
             'comment' => $request->body,
-            'books_id' => $request->book,
+            'book_id' => $request->book,
         ]);
 
         return back();

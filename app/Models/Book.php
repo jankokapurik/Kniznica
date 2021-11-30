@@ -30,8 +30,4 @@ class Book extends Model
         // return $this->hasMany(Comment::class)->latest()->get();
         return $this->hasMany(Comment::class);
     }
-    public function comment()
-    {
-        return $this->belongsTo(Comment::class);
-    }
 }

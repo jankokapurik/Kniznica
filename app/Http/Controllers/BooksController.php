@@ -28,7 +28,7 @@ class BooksController extends Controller
 
         $books = Book::get();
         
-        return view('admin.booksManagement', ['books' => $books]);
+        return view('admin.manageBooks', ['books' => $books]);
     }
 
     public function destroy(Book $book) {

@@ -11,8 +11,24 @@ class SchoolController extends Controller
 
         $schools = School::get();
         
-        return view('admin.schoolManagement', ['schools' => $schools]);
+        return view('admin.manageSchools', ['schools' => $schools]);
     }
+
+    public function create() {
+        
+        return view('admin.createSchool');
+    }
+    
+    public function store(Request $request) {
+        $request->validate([
+            'name' =>'required|max:255',
+        ]);
+
+        School::create($request->all());
+     
+        return redirect()->route('schoolManagement');
+    }
+
 
     public function destroy(School $school) {
 
@@ -34,11 +50,5 @@ class SchoolController extends Controller
         $school->update($request->all());
 
         return redirect()->route('schoolManagement')->with('success','Product updated successfully');
-    }
-
-    public function store(Request $request) {
-        $request->validate([
-            'name' =>'required|max:255',
-        ]);
     }
 }

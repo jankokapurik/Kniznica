@@ -13,7 +13,7 @@ class Comment extends Model
     protected $fillable = [
         'rating',
         'comment',
-        'books_id'
+        'book_id'
     ];
 
     public function likedBy(User $user) {
