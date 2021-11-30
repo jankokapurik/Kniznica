@@ -26,7 +26,7 @@
                 </div>                
                 <div class="mb-4">
                     <label class="font-bold text-gray-800 sr-only" for="quantity">Množstvo</label>
-                    <input class="bg-gray-100 border-2 w-full p-4 text-gray-600 rounded-lg focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 @error('quantity') border-red-500 @enderror" type="text" id="quantity" name="quantity" value="{{ $book->quantity }}">
+                    <input class="bg-gray-100 border-2 w-full p-4 text-gray-600 rounded-lg focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 @error('quantity') border-red-500 @enderror" type="number" id="quantity" name="quantity" value="{{ $book->quantity }}">
                     @error('quantity')
                         <div class="text-red-500 mt-2 text-sm">
                             {{$message}}
