@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\Knihy;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class CommentController extends Controller
 {
@@ -25,12 +26,14 @@ class CommentController extends Controller
 
     public function store(Request $request) {
         $this->validate($request, [
-            'body' => 'required'
+            'body' => 'required',
+            'rating' => 'required'
         ]);  
 
         $request->user()->comments()->create([
             'comment' => $request->body,
             'book_id' => $request->book,
+            'rating' => $request->rating,
         ]);
 
         return back();
@@ -47,9 +50,14 @@ class CommentController extends Controller
             'body' => 'required'
         ]); 
 
+        
+        if($comment->comment === $request->body){
+            throw ValidationException::withMessages(['body' => 'The body field wasn\'t changed']);
+        };
+
         $this->authorize('update', $comment);
         $comment->update(array('comment'=>$request->body));
         
-        return redirect('books/'.$comment->books_id);
+        return redirect('books/'.$comment->book_id);
     }
 }
