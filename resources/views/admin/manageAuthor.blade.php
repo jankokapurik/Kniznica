@@ -5,7 +5,7 @@
         <div class="w-full mt-6 ml-6 bg-white p-6 rounded-tl-lg" >
             <form action="{{ route("author.create") }}" class="mb-4">
                 @csrf
-                <button type="submit" class="bg-green-500 border-2 border-green-500 p-2 rounded-md text-white hover:bg-green-100 hover:text-green-500">Pridať nového autora</button>
+                <button type="submit" class="bg-green-500 border-2 border-green-500 p-2 rounded-md text-white hover:bg-green-600 trasition duration-500">Pridať nového autora</button>
             </form> 
             <table class="border border-gray-800 w-full">
                 <tr>
@@ -24,13 +24,13 @@
                             </td>
                             <td class="border border-gray-600 flex flex-row">
                                 <form action="{{ route('author.edit', $author->id) }}" class="m-1">
-                                    <button class="bg-blue-500 border border-blue-500 p-1 rounded-md text-white hover:bg-blue-100 hover:text-blue-500">Upraviť</button>
+                                    <button class="bg-blue-500 border border-blue-500 p-1 rounded-md text-white hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Upraviť</button>
                                 </form>
                                 <form action="{{ route('author.destroy', $author) }}" method="post" class="m-1">
                                 
                                     @csrf   
                                     @method('DELETE')
-                                    <button type="submit" class="bg-red-500 border border-red-500 p-1 rounded-md text-white hover:bg-red-100 hover:text-red-500">Vymazať</button>
+                                    <button type="submit" class="bg-red-500 border border-red-500 p-1 rounded-md text-white hover:bg-red-100 hover:text-red-500 trasition duration-500">Vymazať</button>
                                 </form>
                             </td>
                         </tr>

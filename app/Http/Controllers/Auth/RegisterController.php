@@ -39,8 +39,8 @@ class RegisterController extends Controller
             'username' =>'required|max:255',
             'email' =>'required|email|max:255',
             'password' =>'required|confirmed|min:6|max:20',
-            'schools_id' => 'required', 
-            'classrooms_id' => 'required', 
+            'school_id' => 'required', 
+            'classroom_id' => 'required', 
         ]);
 
         User::create([
@@ -49,8 +49,8 @@ class RegisterController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'schools_id' => $request->schools_id,
-            'classrooms_id' =>  $request->classrooms_id, 
+            'school_id' => $request->school_id,
+            'classroom_id' =>  $request->classroom_id, 
         ]);
 
         auth()->attempt($request->only('email', 'password'));

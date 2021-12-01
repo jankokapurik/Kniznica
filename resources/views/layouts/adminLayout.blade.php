@@ -21,8 +21,8 @@
             <form action="{{ route('search2') }}" method="get" class="flex items-center">
                 @csrf
                 <label for="search" class="sr-only">Name</label>
-                <input type="text" name="search" placeholder="Vyhľadaj" class="bg-gray-100 border-2 w-full p-1 rounded-lg mr-2">
-                <button type="submit" class="bg-blue-500 text-white p-1 rounded font-medium  hover:opacity-50">Hľadaj</button>
+                <input type="text" name="search" placeholder="Vyhľadaj" class="bg-gray-100 border-2 border-gray-100 w-full p-1 rounded-lg mr-2 focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 trasition duration-500">
+                <button type="submit" class="bg-blue-500 border-2 border-blue-500 text-white p-1 rounded font-medium  hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Hľadaj</button>
             </form>
         </div>
         <ul class="flex items-center ">
@@ -43,8 +43,8 @@
         <div class="mt-6 p-3 h-screen rounded-tr-lg bg-white">
             <nav class="w-max ">
                 <ul class="divide-y">
-                    <li class="p-1 hover:bg-gray-200">
-                        <a href="{{ route('dashboard') }}" class=" hover:text-purple-600">Dashboard</a>
+                    <li class="p-1 hover:bg-gray-200 active:bg-gray-400">
+                        <a href="{{ route('dashboard') }}" class="hover:text-purple-600">Dashboard</a>
                     </li>
                     <li class="p-1 hover:bg-gray-200">
                         <a href="{{ route('booksManagement') }}" class=" hover:text-purple-600">Manažment kníh</a>

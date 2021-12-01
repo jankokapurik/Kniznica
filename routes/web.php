@@ -33,10 +33,6 @@ Route::post('/login', [LoginController::class, 'store']);
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/register', [RegisterController::class, 'index'])->name('register');
-Route::post('/register', [RegisterController::class, 'store']);
-
-
 Route::get('/register', [RegisterController::class, 'show'])->name('register');
 
   // Route::get('/knihy', [PostController::class, 'index'])->name('knihy');
@@ -87,8 +83,8 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::delete('/book/{book}', [BooksController::class, 'destroy'])->name('book.destroy');
     Route::get('/book/{book}', [BooksController::class, 'edit'])->name('book.edit');
     Route::put('/book/{book}', [BooksController::class, 'update'])->name('book.update');
-    // Route::get('/classroom', [ClassroomController::class, 'create'])->name('classroom.create');
-    // Route::post('/classroom', [ClassroomController::class, 'store'])->name('classroom.store');
+    Route::get('/book', [BooksController::class, 'create'])->name('book.create');
+    Route::post('/book', [BooksController::class, 'store'])->name('book.store');
 
 
     //  manazment zanrov

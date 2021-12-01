@@ -10,17 +10,20 @@ class Book extends Model
     use HasFactory;
 
     protected $fillable = [
+        'author_id',
         'title',
         'releaseDate',
-        'quantity'
+        'quantity',
+        'language_id',
+        'image'
     ];
     
-    public function authors()
+    public function author()
     {
         return $this->belongsTo(Author::class);
     }
 
-    public function languages()
+    public function language()
     {
         return $this->belongsTo(Language::class);
     }
@@ -29,5 +32,10 @@ class Book extends Model
     {
         // return $this->hasMany(Comment::class)->latest()->get();
         return $this->hasMany(Comment::class);
+    }
+
+    public function genres() {
+        
+        return $this->belongsToMany(Genre::class, 'book_genre');
     }
 }

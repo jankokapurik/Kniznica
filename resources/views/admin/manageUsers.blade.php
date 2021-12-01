@@ -30,23 +30,23 @@
                                 <p class="text-gray-600 p-1">{{ $user->lname }}</p>
                             </td>
                             <td class="border border-gray-600">
-                                <p class="text-gray-600 p-1">{{ $user->schools->name }}</p>
+                                <p class="text-gray-600 p-1">{{ $user->school->name }}</p>
                             </td>
                             <td class="border border-gray-600">
-                                <p class="text-gray-600 p-1">{{ $user->classrooms->name }}</p>
+                                <p class="text-gray-600 p-1">{{ $user->classroom->name }}</p>
                             </td>
                             <td class="border border-gray-600">
                                 <p class="text-gray-600 p-1">{{ $user->user_type }}</p>
                             </td>
                             <td class="border border-gray-600 flex flex-row">
                                 <form action="{{ route('user.edit', $user->id) }}" class="m-1">
-                                    <button class="bg-blue-500 border border-blue-500 p-1 rounded-md text-white hover:bg-blue-100 hover:text-blue-500">Upraviť</button>
+                                    <button class="bg-blue-500 border-2 border-blue-500 p-1 rounded-md text-white hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Upraviť</button>
                                 </form>
                                 <form action="{{ route('user.destroy', $user) }}" method="post" class="m-1">
                                 
                                     @csrf   
                                     @method('DELETE')
-                                    <button type="submit" class="bg-red-500 border border-red-500 p-1 rounded-md text-white hover:bg-red-100 hover:text-red-500">Vymazať</button>
+                                    <button type="submit" class="bg-red-500 border-2 border-red-500 p-1 rounded-md text-white hover:bg-red-100 hover:text-red-500 trasition duration-500">Vymazať</button>
                                 </form>
                             </td>
                         </tr>

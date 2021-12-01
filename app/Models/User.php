@@ -25,8 +25,8 @@ class User extends Authenticatable
         'email',
         'password',
         'username',
-        'schools_id',
-        'classrooms_id',
+        'school_id',
+        'classroom_id',
         'user_type',
     ];
 
@@ -62,12 +62,12 @@ class User extends Authenticatable
         return $this->hasManyThrough(Like::class, Knihy::class);
     }
 
-    public function classrooms()
+    public function classroom()
     {
         return $this->belongsTo(Classroom::class);
     }
     
-    public function schools()
+    public function school()
     {
         return $this->belongsTo(School::class);
     }

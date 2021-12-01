@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Middleware\AdminMiddleware;
 use App\Models\User;
+use App\Models\School;
+use App\Models\Classroom;
 use Illuminate\Http\Request;
+use App\Http\Middleware\AdminMiddleware;
 
 class UserController extends Controller
 {
@@ -22,8 +24,15 @@ class UserController extends Controller
     }
 
     public function edit(User $user) {
+
+        $schools = School::get();
+        $classrooms = Classroom::get();
         
-        return view('admin.editUser', ['user' => $user]);
+        return view('admin.editUser', [
+            'user' => $user,
+            'schools' => $schools,
+            'classrooms' => $classrooms,
+        ]);
     }
 
     public function update(User $user, Request $request) {
@@ -33,6 +42,8 @@ class UserController extends Controller
             'fname' =>'required|max:255',
             'lname' =>'required|max:255',
             'email' =>'required|email|max:255',
+            'school_id' => 'required',
+            'classroom_id' => 'required',
             'user_type' =>'required||max:255',
         ]);
 
