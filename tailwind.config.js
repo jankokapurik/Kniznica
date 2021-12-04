@@ -1,4 +1,5 @@
 module.exports = {
+  mode: 'jit',
   purge: [
     './resources/**/*.blade.php',
      './resources/**/*.js',
@@ -6,6 +7,7 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    fontFamily: {},
     extend: {},
   },
   variants: {
@@ -13,3 +15,5 @@ module.exports = {
   },
   plugins: [],
 }
+
+  

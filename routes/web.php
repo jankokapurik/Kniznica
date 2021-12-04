@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\BooksController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\SchoolController;
@@ -19,7 +19,7 @@ use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/', function() {
     return view('users.home');
-})->name('home');   
+})->name('users.home');   
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -79,12 +79,12 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
 
     //  manzament knih
-    Route::get('/booksManagement', [BooksController::class, 'manage'])->name('booksManagement');
-    Route::delete('/book/{book}', [BooksController::class, 'destroy'])->name('book.destroy');
-    Route::get('/book/{book}', [BooksController::class, 'edit'])->name('book.edit');
-    Route::put('/book/{book}', [BooksController::class, 'update'])->name('book.update');
-    Route::get('/book', [BooksController::class, 'create'])->name('book.create');
-    Route::post('/book', [BooksController::class, 'store'])->name('book.store');
+    Route::get('/booksManagement', [BookController::class, 'manage'])->name('booksManagement');
+    Route::delete('/book/{book}', [BookController::class, 'destroy'])->name('book.destroy');
+    Route::get('/book/{book}', [BookController::class, 'edit'])->name('book.edit');
+    Route::put('/book/{book}', [BookController::class, 'update'])->name('book.update');
+    Route::get('/book', [BookController::class, 'create'])->name('book.create');
+    Route::post('/book', [BookController::class, 'store'])->name('book.store');
 
 
     //  manazment zanrov
@@ -114,8 +114,8 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
   
 });
 
-Route::get('/books', [BooksController::class, 'index'])->name('books');
-Route::get('/books/{book}', [BooksController::class, 'show'])->name('books.show');
+Route::get('/books', [BookController::class, 'index'])->name('books');
+Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
 
 Route::get('/comments', [CommentController::class, 'index'])->name('comments');
 Route::post('/comments', [CommentController::class, 'store']);

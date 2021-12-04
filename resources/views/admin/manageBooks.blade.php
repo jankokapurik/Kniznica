@@ -46,7 +46,8 @@
                                 </div>
                             </td>
                             <td class="border border-gray-600">
-                                <img src="{{ asset('/storage/images/knihy/'.$book->image) }}" height="100" width="50"alt="kniha">
+                                {{-- <p>{{ $book->image }}</p> --}}
+                                <img src="{{ asset('/images/'.$book->image) }}" height="100" width="50" alt="kniha">
                             </td>
                             <td class="border border-gray-600 flex">
                                 <form action="{{ route('book.edit', $book->id) }}" class="m-1">

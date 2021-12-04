@@ -1,6 +1,6 @@
 @props(['comment' => $comment])
 {{-- {{dd($comment->comment)}} --}}
-<div class="w-8/12 bg-white p-6 rounded-lg m-10">
+<div class="bg-white p-6 rounded-lg m-10">
 
     <form action="{{ route('comment.edit', ['comment' => $comment]) }}" method="post" class="mb-4">
         @csrf        

@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex w-full">
         <div class="w-full mt-6 ml-6 bg-white p-6 rounded-tl-lg" >
-            <form method="POST" action="{{ route('book.update', $book) }}">
+            <form method="POST" action="{{ route('book.update', $book) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-4">
@@ -72,6 +72,16 @@
                             </div>
                         @enderror
                     </select>
+                </div>
+                <label for="image" class="font-bold text-2xl mb-4">Zmeniť fotku</label>
+                <div class="mb-4 flex">
+                    <img src="{{ asset('/images/'.$book->image) }}" height="100" width="50" alt="kniha" class="mr-2">
+                    <input type="file" name="image" id="image" class="bg-gray-100 border-2 w-full p-4 text-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 hover:border-gray-300 trasition duration-500 @error('image') border-red-500 @enderror">
+                    @error('image')
+                        <div class="text-red-500 mt-2 text-sm">
+                            {{$message}}
+                        </div>
+                    @enderror
                 </div>
                 <button type="submit" class="bg-blue-500 border-2 border-blue-500 text-white p-4 rounded-lg hover:bg-gray-100 hover:text-blue-500">Upraviť</button>
             </form>
