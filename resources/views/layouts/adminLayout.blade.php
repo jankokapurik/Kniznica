@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kniznica</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">    
+    <link rel="stylesheet" href="{{ asset('css/rating.css') }}">
 </head>
 <body class="bg-gray-200">
     <nav class="p-6 bg-white flex justify-between">
