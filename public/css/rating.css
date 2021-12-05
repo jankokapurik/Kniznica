@@ -1,0 +1,25 @@
+.ratingsystem input{
+    display: none;
+}
+
+.ratingsystem label{
+    transition: 0.3s;
+}
+
+.ratingsystem{
+    color: grey;
+}
+
+.ratingsystem input:not(:checked) ~ label:hover, 
+.ratingsystem input:not(:checked) ~ label:hover ~ label,
+.ratingsystem input:checked ~ label{
+    color: orange;
+}
+
+.ratingshow-filled{
+    color: orange;
+}
+
+.ratingshow-empty{
+    color: grey;
+}

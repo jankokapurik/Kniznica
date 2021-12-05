@@ -31,8 +31,12 @@ class Book extends Model
 
     public function comments()
     {
-        // return $this->hasMany(Comment::class)->latest()->get();
         return $this->hasMany(Comment::class);
+    }
+
+    public function rating()
+    {
+        return $this->hasMany(Comment::class)->avg('rating');
     }
 
     public function genres() {

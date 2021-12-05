@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Authors;
+use App\Models\Author;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +12,10 @@ class SearchController extends Controller
 {
     public function index(){
         $text = $_GET['search'];
-         $results = Book::where('title', 'LIKE', '%'.$text.'%')->latest()->paginate();
+
+        $results = Book::where('author_id', 'IN', Author::select('id')->where('fname', 'LIKE', '%'.$text.'%'));
+
+        $results->latest()->paginate();
 
         return view('books.books',[
             'books' => $results

@@ -12,12 +12,13 @@ use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
-    public function index() {
-        
+    public function index() {        
         $books = Book::latest()->paginate(10);
 
+        $avg = Book::first()->comments()->avg('rating');
+        
         return view('books.books', [
-            'books' => $books
+            'books' => $books,
         ]);
 
     }

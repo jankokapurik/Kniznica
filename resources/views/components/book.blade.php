@@ -5,8 +5,21 @@
     <div>
         <a href="{{ route('books.show', $book) }}"><strong>{{ $book->author->fname }} {{ $book->author->lname }}</strong></a>
         <p><strong>{{ $book->title }}</strong></p>
+
+        <div class="flex">
+            <span class="pr-1">{{ round($a = $book->rating(),1) }}</span>
+            <x-ratingbar :rating="round($a)"/>
+        </div>
+
+
+
         <p>{{ $book->language->name }}</p>
-        <p>{{ $book->quantity }}</p>
+        <p @if (!$book->quantity)
+            class="text-red-400"
+            @else
+            class="text-green-700"
+        @endif>{{ $book->quantity }} ks</p>
+
         <p class="text-gray-600 p-1">
             @forelse ($book->genres as $genre)
                 {{ $genre->name, }}
@@ -14,6 +27,5 @@
                 Nie sú pridané žánre
             @endforelse  
         </p>
-        <p>Hodnotenie: </p>
     </div>
 </div>
