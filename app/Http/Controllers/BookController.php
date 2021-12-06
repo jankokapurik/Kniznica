@@ -44,21 +44,23 @@ class BookController extends Controller
             'releaseDate' =>'required',
             'quantity' => 'required',
             'language_id' => 'required',
-            'image' => 'mimes:jpg,png,jpeg|max:5048'
+            'image' => 'mimes:jpg,png,jpeg|max:5048',
+            'description' => 'required'
         ]);
 
-        $input = $request->all();
-
+        $input = $request->only('author_id', 'title', 'releaseDate', 'quantity', 'language_id', 'releaseDate', 'image');
+        
         if($request->hasFile('image')) {
-
+            
             $image = $request->file('image');
             $newImageName = $image->getClientOriginalName();
             $request->image->move(public_path('images'), $newImageName);
-
+            
             $input['image'] = $newImageName;
         }
-
-        Book::create($input);
+        
+        $book = Book::create($input);
+        $book->genres()->sync($request->genre);
         return redirect()->route('booksManagement');
     }
 
@@ -70,6 +72,7 @@ class BookController extends Controller
                 'comments' => null,
             ]);
         }
+
         $mode = $book->comments()->whereNotNull('rating')->select("rating", DB::raw('count(*) as total'))
         ->groupBy('rating')->orderBy('total', 'desc')->first()->total; //modus
 
@@ -105,7 +108,7 @@ class BookController extends Controller
 
         $authors = Author::get();
         $languages = Language::get();
-        $genres = Genre::where('id', 'user_id')->get();
+        $genres = Genre::get();
         var_dump($book->genre);
 
         return view('admin.editBook', [
@@ -114,6 +117,7 @@ class BookController extends Controller
             'language' => $language,
             'authors' => $authors,
             'languages' => $languages,
+            'genres' => $genres
         ]);
     }
 
@@ -125,10 +129,13 @@ class BookController extends Controller
             'releaseDate' =>'required',
             'quantity' =>'required',
             'language_id' =>'required',
-            'image' => 'mimes:jpg,png,jpeg|max:5048'
+            'image' => 'mimes:jpg,png,jpeg|max:5048',
+            'description' => 'required'
+
         ]);
 
         $input = $request->all();
+        $input['description'] = $request->get('description');
 
         if($request->hasFile('image')) {
             

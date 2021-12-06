@@ -73,6 +73,10 @@
                         @enderror
                     </select>
                 </div>
+                <div class="mb-4">
+                    <label for="description" class="sr-only">Obsah</label>
+                    <textarea name="description" class="bg-gray-100 border-2 border-gray-200 rounded-lg p-4 w-full hover:border-gray-300 focus:outline-none focus:border-gray-500" rows="3" placeholder="Napíš stručný obsah">{{ $book->description }}</textarea>
+                </div>
                 <label for="image" class="font-bold text-2xl mb-4">Zmeniť fotku</label>
                 <div class="mb-4 flex">
                     <img src="{{ asset('/images/'.$book->image) }}" height="100" width="50" alt="kniha" class="mr-2">
@@ -82,6 +86,19 @@
                             {{$message}}
                         </div>
                     @enderror
+                </div>
+                <div class="bg-gray-100 border-2 p-2 rounded-lg flex hover:border-gray-300 trasition duration-500 mb-4">
+                    @if ($genres->count())
+                    @foreach ($genres as $genre)   
+                    <div class="cursor-pointer">
+                        <label class="cursor-pointer">
+                            <input type="checkbox" name="genre[]" id="genre" value="{{ $book->genres}}" class="peer hidden">
+                            <span class="block m-1 bg-gray-300 py-2 px-3 rounded-full transition duration-500 overflow-hidden text-lg peer-checked:bg-gray-500 peer-checked:text-white
+                            ">{{ $genre->name }}</span>
+                        </label>
+                    </div>
+                    @endforeach
+                    @endif
                 </div>
                 <button type="submit" class="bg-blue-500 border-2 border-blue-500 text-white p-4 rounded-lg hover:bg-gray-100 hover:text-blue-500">Upraviť</button>
             </form>

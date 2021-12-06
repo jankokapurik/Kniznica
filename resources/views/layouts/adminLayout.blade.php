@@ -17,10 +17,10 @@
             <nav class="p-6 bg-white flex justify-between">
                 <ul class="flex items-center">
                     <li>
-                        <a href="{{ route('dashboard') }}" class="p-3 hover:text-purple-600">Dashboard</a>
+                        <a href="{{ route('dashboard') }}" class="p-3 hover:text-blue-500">Dashboard</a>
                     </li>
                     <li>
-                        <a href="{{ route('books') }}" class="p-3 hover:text-purple-600">Library</a>
+                        <a href="{{ route('books') }}" class="p-3 hover:text-blue-500">Library</a>
                     </li>
                 </ul>
                 <div>
@@ -34,12 +34,12 @@
                 <ul class="flex items-center ">
                     @auth
                         <li>
-                            <a href="" class="p-3 hover:text-purple-600">{{ auth()->user()->fname }} {{ auth()->user()->lname }}</a>
+                            <a href="" class="p-3 hover:text-blue-500">{{ auth()->user()->fname }} {{ auth()->user()->lname }}</a>
                         </li> 
                         <li>
                             <form action="{{ route('logout') }}" method="post" class="inline p-3">
                                 @csrf
-                                <button class="p-3 hover:text-purple-600" type="submit">Odhlásiť sa</button>
+                                <button class="p-3 hover:text-blue-500" type="submit">Odhlásiť sa</button>
                             </form>
                         </li>
                     @endauth           
@@ -52,31 +52,31 @@
                     <nav class="w-max ">
                         <ul class="divide-y">
                             <li class="p-1 hover:bg-gray-200 active:bg-gray-400">
-                                <a href="{{ route('dashboard') }}" class="hover:text-purple-600">Dashboard</a>
+                                <a href="{{ route('dashboard') }}" class="hover:text-blue-500">Dashboard</a>
                             </li>
                             <li class="p-1 hover:bg-gray-200">
-                                <a href="{{ route('booksManagement') }}" class=" hover:text-purple-600">Manažment kníh</a>
+                                <a href="{{ route('booksManagement') }}" class=" hover:text-blue-500">Manažment kníh</a>
                             </li>
                             <li class="p-1 hover:bg-gray-200">
-                                <a href="{{ route('userManagement') }}" class=" hover:text-purple-600">Manažment užívateľov</a>
+                                <a href="{{ route('userManagement') }}" class=" hover:text-blue-500">Manažment užívateľov</a>
                             </li>
                             <li class="p-1 hover:bg-gray-200">
-                                <a href="{{ route('classroomManagement') }}" class=" hover:text-purple-600">Manažment tried</a>
+                                <a href="{{ route('classroomManagement') }}" class=" hover:text-blue-500">Manažment tried</a>
                             </li>
                             <li class="p-1 hover:bg-gray-200">
-                                <a href="{{ route('schoolManagement') }}" class=" hover:text-purple-600">Manažment škôl</a>
+                                <a href="{{ route('schoolManagement') }}" class=" hover:text-blue-500">Manažment škôl</a>
                             </li>
                             <li class="p-1 hover:bg-gray-200">
-                                <a href="{{ route('genreManagement') }}" class=" hover:text-purple-600">Manažment žánrov</a>
+                                <a href="{{ route('genreManagement') }}" class=" hover:text-blue-500">Manažment žánrov</a>
                             </li>
                             <li class="p-1 hover:bg-gray-200">
-                                <a href="{{ route('languageManagement') }}" class=" hover:text-purple-600">Manažment jazykov</a>
+                                <a href="{{ route('languageManagement') }}" class=" hover:text-blue-500">Manažment jazykov</a>
                             </li>
                             <li class="p-1 hover:bg-gray-200">
-                                <a href="{{ route('authorManagement') }}" class=" hover:text-purple-600">Manažment autorov</a>
+                                <a href="{{ route('authorManagement') }}" class=" hover:text-blue-500">Manažment autorov</a>
                             </li>
                             <li class="p-1 hover:bg-gray-200">
-                                <a href="" class=" hover:text-purple-600">Reporty</a>
+                                <a href="" class=" hover:text-blue-500">Reporty</a>
                             </li>
                         </ul>
                     </nav>
