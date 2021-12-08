@@ -2,60 +2,81 @@
 
 @section('content')
     <div class="flex w-full">
-        <div class="w-full mt-6 ml-6 bg-white p-6 rounded-tl-lg" >
-            <table class="border border-gray-800 w-full">
-                <tr>
-                    <th class="border border-gray-600 p-1">Užívaťeľské meno</th>
-                    <th class="border border-gray-600 p-1">Email</th>
-                    <th class="border border-gray-600 p-1">Meno</th>
-                    <th class="border border-gray-600 p-1">Priezvisko</th>
-                    <th class="border border-gray-600 p-1">Škola</th>
-                    <th class="border border-gray-600 p-1">Trieda</th>
-                    <th class="border border-gray-600 p-1">Typ užívateľa</th>
-                    <th class="border border-gray-600 p-1">Akcie</th>
-                </tr>
-                @if($users->count())
+        <div class="w-full mt-6 ml-6 p-6 bg-white rounded-l-lg" >
+            <table class="w-full table-auto">
+                <thead>
+                    <tr class="border-b-2 border-gray-500">
+                        <th class="p-1">Užívaťeľské meno</th>
+                        <th class="p-1">Email</th>
+                        <th class="p-1">Meno</th>
+                        <th class="p-1">Priezvisko</th>
+                        <th class="p-1">Škola</th>
+                        <th class="p-1">Trieda</th>
+                        <th class="p-1">Typ užívateľa</th>
+                        <th class="p-1">Akcie</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if($users->count())
                     @foreach($users as $user)
-                        <tr>
-                            <td class="border border-gray-600">
+                    <tr class="even:bg-gray-100 border-t     border-gray-500">
+                        <td>
+                            <div class="flex flex-row justify-center align-middle">
                                 <h2 class="font-bold text-gray-900 p-1">{{ $user->username }}</h2>
-                            </td>
-                            <td class="border border-gray-600">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="flex flex-row justify-center align-middle">
                                 <p class="text-gray-600 p-1">{{ $user->email }}</p>
-                            </td>
-                            <td class="border border-gray-600">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="flex flex-row justify-center align-middle">
                                 <p class="text-gray-600 p1">{{ $user->fname }}</p>
-                            </td>
-                            <td class="border border-gray-600">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="flex flex-row justify-center align-middle">
                                 <p class="text-gray-600 p-1">{{ $user->lname }}</p>
-                            </td>
-                            <td class="border border-gray-600">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="flex flex-row justify-center align-middle">
                                 <p class="text-gray-600 p-1">{{ $user->school->name }}</p>
-                            </td>
-                            <td class="border border-gray-600">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="flex flex-row justify-center align-middle">
                                 <p class="text-gray-600 p-1">{{ $user->classroom->name }}</p>
-                            </td>
-                            <td class="border border-gray-600">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="flex flex-row justify-center align-middle">
                                 <p class="text-gray-600 p-1">{{ $user->user_type }}</p>
-                            </td>
-                            <td class="border border-gray-600 flex flex-row">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="flex flex-row justify-center align-middle"  >
                                 <form action="{{ route('user.edit', $user->id) }}" class="m-1">
                                     <button class="bg-blue-500 border-2 border-blue-500 p-1 rounded-md text-white hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Upraviť</button>
                                 </form>
                                 <form action="{{ route('user.destroy', $user) }}" method="post" class="m-1">
-                                
+                                    
                                     @csrf   
                                     @method('DELETE')
                                     <button type="submit" class="bg-red-500 border-2 border-red-500 p-1 rounded-md text-white hover:bg-red-100 hover:text-red-500 trasition duration-500">Vymazať</button>
                                 </form>
-                            </td>
+                            </div>
+                        </td>
                         </tr>
                         {{-- <div class="m-4 w-full rounded-lg border-2 border-gray-300 flex flex-row"> --}}
                     @endforeach
-                @else
+                    @else
                     <p>Nie sú žiadny používatelia</p>
-                @endif
-                </div>
+                    @endif
+                </tbody>
             </table>
+        </div>
     </div>
 @endsection
+        

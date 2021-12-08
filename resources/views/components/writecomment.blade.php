@@ -9,7 +9,7 @@
             <label for="rating"></label>
             <div class="flex">
                 <p class="p-1 mt-0">Your rating:</p>
-                <div class="ratingsystem text-xl flex flex-row-reverse align-middle">
+                <div class="ratingsystem text-xl flex flex-row-reverse">
                     <input type="radio" name="rating" value="5" id="rate-5">
                     <label for="rate-5">&#9733</label>
                     <input type="radio" name="rating" value="4" id="rate-4">

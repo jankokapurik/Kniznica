@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 class BookController extends Controller
 {
     public function index() {        
-        $books = Book::latest()->paginate(10);
+        $books = Book::select('*','books.id as book_id')->latest()->paginate(10);
 
         $avg = Book::first()->comments()->avg('rating');
         
@@ -99,7 +99,8 @@ class BookController extends Controller
     }
 
     public function destroy(Book $book) {
-        
+
+        $book->genres()->delete();
         $book->delete();
         return back();
     }
@@ -134,7 +135,7 @@ class BookController extends Controller
 
         ]);
 
-        $input = $request->all();
+        $input = $request->only('author_id', 'title', 'releaseDate', 'quantity', 'language_id', 'releaseDate', 'image');
         $input['description'] = $request->get('description');
 
         if($request->hasFile('image')) {
@@ -151,6 +152,7 @@ class BookController extends Controller
         }
         
         $book->update($input);
+        $book->genres()->sync($request->genre);
 
         return redirect()->route('booksManagement')->with('success','Product updated successfully');
     }

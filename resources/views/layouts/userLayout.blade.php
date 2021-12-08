@@ -19,11 +19,16 @@
                         <a href="{{ route('home') }}" class="p-3 hover:text-purple-600">Domov</a>
                     </li>
                     <li>
-                        <a href="{{ route('dashboard') }}" class="p-3 hover:text-purple-600">Dashboard</a>
-                    </li>
-                    <li>
                         <a href="{{ route('books') }}" class="p-3 hover:text-purple-600">Library</a>
                     </li>
+                    @if (auth()->check())
+                        @if (auth()->user()->isAdmin())
+                        <li>
+                            <a href="{{ route('adminHome') }}" class="p-3 hover:text-purple-600">Admin stránka</a>
+                        </li>
+                        @else
+                        @endif
+                    @endif
                 </ul>
                 <div>
                     <form action="{{ route('search2') }}" method="get" class="flex items-center">
@@ -58,9 +63,9 @@
             </nav>
         </header>
         <main class="flex-grow">
-            <div class="flex flex-col justify-between">
-            </div>
+            <div class="flex flex-col justify-between mb-6">
                 @yield('content')
+            </div>
         </main>
         <footer>
             <div class="bg-gray-800 p-10 text-gray-200 min-w-screen min-h-16 flex justify-around">

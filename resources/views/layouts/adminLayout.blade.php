@@ -17,7 +17,7 @@
             <nav class="p-6 bg-white flex justify-between">
                 <ul class="flex items-center">
                     <li>
-                        <a href="{{ route('dashboard') }}" class="p-3 hover:text-blue-500">Dashboard</a>
+                        <a href="{{ route('home') }}" class="p-3 hover:text-purple-600">Domov</a>
                     </li>
                     <li>
                         <a href="{{ route('books') }}" class="p-3 hover:text-blue-500">Library</a>
@@ -27,7 +27,7 @@
                     <form action="{{ route('search2') }}" method="get" class="flex items-center">
                         @csrf
                         <label for="search" class="sr-only">Name</label>
-                        <input type="text" name="search" placeholder="Vyhľadaj" class="bg-gray-100 border-2 border-gray-100 w-full p-1 rounded-lg mr-2 focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 trasition duration-500">
+                        <input type="text" name="search" placeholder="Vyhľadaj" value="" class="bg-gray-100 border-2 border-gray-100 w-full p-1 rounded-lg mr-2 focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 trasition duration-500">
                         <button type="submit" class="bg-blue-500 border-2 border-blue-500 text-white p-1 rounded font-medium  hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Hľadaj</button>
                     </form>
                 </div>
@@ -46,38 +46,61 @@
                 </ul>
             </nav>
         </header>
-        <main class="flex-grow h-full">
-            <div class="flex flex-row  ">
-                <div class="mt-6 p-3 h-screen rounded-tr-lg bg-white">
-                    <nav class="w-max ">
-                        <ul class="divide-y">
-                            <li class="p-1 hover:bg-gray-200 active:bg-gray-400">
-                                <a href="{{ route('dashboard') }}" class="hover:text-blue-500">Dashboard</a>
-                            </li>
-                            <li class="p-1 hover:bg-gray-200">
-                                <a href="{{ route('booksManagement') }}" class=" hover:text-blue-500">Manažment kníh</a>
-                            </li>
-                            <li class="p-1 hover:bg-gray-200">
-                                <a href="{{ route('userManagement') }}" class=" hover:text-blue-500">Manažment užívateľov</a>
-                            </li>
-                            <li class="p-1 hover:bg-gray-200">
-                                <a href="{{ route('classroomManagement') }}" class=" hover:text-blue-500">Manažment tried</a>
-                            </li>
-                            <li class="p-1 hover:bg-gray-200">
-                                <a href="{{ route('schoolManagement') }}" class=" hover:text-blue-500">Manažment škôl</a>
-                            </li>
-                            <li class="p-1 hover:bg-gray-200">
-                                <a href="{{ route('genreManagement') }}" class=" hover:text-blue-500">Manažment žánrov</a>
-                            </li>
-                            <li class="p-1 hover:bg-gray-200">
-                                <a href="{{ route('languageManagement') }}" class=" hover:text-blue-500">Manažment jazykov</a>
-                            </li>
-                            <li class="p-1 hover:bg-gray-200">
-                                <a href="{{ route('authorManagement') }}" class=" hover:text-blue-500">Manažment autorov</a>
-                            </li>
-                            <li class="p-1 hover:bg-gray-200">
-                                <a href="" class=" hover:text-blue-500">Reporty</a>
-                            </li>
+        <main class="flex-grow h-full mb-6">
+            <div class="flex flex-row">
+                <div class="mt-6 p-3 h-screen rounded-r-lg bg-white">
+                    <nav class="w-max">
+                        <ul class="divide-y divide-gray-500">
+                            <a href="{{ route('adminHome') }}" class="hover:text-blue-500">
+                                <li class="p-1 hover:bg-gray-200 active:bg-gray-400">
+                                    Admin domov
+                                </li>
+                            </a>
+                            <a href="{{ route('booksManagement') }}" class=" hover:text-blue-500">
+                                <li class="p-1 hover:bg-gray-200 border-t border-gray-300">
+                                    Manažment kníh
+                                </li>
+                            </a>
+                            <a href="{{ route('userManagement') }}" class=" hover:text-blue-500">
+                                <li class="p-1 hover:bg-gray-200 border-t border-gray-300">
+                                    Manažment užívateľov
+                                </li>
+                            </a>
+                            <a href="{{ route('classroomManagement') }}" class=" hover:text-blue-500">
+                                <li class="p-1 hover:bg-gray-200 border-t border-gray-300">
+                                        Manažment tried
+                                </li>
+                            </a>
+                            <a href="{{ route('schoolManagement') }}" class=" hover:text-blue-500">
+                                <li class="p-1 hover:bg-gray-200 border-t border-gray-300">
+                                    Manažment škôl
+                                </li>
+                            </a>
+                            <a href="{{ route('genreManagement') }}" class=" hover:text-blue-500">
+                                <li class="p-1 hover:bg-gray-200 border-t border-gray-300">
+                                    Manažment žánrov
+                                </li>
+                            </a>
+                            <a href="{{ route('languageManagement') }}" class="hover:text-blue-500">
+                                <li class="p-1 hover:bg-gray-200 border-t border-gray-300">
+                                    Manažment jazykov
+                                </li>
+                            </a>
+                            <a href="{{ route('authorManagement') }}" class="hover:text-blue-500">
+                                <li class="p-1 hover:bg-gray-200 border-t border-gray-300">
+                                    Manažment autorov
+                                </li>
+                            </a>
+                            <a href="{{ route('loans') }}" class="hover:text-blue-500">
+                                <li class="p-1 hover:bg-gray-200 border-t border-gray-300">
+                                    Výpožičky
+                                </li>
+                            </a>
+                            <a href="{{ route('reports') }}" class="hover:text-blue-500">
+                                <li class="p-1 hover:bg-gray-200 border-t border-gray-300">
+                                    Reporty
+                                </li>
+                            </a>
                         </ul>
                     </nav>
                 </div>
@@ -85,8 +108,11 @@
             </div>
         </main>
         <footer>
-            <div class="bg-gray-800 p-10 text-gray-200 min-w-screen min-h-16 flex justify-around">
-                <p>Footer</p>
+            <div class="bg-gray-800 p-10 text-gray-200 min-w-screen min-h-16 flex justify-around mt-6">
+                <div class="h-max w-max flex flex-col justify-content-center align-items-center">
+                    <p>Email: kniznica@spseke.sk</p>    
+                    <p>Tel: 0940 434 556</p>
+                </div>
             </div>
         </footer>
     </div>

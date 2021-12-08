@@ -62,13 +62,18 @@ class User extends Authenticatable
         return $this->hasManyThrough(Like::class, Knihy::class);
     }
 
-    public function classroom()
-    {
+    public function classroom() {
+
         return $this->belongsTo(Classroom::class);
     }
     
-    public function school()
-    {
+    public function school() {
+
         return $this->belongsTo(School::class);
+    }
+
+    public function isAdmin() {
+        
+        return $this->user_type == "admin" ? true : false;
     }
 }

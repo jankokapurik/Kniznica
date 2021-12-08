@@ -3,6 +3,6 @@
 @section('content')
     <div class="flex w-full ">
         <div class="w-full bg-white ml-6 mt-6 p-6 rounded-l-lg" >
-            <h1 class="font-bold text-3xl">Domovská stránka admina</h1>
+            <h1 class="font-bold text-3xl">Výpožičky - admin</h1>
     </div>
 @endsection

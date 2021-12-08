@@ -86,17 +86,17 @@
                             {{$message}}
                         </div>
                     @enderror
-                </div>
+                    </div>
                 <div class="bg-gray-100 border-2 p-2 rounded-lg flex hover:border-gray-300 trasition duration-500 mb-4">
                     @if ($genres->count())
                     @foreach ($genres as $genre)   
-                    <div class="cursor-pointer">
-                        <label class="cursor-pointer">
-                            <input type="checkbox" name="genre[]" id="genre" value="{{ $book->genres}}" class="peer hidden">
-                            <span class="block m-1 bg-gray-300 py-2 px-3 rounded-full transition duration-500 overflow-hidden text-lg peer-checked:bg-gray-500 peer-checked:text-white
-                            ">{{ $genre->name }}</span>
-                        </label>
-                    </div>
+                        <div class="cursor-pointer">
+                            <label class="cursor-pointer">
+                                <input type="checkbox" name="genre[]" id="genre" value="{{ $genre->id }}" class="peer hidden" {{ ($book->genres->find($genre)) ?  'checked' : ''}}>
+                                <span class="block m-1 bg-gray-200 py-2 px-3 rounded-full transition duration-500 overflow-hidden text-lg peer-checked:bg-blue-500 peer-checked:text-white {{ ($book->genres->find($genre)) ?  'bg-red-500 text-white' : '' }}
+                                ">{{ $genre->name }}</span>
+                            </label>
+                        </div>
                     @endforeach
                     @endif
                 </div>
