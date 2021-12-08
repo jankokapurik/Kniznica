@@ -82,13 +82,13 @@
                     <input type="file" name="image" id="image" placeholder="Fotka" class="bg-gray-100 border-2 w-full p-4 text-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 hover:border-gray-300 trasition duration-500">
                 </div>
                 <h1 class="text-3xl mb-2">Vyber zanre knihy</h1>
-                <div class="bg-gray-100 border-2 p-2 rounded-lg flex hover:border-gray-300 trasition duration-500 mb-4">
+                <div class="flex mb-6">
                     @if ($genres->count())
                     @foreach ($genres as $genre)   
                     <div class="cursor-pointer">
                         <label class="cursor-pointer">
                             <input type="checkbox" name="genre[]" id="genre" value="{{ $genre->id }}" class="peer hidden">
-                            <span class="block m-1 bg-gray-300 py-2 px-3 rounded-full transition duration-500 overflow-hidden text-lg peer-checked:bg-gray-500 peer-checked:text-white
+                            <span class="block m-1 bg-gray-200 text-gray-400 py-2 px-3 rounded-full transition duration-500 overflow-hidden text-lg peer-checked:bg-blue-500 peer-checked:text-white peer-checked:shadow-2xl peer-checked:ring-blue-500
                             ">{{ $genre->name }}</span>
                         </label>
                     </div>
@@ -96,7 +96,7 @@
                     @endif
                 </div>
                 <div class="mb-4">
-                    <button type="submit" class="bg-blue-500 border-2 border-blue-500 text-white p-4 rounded-lg hover:bg-gray-100 hover:text-blue-500 trasition duration-500">Pridať</button>
+                    <button type="submit" class="bg-green-500 border-2 border-green-500 text-white p-4 rounded-lg hover:bg-green-100 hover:text-green-500 trasition duration-500">Pridať</button>
                 </div>
             </form>
         </div>

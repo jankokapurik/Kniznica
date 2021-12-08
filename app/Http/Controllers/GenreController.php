@@ -23,6 +23,8 @@ class GenreController extends Controller
             'name' =>'required|max:100',
         ]);
 
+        $request->name = ucfirst($request->name);
+
         Genre::create([
             'name' => $request->name,
             "createdBy" => $request->user()]);

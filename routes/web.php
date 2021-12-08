@@ -19,11 +19,7 @@ use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/', function() {
     return view('users.home');
-})->name('users.home');   
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-Route::get('/users/{user:username}/knihy', [UserKnihaController::class, 'index'])->name('users.knihy');
+})->name('home');   
 
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
@@ -32,28 +28,15 @@ Route::post('/login', [LoginController::class, 'store']);
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
-
 Route::get('/register', [RegisterController::class, 'show'])->name('register');
-
-  // Route::get('/knihy', [PostController::class, 'index'])->name('knihy');
-  // Route::post('/knihy', [PostController::class, 'store']);
-
-
-Route::post('/knihy/ {kniha} /likes', [PostLikeController::class, 'store'])->name('knihy.likes');
-Route::delete('/knihy/ {kniha} /likes', [PostLikeController::class, 'destroy'])->name('knihy.likes');
 
 Route::get('/search2', [SearchController::class, 'index'])->name('search2');
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
-    Route::get('/adminDashboard', function () {
-      return view('admin.dashboard');
-    })->name('dashboard');
-    Route::get('/admin', function () {
+
+    Route::get('/adminHome', function () {
       return view('admin.home');
-    })->name('home');
-    Route::get('/booksManagement', function () {
-      return view('admin.booksManagement');
-    })->name('booksManagement');
+    })->name('adminHome');
 
     //  manazment pouzivatelov
     Route::get('/userManagement', [UserController::class, 'index'])->name('userManagement');
@@ -112,6 +95,13 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/author', [AuthorController::class, 'create'])->name('author.create');
     Route::post('/author', [AuthorController::class, 'store'])->name('author.store');
   
+    Route::get('/vypozicky', function () {
+      return view('admin.loans');
+    })->name('loans');
+
+    Route::get('/reporty', function () {
+      return view('admin.reports');
+    })->name('reports');
 });
 
 Route::get('/books', [BookController::class, 'index'])->name('books');

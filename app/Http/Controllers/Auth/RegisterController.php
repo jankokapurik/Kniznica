@@ -43,9 +43,13 @@ class RegisterController extends Controller
             'classroom_id' => 'required', 
         ]);
 
+        $data = $request;
+        $data['fname'] = ucfirst($request->fname);
+        $data['lname'] = ucfirst($request->lname);
+
         User::create([
-            'fname' => $request->fname,
-            'lname' => $request->lname,
+            'fname' => $data['fname'],
+            'lname' => $data['lname'],
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -53,8 +57,8 @@ class RegisterController extends Controller
             'classroom_id' =>  $request->classroom_id, 
         ]);
 
-        auth()->attempt($request->only('email', 'password'));
+        auth()->attempt($data->only('email', 'password'));
 
-        return redirect()->route('dashboard'); 
+        return redirect()->route('home'); 
     }
 }
