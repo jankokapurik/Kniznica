@@ -6,6 +6,12 @@
             <form method="POST" action="{{ route('user.update', $user) }}">
                 @csrf
                 @method('PATCH')
+
+                
+                @error('notChanged')
+                    <div class="bg-red-500 w-full p-4 text-gray-600 rounded-lg text-white mb-6">{{$message}}</div>
+                @enderror
+
                 <div class="mb-4">
                     <label class="font-bold text-gray-800" for="username">Užívateľské meno</label>
                     <input class="bg-gray-100 border-2 w-full p-4 text-gray-600 rounded-lg focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 @error('username') border-red-500 @enderror trasition duration-500" type="text" id="username" name="username" value="{{ $user->username }}">

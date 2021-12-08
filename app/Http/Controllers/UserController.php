@@ -64,9 +64,36 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(){
-        dd('update');
+    public function update(User $user, Request $request){
+        $request->validate([
+            'username' => 'required|max:255',
+            'fname' => 'required|max:255',
+            'lname' => 'required|max:255',
+            'email' => 'required|email||max:255',
+            'school_id' => 'required',
+            'classroom_id' => 'required',
+        ]);
+
+        if(!($user->username === $request->username)){
+            $request->validate([
+                'username' => 'unique:users,username',
+            ]);
+        }
+
+        if(!($user->email === $request->email)){
+            $request->validate([
+                'email' => 'unique:users,email',
+            ]);
+        }
+
+        
+        $user->update($request->all());
+
+        if($user->getChanges())return redirect()->route('home');
+        return back()->withErrors(['notChanged' => 'nothing changed']);        
     }
+
+    
 
 }
 
