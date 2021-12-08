@@ -23,33 +23,50 @@ class UserController extends Controller
         return back();
     }
 
-    public function edit(User $user) {
+    // public function edit(User $user) {
 
+    //     $schools = School::get();
+    //     $classrooms = Classroom::get();
+        
+    //     return view('admin.editUser', [
+    //         'user' => $user,
+    //         'schools' => $schools,
+    //         'classrooms' => $classrooms,
+    //     ]);
+    // }
+
+    // public function update(User $user, Request $request) {
+
+    //     $request->validate([
+    //         'username' =>'required|max:255',
+    //         'fname' =>'required|max:255',
+    //         'lname' =>'required|max:255',
+    //         'email' =>'required|email|max:255',
+    //         'school_id' => 'required',
+    //         'classroom_id' => 'required',
+    //         'user_type' =>'required||max:255',
+    //     ]);
+
+    //     $user->update($request->all());
+
+    //     return redirect()->route('userManagement')->with('success','Product updated successfully');
+    // }
+
+
+    function show(User $user){
         $schools = School::get();
         $classrooms = Classroom::get();
-        
-        return view('admin.editUser', [
+
+        return view('users.editUser', [
             'user' => $user,
-            'schools' => $schools,
-            'classrooms' => $classrooms,
+            'schools' =>$schools,
+            'classrooms'=>$classrooms,
         ]);
     }
 
-    public function update(User $user, Request $request) {
-
-        $request->validate([
-            'username' =>'required|max:255',
-            'fname' =>'required|max:255',
-            'lname' =>'required|max:255',
-            'email' =>'required|email|max:255',
-            'school_id' => 'required',
-            'classroom_id' => 'required',
-            'user_type' =>'required||max:255',
-        ]);
-
-        $user->update($request->all());
-
-        return redirect()->route('userManagement')->with('success','Product updated successfully');
+    public function update(){
+        dd('update');
     }
+
 }
 

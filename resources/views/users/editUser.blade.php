@@ -1,13 +1,13 @@
-@extends('layouts.adminLayout')
+@extends('layouts.userLayout')
 
 @section('content')
     <div class="flex w-full">
         <div class="w-full mt-6 ml-6 bg-white p-6 rounded-tl-lg" >
             <form method="POST" action="{{ route('user.update', $user) }}">
                 @csrf
-                @method('PUT')
+                @method('PATCH')
                 <div class="mb-4">
-                    <label class="font-bold text-gray-800 sr-only" for="username">Užívateľské meno</label>
+                    <label class="font-bold text-gray-800" for="username">Užívateľské meno</label>
                     <input class="bg-gray-100 border-2 w-full p-4 text-gray-600 rounded-lg focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 @error('username') border-red-500 @enderror trasition duration-500" type="text" id="username" name="username" value="{{ $user->username }}">
                     @error('username')
                         <div class="text-red-500 mt-2 text-sm">
@@ -16,7 +16,7 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label class="font-bold text-gray-800 sr-only" for="fname">Meno</label>
+                    <label class="font-bold text-gray-800" for="fname">Meno</label>
                     <input class="bg-gray-100 border-2 w-full p-4 text-gray-600 rounded-lg focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 @error('fname') border-red-500 @enderror trasition duration-500" type="text" id="fname" name="fname" value="{{ $user->fname }}">
                     @error('fname')
                         <div class="text-red-500 mt-2 text-sm">
@@ -25,7 +25,7 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label class="font-bold text-gray-800 sr-only" for="lname">Priezvisko</label>
+                    <label class="font-bold text-gray-800" for="lname">Priezvisko</label>
                     <input class="bg-gray-100 border-2 w-full p-4 text-gray-600 rounded-lg focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 @error('lname') border-red-500 @enderror trasition duration-500" type="text" id="lname" name="lname" value="{{ $user->lname }}">
                     @error('lname')
                         <div class="text-red-500 mt-2 text-sm">
@@ -34,7 +34,7 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label class="font-bold text-gray-800 sr-only" for="email">Email</label>
+                    <label class="font-bold text-gray-800" for="email">Email</label>
                     <input class="bg-gray-100 border-2 w-full p-4 text-gray-600 rounded-lg focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 @error('email') border-red-500 @enderror trasition duration-500" type="text" id="email" name="email" value="{{ $user->email }}">
                     @error('email')
                         <div class="text-red-500 mt-2 text-sm">
@@ -43,7 +43,7 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="school_id" class="sr-only">Škola</label>
+                    <label for="school_id" class="font-bold text-gray-800">Škola</label>
                     <select name="school_id" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 focus:border-gray-600 @error('school_id') border-red-500 @enderror trasition duration-500" value="">
                         <optgroup label="Škola">
                             @if($schools->count())
@@ -62,7 +62,7 @@
                     </select>
                 </div>
                 <div class="mb-4">
-                    <label for="classroom_id" class="sr-only">Trieda</label>
+                    <label for="classroom_id" class="font-bold text-gray-800">Trieda</label>
                     <select name="classroom_id" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 focus:border-gray-600 @error('classroom_id') border-red-500 @enderror trasition duration-500" value="">
                         <optgroup label="Trieda">
                             @if($classrooms->count())
@@ -74,20 +74,6 @@
                             @endif
                         </optgroup>
                         @error('classroom_id')
-                        <div class="text-red-500 mt-2 text-sm">
-                            {{$message}}
-                        </div>
-                        @enderror
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label for="user_type" class="sr-only">Typ užívateľa</label>
-                    <select name="user_type" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 focus:border-gray-600 @error('user_type') border-red-500 @enderror trasition duration-500" value="">
-                        <optgroup label="Typ užívateľa">
-                            <option value="user" {{ ($user->user_type == "user") ? 'selected' : '' }}>User</option>
-                            <option value="admin" {{ ($user->user_type == "admin") ? 'selected' : '' }}>Admin</option>
-                        </optgroup>
-                        @error('user_type')
                         <div class="text-red-500 mt-2 text-sm">
                             {{$message}}
                         </div>

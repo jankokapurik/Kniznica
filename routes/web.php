@@ -57,9 +57,11 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
     //  manazment pouzivatelov
     Route::get('/userManagement', [UserController::class, 'index'])->name('userManagement');
-    Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
-    Route::get('/user/{user}', [UserController::class, 'edit'])->name('user.edit');
-    Route::put('/user/{user}', [UserController::class, 'update'])->name('user.update');
+    // Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+    // Route::get('/user/{user}', [UserController::class, 'edit'])->name('user.edit');
+    // Route::put('/user/{user}', [UserController::class, 'update'])->name('user.update');
+
+
 
     //  manazment tried
     Route::get('/classroomManagement', [ClassroomController::class, 'index'])->name('classroomManagement');
@@ -124,3 +126,10 @@ Route::delete('/comment.destroy/{comment}',[CommentController::class, 'destroy']
 
 Route::get('/comment.edit/{comment}',[CommentController::class, 'show'])->name('comment.edit');
 Route::patch('/comment.edit/{comment}',[CommentController::class, 'edit'])->name('comment.edit');
+
+
+
+//user-details
+
+Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show');
+Route::patch('/user/{user}', [UserController::class, 'update'])->name('user.update');

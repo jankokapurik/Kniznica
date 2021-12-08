@@ -36,7 +36,7 @@
                 <ul class="flex items-center ">
                     @auth
                     <li>
-                        <a href="" class="p-3 hover:text-purple-600">{{ auth()->user()->fname }} {{ auth()->user()->lname }}</a>
+                        <a href="/user/{{ auth()->user()->id }}" class="p-3 hover:text-purple-600">{{ auth()->user()->fname }} {{ auth()->user()->lname }}</a>
                     </li> 
                     <li>
                         <form action="{{ route('logout') }}" method="post" class="inline p-3">
