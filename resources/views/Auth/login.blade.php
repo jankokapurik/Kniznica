@@ -32,6 +32,12 @@
                     @enderror
                 </div>
 
+                @if (session('status'))
+                    <a href="{{ route('forgotten') }}" class="rounded-lg mb-6 text-red-600 text-center">
+                        Forgotten password??
+                    </a>
+                @endif
+
                 <div class="mb-4">
                     <div class="flex items-center">
                         <input type="checkbox" name="remember" id="remember" class="mr-2 trasition duration-500">

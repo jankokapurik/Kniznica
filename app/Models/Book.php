@@ -34,13 +34,17 @@ class Book extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function countComments()
+    {
+        return $this->hasMany(Comment::class)->count();
+    }
+
     public function rating()
     {
         return $this->hasMany(Comment::class)->avg('rating');
     }
 
-    public function genres() {
-        
+    public function genres() {        
         return $this->belongsToMany(Genre::class, 'book_genre');
     }
 }

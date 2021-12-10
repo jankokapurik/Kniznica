@@ -5,9 +5,13 @@
         <a href="{{ route('books.show', $book) }}"><strong>{{ $book->author->fname }} {{ $book->author->lname }}</strong></a>
         <p><strong>{{ $book->title }}</strong></p>
 
-        <div class="flex">
-            <span class="pr-1">{{ round($a = $book->rating(),1) }}</span>
-            <x-ratingbar :rating="round($a)"/>
+        <div class="flex">            
+            @if ($book->countComments())
+                <span class="pr-1">{{ round($a = $book->rating(),1) }}</span>
+                <x-ratingbar :rating="round($a)"/>    
+            @else
+                <span>nie je hodnotene</span>
+            @endif            
         </div>
 
 

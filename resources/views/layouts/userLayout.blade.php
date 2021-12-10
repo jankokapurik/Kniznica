@@ -38,42 +38,53 @@
                         <button type="submit" class="bg-blue-500 border-2 border-blue-500 text-white p-1 rounded font-medium  hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Hľadaj</button>
                     </form>
                 </div>
-                <ul class="flex items-center">
+
+                <div>
                     @auth
+                    <ul class="flex items-center">                        
+                        <div class="group">
+                            <ul>                        
+                                <li>    
+                                    <p class="overflow-ellipsis p-1 hover:text-purple-600">{{ auth()->user()->fname }} {{ auth()->user()->lname }}</p>
+                                </li>
+                            </ul>    
+                            <ul class="absolute bg-white w-32 right-0">
 
-                    <ul class="group bg-green-200 relative overflow-hidden items-center">
-                        <li class="bg-red-200 w-32">
-                            <a href="/user/{{ auth()->user()->id }}" class="p-3 hover:text-purple-600">{{ auth()->user()->fname }} {{ auth()->user()->lname }}</a>
-                        </li>
-                        <div class="fixed w-32 hidden bg-red-200 group-hover:block">
-                            <div class="flex flex-col items-center">
-                                <li><a href="" class="p-3 hover:text-purple-600">Profile</a></li>
-                                <li><a href="" class="p-3 hover:text-purple-600">Log out</a></li>
-                            </div>
+                                <li class="bg-white hidden group-hover:block">
+                                    <a href="/user/{{ auth()->user()->id }}" class="block hover:text-purple-600 text-base">Profile</a>
+                                </li>
 
-                        </div>
+                                <li class="bg-white hidden group-hover:block">
+                                    <a href="/" class="block hover:text-purple-600 text-base">Verify accont</a>
+                                </li>
+
+                                <li class="bg-white hidden group-hover:block">
+                                    <form action="{{ route('logout') }}" method="post" class="inline">
+                                        @csrf
+                                        <button class="hover:text-purple-600 text-base block" type="submit">Odhlásiť sa</button>
+                                    </form>
+                                </li>
+
+                            </ul>
+                        </div>                        
                     </ul>
-                    
-
-                    <li>
-                        <form action="{{ route('logout') }}" method="post" class="inline p-3">
-                            @csrf
-                            <button class="p-3 hover:text-purple-600" type="submit">Odhlásiť sa</button>
-                        </form>
-                    </li>
                     @endauth
+
                     @guest
-                    <li>
-                        <a href="{{route('login')}}" class="p-3 hover:text-purple-600">Prihlásiť sa</a>
-                    </li>
-                    <li>
-                        <a href="{{route('register')}}" class="p-3 hover:text-purple-600">Zaregistrovať sa</a>
-                    </li>
+                    <ul class="flex">                        
+                        <li>
+                            <a href="{{route('login')}}" class="p-3 hover:text-purple-600">Prihlásiť sa</a>
+                        </li>
+                        <li>
+                            <a href="{{route('register')}}" class="p-3 hover:text-purple-600">Zaregistrovať sa</a>
+                        </li>                                            
+                    </ul>
                     @endguest
-                    
-                </ul>
-            </nav>
+                </div>
+            </nav>            
         </header>
+        
+        {{-- MAIN CONTENT --}}
         <main class="flex-grow">
             <div class="flex flex-col justify-between mb-6">
                 @yield('content')

@@ -16,6 +16,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;   
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ForgottenController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function() {
     return view('users.home');
@@ -123,3 +125,11 @@ Route::patch('/comment.edit/{comment}',[CommentController::class, 'edit'])->name
 
 Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show');
 Route::patch('/user/{user}', [UserController::class, 'update'])->name('user.update');
+
+Route::get('/forgotten', [ForgottenController::class, 'index'])->name('forgotten');
+Route::post('/forgotten', [ForgottenController::class, 'send'])->name('forgotten.send');
+
+Auth::routes(['verify' => true]);
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
