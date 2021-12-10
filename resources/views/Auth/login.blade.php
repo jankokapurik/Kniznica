@@ -33,9 +33,9 @@
                 </div>
 
                 @if (session('status'))
-                    <a href="{{ route('forgotten') }}" class="rounded-lg mb-6 text-red-600 text-center">
-                        Forgotten password??
-                    </a>
+                <a href="{{ route('forgotten') }}" class="rounded-lg mb-6 text-red-600 text-center">
+                    Forgotten password??
+                </a>
                 @endif
 
                 <div class="mb-4">

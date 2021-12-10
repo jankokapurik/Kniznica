@@ -38,7 +38,7 @@
                         <button type="submit" class="bg-blue-500 border-2 border-blue-500 text-white p-1 rounded font-medium  hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Hľadaj</button>
                     </form>
                 </div>
-
+                
                 <div>
                     @auth
                     <ul class="flex items-center">                        
@@ -53,10 +53,11 @@
                                 <li class="bg-white hidden group-hover:block">
                                     <a href="/user/{{ auth()->user()->id }}" class="block hover:text-purple-600 text-base">Profile</a>
                                 </li>
-
                                 <li class="bg-white hidden group-hover:block">
                                     <a href="/" class="block hover:text-purple-600 text-base">Verify accont</a>
                                 </li>
+
+                    
 
                                 <li class="bg-white hidden group-hover:block">
                                     <form action="{{ route('logout') }}" method="post" class="inline">
@@ -69,7 +70,6 @@
                         </div>                        
                     </ul>
                     @endauth
-
                     @guest
                     <ul class="flex">                        
                         <li>
@@ -81,9 +81,9 @@
                     </ul>
                     @endguest
                 </div>
-            </nav>            
+            </nav>   
         </header>
-        
+                
         {{-- MAIN CONTENT --}}
         <main class="flex-grow">
             <div class="flex flex-col justify-between mb-6">

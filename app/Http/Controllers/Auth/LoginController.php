@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-
 
 class LoginController extends Controller
 {
@@ -24,24 +23,19 @@ class LoginController extends Controller
         ]);
 
         if(!auth()->attempt($request->only('email', 'password'), $request->remember)) {
-            return back()->with('status', 'Invalid login details')->with($request->except('password'));
+            return back()->with('status', 'Invalid login details');
         }
 
         return redirect()->route('home');
     }
 
+    protected function redirectTo() {
 
-    // protected function redirectTo() {
-
-    //     if (Auth::user()->user_type == 'admin') {
-    //         return 'admin';  // admin dashboard path
-    //     } 
-    //     else {
-    //         return 'home';  // member dashboard path
-    //     }
-    // }
-
-    // public function showLoginForm(){
-    //     return view('auth.login');
-    // }
+        if (Auth::user()->user_type == 'admin') {
+            return 'admin';  // admin dashboard path
+        } 
+        else {
+            return 'home';  // member dashboard path
+        }
+    }
 }

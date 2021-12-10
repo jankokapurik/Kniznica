@@ -44,7 +44,8 @@ class Book extends Model
         return $this->hasMany(Comment::class)->avg('rating');
     }
 
-    public function genres() {        
+    public function genres() {
+        
         return $this->belongsToMany(Genre::class, 'book_genre');
     }
 }

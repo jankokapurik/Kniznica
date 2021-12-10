@@ -11,7 +11,7 @@
                 <x-ratingbar :rating="round($a)"/>    
             @else
                 <span>nie je hodnotene</span>
-            @endif            
+            @endif    
         </div>
 
 
