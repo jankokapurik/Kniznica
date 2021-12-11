@@ -126,5 +126,10 @@ Route::patch('/user/{user}', [UserController::class, 'update'])->name('user.upda
 Route::get('/forgotten', [ForgottenController::class, 'index'])->name('forgotten');
 Route::post('/forgotten', [ForgottenController::class, 'send'])->name('forgotten.send');
 
+Route::get('/send',[UserController::class, 'sendEmail']);
+
+
+// Auth::routes(['verify' => true]);
+
 
 // Route::get('/home', [HomeController::class, 'index'])->name('home');

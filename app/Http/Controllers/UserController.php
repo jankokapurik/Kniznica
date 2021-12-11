@@ -7,11 +7,18 @@ use App\Models\School;
 use App\Models\Classroom;
 use Illuminate\Http\Request;
 use App\Http\Middleware\AdminMiddleware;
+use App\Mail\VerifyAccount;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
-    public function index() {
+    public function sendEmail(){
+        $user = auth()->user();
 
+        Mail::to($user)->send(new VerifyAccount());
+    }
+
+    public function index() {
         $users = User::get();
         
         return view('admin.manageUsers', ['users' => $users]);

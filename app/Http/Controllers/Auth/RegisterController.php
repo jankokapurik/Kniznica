@@ -7,12 +7,20 @@ use App\Models\School;
 use App\Models\Classroom;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\VerifyAccount;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
     public function __construct() {
         $this->middleware(['guest']);
+    }
+
+    public function sendEmail(){
+        $user = auth()->user();
+
+        Mail::to($user)->send(new VerifyAccount());
     }
     
     public function books(){
