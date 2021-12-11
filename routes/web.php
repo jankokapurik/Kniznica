@@ -8,13 +8,10 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\CommentController;  
-use App\Http\Controllers\UserKnihaController;
 use App\Http\Controllers\Auth\LoginController; 
 use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\DashboardController;   
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ForgottenController;
 use Illuminate\Support\Facades\Auth;
@@ -129,7 +126,5 @@ Route::patch('/user/{user}', [UserController::class, 'update'])->name('user.upda
 Route::get('/forgotten', [ForgottenController::class, 'index'])->name('forgotten');
 Route::post('/forgotten', [ForgottenController::class, 'send'])->name('forgotten.send');
 
-Auth::routes(['verify' => true]);
-Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
