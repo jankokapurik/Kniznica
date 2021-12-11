@@ -8,6 +8,7 @@ use App\Models\Classroom;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mail\VerifyAccount;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -55,7 +56,7 @@ class RegisterController extends Controller
         $data['fname'] = ucfirst($request->fname);
         $data['lname'] = ucfirst($request->lname);
 
-        User::create([
+        $user = User::create([
             'fname' => $data['fname'],
             'lname' => $data['lname'],
             'username' => $request->username,
@@ -64,6 +65,9 @@ class RegisterController extends Controller
             'school_id' => $request->school_id,
             'classroom_id' =>  $request->classroom_id, 
         ]);
+
+        event(new Registered($user));  
+        auth()->login($user);
 
         auth()->attempt($data->only('email', 'password'));
 

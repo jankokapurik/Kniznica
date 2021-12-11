@@ -13,8 +13,11 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Auth\LoginController; 
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgottenController;
+use App\Http\Controllers\VerificationController;
 use Illuminate\Support\Facades\Auth;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function() {
     return view('users.home');
@@ -133,3 +136,20 @@ Route::get('/send',[UserController::class, 'sendEmail']);
 
 
 // Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
+////////////////////////////////////////
+// Route::group(['middleware' => ['auth']], function(){
+  //verification routes
+
+  
+  Route::get('/email/verify', [VerificationController::class,'show'])->name('verification.notice');
+  Route::get('/email/verify/{id}/{hash}', [VerificationController::class,'verify'])->name('verification.verify')->middleware(['signed']);
+  Route::post('/email/resend', [VerificationController::class,'resend'])->name('verification.resend');
+// });
+
+Route::group(['middleware' => ['auth']], function(){
+  Route::group(['middleware' => ['verified']], function(){
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+  });
+});
