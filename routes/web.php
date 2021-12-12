@@ -139,17 +139,15 @@ Route::get('/send',[UserController::class, 'sendEmail']);
 
 
 ////////////////////////////////////////
-// Route::group(['middleware' => ['auth']], function(){
-  //verification routes
-
-  
+Route::group(['middleware' => ['auth']], function(){
   Route::get('/email/verify', [VerificationController::class,'show'])->name('verification.notice');
   Route::get('/email/verify/{id}/{hash}', [VerificationController::class,'verify'])->name('verification.verify')->middleware(['signed']);
   Route::post('/email/resend', [VerificationController::class,'resend'])->name('verification.resend');
-// });
+});
 
 Route::group(['middleware' => ['auth']], function(){
   Route::group(['middleware' => ['verified']], function(){
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/verification/welcome', [VerificationController::class,'welcome']);
   });
 });

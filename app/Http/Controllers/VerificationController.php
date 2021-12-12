@@ -10,7 +10,7 @@ class VerificationController extends Controller
 {
     use VerifiesEmails, RedirectsUsers;
 
-    protected $redirectTo = '/';
+    protected $redirectTo = '/verification/welcome';
 
     public function __construct(){
         $this->middleware('auth');
@@ -25,4 +25,10 @@ class VerificationController extends Controller
                 'pageTitle' => __('Account Verification')
             ]);
     }
+    
+    public function welcome(){
+        return view('verification.welcome');
+    }
+
+    //metody verify a resend su zdedene
 }
