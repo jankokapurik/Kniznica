@@ -54,7 +54,7 @@
                                     <a href="/user/{{ auth()->user()->id }}" class="block hover:text-purple-600 text-base">Profile</a>
                                 </li>
                                 <li class="bg-white hidden group-hover:block">
-                                    <a href="/" class="block hover:text-purple-600 text-base">Verify accont</a>
+                                    <a href="{{ route('verification.notice') }}" class="block hover:text-purple-600 text-base">Verify accont</a>
                                 </li>
 
                     

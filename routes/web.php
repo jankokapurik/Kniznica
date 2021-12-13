@@ -35,17 +35,13 @@ Route::get('/search2', [SearchController::class, 'index'])->name('search2');
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
 
-    Route::get('/adminHome', function () {
-      return view('admin.home');
-    })->name('adminHome');
+    Route::get('/adminHome', function () { return view('admin.home');})->name('adminHome');
 
     //  manazment pouzivatelov
-    Route::get('/userManagement', [UserController::class, 'index'])->name('userManagement');
+    // Route::get('/userManagement', [UserController::class, 'index'])->name('userManagement');
     // Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
     // Route::get('/user/{user}', [UserController::class, 'edit'])->name('user.edit');
     // Route::put('/user/{user}', [UserController::class, 'update'])->name('user.update');
-
-
 
     //  manazment tried
     Route::get('/classroomManagement', [ClassroomController::class, 'index'])->name('classroomManagement');
@@ -121,20 +117,11 @@ Route::patch('/comment.edit/{comment}',[CommentController::class, 'edit'])->name
 
 
 //user-details
-
 Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show');
 Route::patch('/user/{user}', [UserController::class, 'update'])->name('user.update');
-
 Route::get('/forgotten', [ForgottenController::class, 'index'])->name('forgotten');
 Route::post('/forgotten', [ForgottenController::class, 'send'])->name('forgotten.send');
-
 Route::get('/send',[UserController::class, 'sendEmail']);
-
-
-// Auth::routes(['verify' => true]);
-
-
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 //VERIFICATION
