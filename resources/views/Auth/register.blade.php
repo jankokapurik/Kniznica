@@ -68,7 +68,7 @@
                             <option value=>Vyber svoju školu</option>
                         @if($schools->count())
                             @foreach($schools as $school)
-                                <option value={{ $school->id }} >{{ $school->name }}</option>
+                                <option value={{ $school->id }} @if ($school->id == old('school_id')) selected @endif>{{ $school->name }}</option>
                             @endforeach
                         @else
                             <p>Nie je ziaden post</p>
@@ -89,7 +89,7 @@
                         <option class="font-bold" value=>Vyber svoju triedu</option>
                         @if($classrooms->count())
                             @foreach($classrooms as $classroom)
-                                <option value={{ $classroom->id }} >{{ $classroom->name }}</option>
+                                <option value={{ $classroom->id }} @if ($classroom->id == old('classroom_id')) selected @endif>{{ $classroom->name }}</option>
                             @endforeach
                         @else
                             <p>Nie je ziaden post</p>
