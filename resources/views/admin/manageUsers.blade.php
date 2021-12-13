@@ -57,7 +57,7 @@
                         </td>
                         <td>
                             <div class="flex flex-row justify-center align-middle"  >
-                                <form action="{{ route('user.edit', $user->id) }}" class="m-1">
+                                <form action="{{ route('user.adminedit', $user->id) }}" class="m-1">
                                     <button class="bg-blue-500 border-2 border-blue-500 p-1 rounded-md text-white hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Upraviť</button>
                                 </form>
                                 <form action="{{ route('user.destroy', $user) }}" method="post" class="m-1">

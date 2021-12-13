@@ -3,11 +3,9 @@
 @section('content')
     <div class="flex w-full">
         <div class="w-full mt-6 ml-6 bg-white p-6 rounded-tl-lg" >
-            <form method="POST" action="{{ route('user.update', $user) }}">
+            <form method="POST" action="{{ route('user.adminupdate', $user) }}">
                 @csrf
-                @method('PATCH')
-
-                
+                @method('PATCH')                
                 @error('notChanged')
                     <div class="bg-red-500 w-full p-4 text-gray-600 rounded-lg mb-6">{{$message}}</div>
                 @enderror
@@ -85,6 +83,20 @@
                         </div>
                         @enderror
                     </select>
+
+                    <label for="user_type" class="font-bold text-gray-800">Typ účtu</label>
+                    <select name="user_type" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 focus:border-gray-600 @error('user_type') border-red-500 @enderror trasition duration-500" value="">
+                        <optgroup label="User">                            
+                            <option value="admin" {{ ($user->user_type == 'admin') ? 'selected' : '' }}>Admin</option>
+                            <option value="user" {{ ($user->user_type == 'user') ? 'selected' : '' }}>user</option>
+                        </optgroup>
+                        @error('user_type')
+                        <div class="text-red-500 mt-2 text-sm">
+                            {{$message}}
+                        </div>
+                        @enderror
+                    </select>
+                    
                 </div>
                 <button type="submit" class="bg-blue-500 border-2 border-blue-500 text-white p-4 rounded-lg hover:bg-gray-100 hover:text-blue-500 trasition duration-500">Upraviť</button>
                 </div>

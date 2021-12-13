@@ -53,8 +53,8 @@
                                     <p class="overflow-ellipsis p-1 hover:text-purple-600">{{ auth()->user()->fname }} {{ auth()->user()->lname }}</p>
                                 </li>
                             </ul>    
-                            <ul class="absolute bg-white w-32 right-0">
-
+                            <ul class="absolute w-32 right-0">
+                    
                                 <li class="bg-white hidden group-hover:block">
                                     <a href="/user/{{ auth()->user()->id }}" class="block hover:text-purple-600 text-base">Profile</a>
                                 </li>

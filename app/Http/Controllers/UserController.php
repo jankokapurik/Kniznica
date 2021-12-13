@@ -19,19 +19,26 @@ class UserController extends Controller
     }
 
     public function index() {
-        $users = User::get();
-        
+        $users = User::get();        
         return view('admin.manageUsers', ['users' => $users]);
     }
 
-    public function destroy(User $user) {
-        
+    public function destroy(User $user) {        
         $user->delete();
         return back();
     }
 
-    public function edit(User $user) {
+    public function adminedit(User $user) {
+        $schools = School::get();
+        $classrooms = Classroom::get();
+        return view('admin.editUser', [
+            'user' => $user,
+            'schools' => $schools,
+            'classrooms' => $classrooms,
+        ]);
+    }
 
+    public function edit(User $user) {
         $schools = School::get();
         $classrooms = Classroom::get();
         
@@ -40,6 +47,25 @@ class UserController extends Controller
             'schools' => $schools,
             'classrooms' => $classrooms,
         ]);
+    }
+
+    public function adminupdateuser(User $user, Request $request) {
+        // dd('admin');
+        $request->validate([
+            'username' =>'required|max:255',
+            'fname' =>'required|max:255',
+            'lname' =>'required|max:255',
+            'email' =>'required|email|max:255',
+            'school_id' => 'required',
+            'classroom_id' => 'required',
+            'user_type' =>'required||max:255',
+        ]);
+        // dd('next');
+        // dd($request->all());
+
+        $user->update($request->all());
+
+        return redirect('userManagement')->with('success','Product updated successfully');
     }
 
     public function updateuser(User $user, Request $request) {
@@ -56,7 +82,7 @@ class UserController extends Controller
 
         $user->update($request->all());
 
-        return redirect()->route('userManagement')->with('success','Product updated successfully');
+        return redirect()->route('home')->with('success','Product updated successfully');
     }
 
     function show(User $user){

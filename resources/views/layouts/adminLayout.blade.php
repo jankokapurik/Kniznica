@@ -33,16 +33,39 @@
                 </div>
                 <ul class="flex items-center ">
                     @auth
-                        <li>
-                            <a href="" class="p-3 hover:text-blue-500">{{ auth()->user()->fname }} {{ auth()->user()->lname }}</a>
-                        </li> 
-                        <li>
-                            <form action="{{ route('logout') }}" method="post" class="inline p-3">
-                                @csrf
-                                <button class="p-3 hover:text-blue-500" type="submit">Odhlásiť sa</button>
-                            </form>
-                        </li>
-                    @endauth           
+                    <ul class="flex items-center space-x-4"> 
+                        <ul>                        
+                            <li>    
+                                <a href="/loans" class="block hover:text-purple-600 text-base">Výpožičky</a>
+                            </li>
+                        </ul>                        
+                        <div class="group">
+                            <ul>                        
+                                <li>    
+                                    <p class="overflow-ellipsis p-1 hover:text-purple-600">{{ auth()->user()->fname }} {{ auth()->user()->lname }}</p>
+                                </li>
+                            </ul>    
+                            <ul class="absolute w-32 right-0">
+                    
+                                <li class="bg-white hidden group-hover:block">
+                                    <a href="/user/{{ auth()->user()->id }}" class="block hover:text-purple-600 text-base">Profile</a>
+                                </li>
+                                <li class="bg-white hidden group-hover:block">
+                                    <a href="{{ route('verification.notice') }}" class="block hover:text-purple-600 text-base">Verify accont</a>
+                                </li>
+
+                                <li class="bg-white hidden group-hover:block">
+                                    <form action="{{ route('logout') }}" method="post" class="inline">
+                                        @csrf
+                                        <button class="hover:text-purple-600 text-base block" type="submit">Odhlásiť sa</button>
+                                    </form>
+                                </li>
+
+                            </ul>
+                            
+                        </div>                        
+                    </ul>
+                    @endauth          
                 </ul>
             </nav>
         </header>

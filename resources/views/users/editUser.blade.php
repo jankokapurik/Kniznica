@@ -6,10 +6,10 @@
             <form method="POST" action="{{ route('user.update', $user) }}">
                 @csrf
                 @method('PATCH')
-
+                USER {{ route('user.update', $user) }}
                 
                 @error('notChanged')
-                    <div class="bg-red-500 w-full p-4 text-gray-600 rounded-lg text-white mb-6">{{$message}}</div>
+                    <div class="bg-red-500 w-full p-4 text-gray-600 rounded-lg mb-6">{{$message}}</div>
                 @enderror
 
                 <div class="mb-4">
