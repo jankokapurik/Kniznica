@@ -137,26 +137,23 @@ Route::get('/send',[UserController::class, 'sendEmail']);
 // Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
-////////////////////////////////////////
-Route::group(['middleware' => ['auth']], function(){
+//VERIFICATION
+Route::middleware(['auth'])->group(function(){
   Route::get('/email/verify', [VerificationController::class,'show'])->name('verification.notice');
   Route::get('/email/verify/{id}/{hash}', [VerificationController::class,'verify'])->name('verification.verify')->middleware(['signed']);
   Route::post('/email/resend', [VerificationController::class,'resend'])->name('verification.resend');
 });
 
-Route::group(['middleware' => ['auth']], function(){
-  Route::group(['middleware' => ['verified']], function(){
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('/verification/welcome', [VerificationController::class,'welcome']);
-  });
+//THIS IS ALLOWED ONLY FOR VERIFICATED USERS
+Route::middleware(['auth', 'verified'])->group(function(){
+  Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+  Route::get('/verification/welcome', [VerificationController::class,'welcome']);
 });
 
-
-///RESETING PASSWORD
-Route::get('/forgot', [ResetPassword::class, 'request'])->middleware('guest')->name('password.request');
-
-Route::post('/forgot', [ResetPassword::class, 'email'])->middleware('guest')->name('password.email');
-
-Route::get('/reset-password/{token}', [ResetPassword::class, 'reset'])->middleware('guest')->name('password.reset');
-
-Route::post('reset-password', [ResetPassword::class, 'update'])->middleware('guest')->name('password.update');
+//RESETING PASSWORD
+Route::middleware(['guest'])->group(function(){
+  Route::get('/forgot', [ResetPassword::class, 'request'])->name('password.request');
+  Route::post('/forgot', [ResetPassword::class, 'email'])->name('password.email');
+  Route::get('/reset-password/{token}', [ResetPassword::class, 'reset'])->name('password.reset');
+  Route::post('/reset-password', [ResetPassword::class, 'update'])->name('password.update');
+});
