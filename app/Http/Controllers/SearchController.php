@@ -13,18 +13,13 @@ class SearchController extends Controller
     public function index(){
         $text = $_GET['search'];
 
-        $results = Book::join('authors','books.author_id','=','authors.id')
+        $results = Book::select('books.*', 'authors.fname', 'authors.lname')
+            ->join('authors','books.author_id','=','authors.id')
             ->where('books.title', 'LIKE', '%'.$text.'%')
             ->orWhere('authors.fname', 'LIKE', '%'.$text.'%')
             ->orWhere('authors.lname', 'LIKE', '%'.$text.'%')
             ->orWhereRaw("concat(fname, ' ', lname) like '%$text%' ")
-            ->select('*','books.id as book_id')
             ->paginate(10);
-
-        foreach($results as $result) {
-
-            $result->id = $result->book_id;
-        }
 
         return view('books.books',[
             'books' => $results

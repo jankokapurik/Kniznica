@@ -77,4 +77,9 @@ class User extends Authenticatable implements MustVerifyEmail
         
         return $this->user_type == "admin" ? true : false;
     }
+
+    public function loan() {
+
+        return $this->belongsTo(Loan::class);
+    }
 }

@@ -29,7 +29,7 @@
                         <div>
                             <div class="w-full flex">
                                 <div class="p-1"> 
-                                    5&nbsp;hviezdicok
+                                    <span class="text-yellow-500">&#9733&#9733&#9733&#9733&#9733</span>
                                 </div>
                                 <div class="w-7/12 flex-grow h-2 flex rounded bg-gray-200 mt-3">
                                     <div style="width: {{$rating['star5']}}%" class="bg-green-400 rounded"></div>
@@ -37,7 +37,7 @@
                             </div>
                             <div class="w-full flex">
                                 <div class="p-1"> 
-                                    4&nbsp;hviezdicky
+                                    <span class="text-yellow-500">&#9733&#9733&#9733&#9733</span>&#9733
                                 </div>
                                 <div class="w-7/12 flex-grow h-2 flex rounded bg-gray-200 mt-3">
                                     <div style="width: {{$rating['star4']}}%" class="bg-green-300 rounded"></div>
@@ -45,7 +45,7 @@
                             </div>
                             <div class="w-full flex">
                                 <div class="p-1"> 
-                                    3&nbsp;hviezdicky
+                                    <span class="text-yellow-500">&#9733&#9733&#9733</span>&#9733&#9733
                                 </div>
                                 <div class="w-7/12 flex-grow h-2 flex rounded bg-gray-200 mt-3">
                                     <div style="width: {{$rating['star3']}}%" class="bg-yellow-200 rounded"></div>
@@ -53,7 +53,7 @@
                             </div>
                             <div class="w-full flex">
                                 <div class="p-1"> 
-                                    2&nbsp;hviezdicky
+                                    <span class="text-yellow-500">&#9733&#9733</span>&#9733&#9733&#9733
                                 </div>
                                 <div class="w-7/12 flex-grow h-2 flex rounded bg-gray-200 mt-3">
                                     <div style="width: {{$rating['star2']}}%" class="bg-yellow-300 rounded"></div>
@@ -61,7 +61,7 @@
                             </div>
                             <div class="w-full flex">
                             <div class="p-1"> 
-                                1&nbsp;hviezdicka
+                                <span class="text-yellow-500">&#9733</span>&#9733&#9733&#9733&#9733
                             </div>
                             <div class="w-7/12 flex-grow h-2 flex rounded bg-gray-200 mt-3">
                                 <div style="width: {{$rating['star1']}}%" class="bg-red-400 rounded"></div>

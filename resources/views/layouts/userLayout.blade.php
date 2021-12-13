@@ -41,7 +41,12 @@
                 
                 <div>
                     @auth
-                    <ul class="flex items-center">                        
+                    <ul class="flex items-center space-x-4"> 
+                        <ul>                        
+                            <li>    
+                                <a href="/loans" class="block hover:text-purple-600 text-base">Výpožičky</a>
+                            </li>
+                        </ul>                        
                         <div class="group">
                             <ul>                        
                                 <li>    
@@ -57,8 +62,6 @@
                                     <a href="{{ route('verification.notice') }}" class="block hover:text-purple-600 text-base">Verify accont</a>
                                 </li>
 
-                    
-
                                 <li class="bg-white hidden group-hover:block">
                                     <form action="{{ route('logout') }}" method="post" class="inline">
                                         @csrf
@@ -67,6 +70,7 @@
                                 </li>
 
                             </ul>
+                            
                         </div>                        
                     </ul>
                     @endauth

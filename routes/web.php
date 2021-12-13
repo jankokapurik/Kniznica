@@ -20,7 +20,11 @@ use App\Http\Controllers\VerificationController;
 
 Route::get('/', function() {
     return view('users.home');
-})->name('home');   
+})->name('home');  
+
+Route::get('/loans', function() {
+    return view('books.loan');
+})->name('loan');   
 
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
@@ -38,10 +42,10 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/adminHome', function () { return view('admin.home');})->name('adminHome');
 
     //  manazment pouzivatelov
-    // Route::get('/userManagement', [UserController::class, 'index'])->name('userManagement');
-    // Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
-    // Route::get('/user/{user}', [UserController::class, 'edit'])->name('user.edit');
-    // Route::put('/user/{user}', [UserController::class, 'update'])->name('user.update');
+    Route::get('/userManagement', [UserController::class, 'index'])->name('userManagement');
+    Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::get('/user/{user}', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/user/{user}', [UserController::class, 'updateuser'])->name('user.update');
 
     //  manazment tried
     Route::get('/classroomManagement', [ClassroomController::class, 'index'])->name('classroomManagement');

@@ -54,7 +54,7 @@
                 </div>
                 <div class="mb-4">
                     <label for="language_id   " class="sr-only">Jazyk</label>
-                    <select name="language_id" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 focus:border-gray-500 @error('language_id') border-red-500 @enderror trasition duration-500" value="">
+                    <select name="language_id" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 focus:border-gray-500 @error('language_id') border-red-500 @enderror trasition duration-500">
                     <optgroup label="Jazyk">
                         <option class="font-bold">Vyber jazyk</option>
                         @if($languages->count())

@@ -12,8 +12,25 @@ use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
-    public function index() {        
-        $books = Book::select('*','books.id as book_id')->latest()->paginate(10);
+    public function index(Request $request) {        
+
+        if(!$request->filter){
+
+            $books= Book::Select(['books.*', 'authors.fname', 'authors.lname' ])
+            ->join('authors', 'books.author_id', '=', 'authors.id')
+            ->orderBy('title')
+            ->paginate(10);
+        }
+
+        if($request->filter){
+
+            $filter = explode('|', $request->filter);
+
+            $books= Book::Select(['books.*', 'authors.fname', 'authors.lname' ])
+            ->join('authors', 'books.author_id', '=', 'authors.id')
+            ->orderBy($filter[0],$filter[1])
+            ->paginate(10);
+        }
 
         $avg = Book::first()->comments()->avg('rating');
         
@@ -81,7 +98,7 @@ class BookController extends Controller
             'comments' => $book->comments()->latest()->get(),
             'rating' => [
                 "avg" => $book->comments()->avg('rating'),
-                "star5" => round($book->comments()->where('rating',5)->count('rating')/$mode * 100),
+                "star5" => round($book->comments()->where('rating',5)->count('rating') * 100 / $mode ),
                 "star4" => round($book->comments()->where('rating',4)->count('rating')/$mode * 100),
                 "star3" => round($book->comments()->where('rating',3)->count('rating')/$mode * 100),
                 "star2" => round($book->comments()->where('rating',2)->count('rating')/$mode * 100),
