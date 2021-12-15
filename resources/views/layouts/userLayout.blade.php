@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">    
     <link rel="stylesheet" href="{{ asset('css/rating.css') }}">
     
+    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> --}}
+    {{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" ></script> --}}
+
+    <script src="{{ URL::asset('js/autocomplete.js') }}"></script>
     
 </head>
 <body class="bg-gray-200">
@@ -30,15 +35,18 @@
                         @endif
                     @endif
                 </ul>
+                {{-- SEARCH --}}
                 <div>
-                    <form action="{{ route('search2') }}" method="get" class="flex items-center">
+                    <form autocomplete="off" action="{{ route('search2') }}" method="get" class="flex items-center">
                         @csrf
-                        <label for="search" class="sr-only">Name</label>
-                        <input type="text" name="search" placeholder="Vyhľadaj" class="bg-gray-100 border-2 border-gray-100 w-full p-1 rounded-lg mr-2 focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 trasition duration-500">
+                            <div class="w-64 relative">
+                                <label for="search" class="sr-only">Name</label>
+                                <input id="searchbar" type="text" name="search" placeholder="Vyhľadaj" class="bg-gray-100 border-2 border-gray-100 w-full p-1 rounded-lg mr-2 focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 trasition duration-500">
+                            </div>
                         <button type="submit" class="bg-blue-500 border-2 border-blue-500 text-white p-1 rounded font-medium  hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Hľadaj</button>
                     </form>
                 </div>
-                
+                  
                 <div>
                     @auth
                     <ul class="flex items-center space-x-4"> 
@@ -104,4 +112,15 @@
         </footer>
     </div>
 </body>
+
+<script>
+    var books = @json($books).data;
+
+    array = [];
+    books.forEach(element => {
+        array.push([element.author.fname, element.title]);
+    });
+        autocomplete(document.getElementById("searchbar"),array);
+</script>
+
 </html>
