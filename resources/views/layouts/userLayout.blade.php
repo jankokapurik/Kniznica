@@ -39,7 +39,7 @@
                     @endif
                 </ul>
                 {{-- SEARCH --}}
-                <div>
+                {{-- <div>
                     <form autocomplete="off" action="{{ route('search2') }}" method="get" class="flex items-center">
                         @csrf
                             <div class="w-64 relative">
@@ -48,7 +48,11 @@
                             </div>
                         <button type="submit" class="bg-blue-500 border-2 border-blue-500 text-white p-1 rounded font-medium  hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Hľadaj</button>
                     </form>
-                </div>
+                </div> --}}
+
+                
+                <x-searchbar name="name" :values="$allBooks" class="w-32"></x-searchbar>
+                {{-- <x-searchbar name="name2" :values="$allBooks"></x-searchbar> --}}
                   
                 <div>
                     @auth
@@ -115,9 +119,4 @@
         </footer>
     </div>
 </body>
-
-<script>
-    autocomplete(document.getElementById("searchbar"), @json($allBooks));
-</script>
-
 </html>

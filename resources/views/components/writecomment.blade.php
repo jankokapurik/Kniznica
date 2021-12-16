@@ -29,7 +29,7 @@
             @enderror
             <label for="body" class="sr-only">Body</label>
             <textarea name="body" id="body" cols="30" rows="4" class="bg-gray-100 w-full p-4 rounded-lg 
-            border-2 border-gray-200  outline-none focus:border-gray-400 transition duration-500
+            border-2 outline-none focus:border-gray-400 transition duration-500
             @error('body') border-red-500 @enderror" placeholder="Post something!"></textarea>
     
             @error('body')

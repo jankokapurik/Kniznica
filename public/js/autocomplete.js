@@ -1,13 +1,9 @@
-function autocomplete(element, values){
+function autocomplete(element, input){
 
-    array = [];
-    values.forEach(element => {
-        array.push([element.authors_fname, element.title]);
+    values = [];
+    input.forEach(element => {
+        values.push([element.authors_fname, element.title]);
     });
-
-    values = array;
-
-    console.log(values);
 
     container = document.createElement("div");
     container.className = "absolute bg-white inset-x-0 divide-y border-2 rounded-md"; 
