@@ -16,9 +16,12 @@
     
 </head>
 <body class="bg-gray-200">
+    {{-- {{dd($allBooks)}} --}}
+
     <div class="flex flex-col h-screen">
         <header>
             <nav class="p-6 bg-white flex justify-between mb-6">
+
                 <ul class="flex items-center">
                     <li>
                         <a href="{{ route('home') }}" class="p-3 hover:text-purple-600">Domov</a>
@@ -114,13 +117,7 @@
 </body>
 
 <script>
-    var books = @json($books).data;
-
-    array = [];
-    books.forEach(element => {
-        array.push([element.author.fname, element.title]);
-    });
-        autocomplete(document.getElementById("searchbar"),array);
+    autocomplete(document.getElementById("searchbar"), @json($allBooks));
 </script>
 
 </html>

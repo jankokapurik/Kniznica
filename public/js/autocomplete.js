@@ -1,4 +1,14 @@
 function autocomplete(element, values){
+
+    array = [];
+    values.forEach(element => {
+        array.push([element.authors_fname, element.title]);
+    });
+
+    values = array;
+
+    console.log(values);
+
     container = document.createElement("div");
     container.className = "absolute bg-white inset-x-0 divide-y border-2 rounded-md"; 
     container.id = element.id + "-container";
@@ -40,7 +50,7 @@ function autocomplete(element, values){
     element.addEventListener("keydown", function(e){  
         container = document.getElementById(this.id + "-container");            
         count = container.childElementCount;
-        // alert(a);
+
         //key down
         if(e.keyCode == 40) {            
             if(this.focus >= 0)container.childNodes[this.focus].style.backgroundColor = "white";                
