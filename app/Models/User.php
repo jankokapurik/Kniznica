@@ -80,6 +80,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function loan() {
 
-        return $this->belongsTo(Loan::class);
+        return $this->hasOne(Loan::class);
+    }
+
+    public function hasLoan() {
+
+        return $this->loan->contains('user_id', auth()->user()->id);
     }
 }

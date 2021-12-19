@@ -37,8 +37,6 @@ class RegisterController extends Controller
             'schools' => $schools
         ]);
     }
-    
-   
 
     public function store(Request $request){
 

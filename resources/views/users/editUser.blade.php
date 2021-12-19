@@ -10,7 +10,7 @@
                 
                 @error('notChanged')
                     <div class="bg-red-500 w-full p-4 text-gray-600 rounded-lg mb-6">{{$message}}</div>
-                @enderror
+                {{-- @enderror --}}
 
                 <div class="mb-4">
                     <label class="font-bold text-gray-800" for="username">Užívateľské meno</label>
