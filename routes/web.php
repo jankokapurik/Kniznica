@@ -1,30 +1,27 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\LoanController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\Auth\ResetPassword;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\CommentController;  
-use App\Http\Controllers\Auth\LoginController; 
-use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ResetPassword;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgottenController;
+use App\Http\Controllers\Auth\LoginController; 
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/', function() {
     return view('users.home');
-})->name('home');  
-
-Route::get('/loans', function() {
-    return view('books.loan');
-})->name('loan');   
+})->name('home');
 
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
@@ -39,72 +36,81 @@ Route::get('/search2', [SearchController::class, 'index'])->name('search2');
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
 
-    Route::get('/adminHome', function () { return view('admin.home');})->name('adminHome');
+  Route::get('/adminHome', function () { return view('admin.home');})->name('adminHome');
 
-    //  manazment pouzivatelov
-    Route::get('/userManagement', [UserController::class, 'index'])->name('userManagement');
-    Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
-    Route::get('/manage/user/{user}', [UserController::class, 'adminedit'])->name('user.adminedit');
-    Route::patch('/manage/user/{user}', [UserController::class, 'adminupdateuser'])->name('user.adminupdate');
+  //  manazment pouzivatelov
+  Route::get('/userManagement', [UserController::class, 'index'])->name('userManagement');
+  Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+  Route::get('/manage/user/{user}', [UserController::class, 'adminedit'])->name('user.adminedit');
+  Route::patch('/manage/user/{user}', [UserController::class, 'adminupdateuser'])->name('user.adminupdate');
 
-    //  manazment tried
-    Route::get('/classroomManagement', [ClassroomController::class, 'index'])->name('classroomManagement');
-    Route::delete('/classroom/{classroom}', [ClassroomController::class, 'destroy'])->name('classroom.destroy');
-    Route::get('/classroom/{classroom}', [ClassroomController::class, 'edit'])->name('classroom.edit');
-    Route::put('/classroom/{classroom}', [ClassroomController::class, 'update'])->name('classroom.update');
-    Route::get('/classroom', [ClassroomController::class, 'create'])->name('classroom.create');
-    Route::post('/classroom', [ClassroomController::class, 'store'])->name('classroom.store');
+  //  manazment tried
+  Route::get('/classroomManagement', [ClassroomController::class, 'index'])->name('classroomManagement');
+  Route::delete('/classroom/{classroom}', [ClassroomController::class, 'destroy'])->name('classroom.destroy');
+  Route::get('/classroom/{classroom}', [ClassroomController::class, 'edit'])->name('classroom.edit');
+  Route::put('/classroom/{classroom}', [ClassroomController::class, 'update'])->name('classroom.update');
+  Route::get('/classroom', [ClassroomController::class, 'create'])->name('classroom.create');
+  Route::post('/classroom', [ClassroomController::class, 'store'])->name('classroom.store');
 
-    //  manazment skol
-    Route::get('/schoolManagement', [SchoolController::class, 'index'])->name('schoolManagement');
-    Route::delete('/school/{school}', [SchoolController::class, 'destroy'])->name('school.destroy');
-    Route::get('/school/{school}', [SchoolController::class, 'edit'])->name('school.edit');
-    Route::put('/school/{school}', [SchoolController::class, 'update'])->name('school.update');
-    Route::get('/school', [SchoolController::class, 'create'])->name('school.create');
-    Route::post('/school', [SchoolController::class, 'store'])->name('school.store');
-
-
-    //  manzament knih
-    Route::get('/booksManagement', [BookController::class, 'manage'])->name('booksManagement');
-    Route::delete('/book/{book}', [BookController::class, 'destroy'])->name('book.destroy');
-    Route::get('/book/{book}', [BookController::class, 'edit'])->name('book.edit');
-    Route::put('/book/{book}', [BookController::class, 'update'])->name('book.update');
-    Route::get('/book', [BookController::class, 'create'])->name('book.create');
-    Route::post('/book', [BookController::class, 'store'])->name('book.store');
+  //  manazment skol
+  Route::get('/schoolManagement', [SchoolController::class, 'index'])->name('schoolManagement');
+  Route::delete('/school/{school}', [SchoolController::class, 'destroy'])->name('school.destroy');
+  Route::get('/school/{school}', [SchoolController::class, 'edit'])->name('school.edit');
+  Route::put('/school/{school}', [SchoolController::class, 'update'])->name('school.update');
+  Route::get('/school', [SchoolController::class, 'create'])->name('school.create');
+  Route::post('/school', [SchoolController::class, 'store'])->name('school.store');
 
 
-    //  manazment zanrov
-    Route::get('/genreManagement', [GenreController::class, 'index'])->name('genreManagement');
-    Route::delete('/genre/{genre}', [GenreController::class, 'destroy'])->name('genre.destroy');
-    Route::get('/genre/{genre}', [GenreController::class, 'edit'])->name('genre.edit');
-    Route::put('/genre/{genre}', [GenreController::class, 'update'])->name('genre.update');
-    Route::get('/genre', [GenreController::class, 'create'])->name('genre.create');
-    Route::post('/genre', [GenreController::class, 'store'])->name('genre.store');
+  //  manzament knih
+  Route::get('/booksManagement', [BookController::class, 'manage'])->name('booksManagement');
+  Route::delete('/book/{book}', [BookController::class, 'destroy'])->name('book.destroy');
+  Route::get('/book/{book}', [BookController::class, 'edit'])->name('book.edit');
+  Route::put('/book/{book}', [BookController::class, 'update'])->name('book.update');
+  Route::get('/book', [BookController::class, 'create'])->name('book.create');
+  Route::post('/book', [BookController::class, 'store'])->name('book.store');
+
+
+  //  manazment zanrov
+  Route::get('/genreManagement', [GenreController::class, 'index'])->name('genreManagement');
+  Route::delete('/genre/{genre}', [GenreController::class, 'destroy'])->name('genre.destroy');
+  Route::get('/genre/{genre}', [GenreController::class, 'edit'])->name('genre.edit');
+  Route::put('/genre/{genre}', [GenreController::class, 'update'])->name('genre.update');
+  Route::get('/genre', [GenreController::class, 'create'])->name('genre.create');
+  Route::post('/genre', [GenreController::class, 'store'])->name('genre.store');
+
+
+  //  manazment jazykov
+  Route::get('/languageManagement', [LanguageController::class, 'index'])->name('languageManagement');
+  Route::delete('/language/{language}', [LanguageController::class, 'destroy'])->name('language.destroy');
+  Route::get('/language/{language}', [LanguageController::class, 'edit'])->name('language.edit');
+  Route::put('/language/{language}', [LanguageController::class, 'update'])->name('language.update');
+  Route::get('/language', [LanguageController::class, 'create'])->name('language.create');
+  Route::post('/language', [LanguageController::class, 'store'])->name('language.store');
+
+  //  manazment autorov
+  Route::get('/authorManagement', [AuthorController::class, 'index'])->name('authorManagement');
+  Route::delete('/author/{author}', [AuthorController::class, 'destroy'])->name('author.destroy');
+  Route::get('/author/{author}', [AuthorController::class, 'edit'])->name('author.edit');
+  Route::put('/author/{author}', [AuthorController::class, 'update'])->name('author.update');
+  Route::get('/author', [AuthorController::class, 'create'])->name('author.create');
+  Route::post('/author', [AuthorController::class, 'store'])->name('author.store');
   
+  //  manazment vypoziciek
+  Route::get('/loanManagement', [LoanController::class, 'index'])->name('loanManagement');
+  Route::delete('/loan/{loan}', [LoanController::class, 'destroy'])->name('loan.destroy');
+  Route::get('/loan/{loan}', [LoanController::class, 'edit'])->name('loan.edit');
+  Route::put('/loan/{loan}', [LoanController::class, 'update'])->name('loan.update');
+  Route::get('/loan', [LoanController::class, 'create'])->name('loan.create');
+  Route::post('/loan', [LoanController::class, 'store'])->name('loan.store');
+  Route::get('/loan/{loan}/approve', [LoanController::class, 'approve'])->name('loan.approve');
 
-    //  manazment jazykov
-    Route::get('/languageManagement', [LanguageController::class, 'index'])->name('languageManagement');
-    Route::delete('/language/{language}', [LanguageController::class, 'destroy'])->name('language.destroy');
-    Route::get('/language/{language}', [LanguageController::class, 'edit'])->name('language.edit');
-    Route::put('/language/{language}', [LanguageController::class, 'update'])->name('language.update');
-    Route::get('/language', [LanguageController::class, 'create'])->name('language.create');
-    Route::post('/language', [LanguageController::class, 'store'])->name('language.store');
+  Route::get('/vypozicky', function () {
+    return view('admin.loans');
+  })->name('loans');
 
-    //  manazment autorov
-    Route::get('/authorManagement', [AuthorController::class, 'index'])->name('authorManagement');
-    Route::delete('/author/{author}', [AuthorController::class, 'destroy'])->name('author.destroy');
-    Route::get('/author/{author}', [AuthorController::class, 'edit'])->name('author.edit');
-    Route::put('/author/{author}', [AuthorController::class, 'update'])->name('author.update');
-    Route::get('/author', [AuthorController::class, 'create'])->name('author.create');
-    Route::post('/author', [AuthorController::class, 'store'])->name('author.store');
-  
-    Route::get('/vypozicky', function () {
-      return view('admin.loans');
-    })->name('loans');
-
-    Route::get('/reporty', function () {
-      return view('admin.reports');
-    })->name('reports');
+  Route::get('/reporty', function () {
+    return view('admin.reports');
+  })->name('reports');
 });
 
 Route::get('/books', [BookController::class, 'index'])->name('books');
@@ -149,3 +155,6 @@ Route::middleware(['guest'])->group(function(){
   Route::get('/reset-password/{token}', [ResetPassword::class, 'reset'])->name('password.reset');
   Route::post('/reset-password', [ResetPassword::class, 'update'])->name('password.update');
 });
+
+Route::get('/loaned/{user}', [LoanController::class, 'loaned'])->name('loaned'); 
+Route::get('/createLoan/{user}', [LoanController::class, 'userCreate'])->name('loan.userCreate');

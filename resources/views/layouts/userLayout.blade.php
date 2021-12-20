@@ -57,7 +57,7 @@
                     <ul class="flex items-center space-x-4"> 
                         <ul>                        
                             <li>    
-                                <a href="/loans" class="block hover:text-purple-600 text-base">Výpožičky</a>
+                                <a href="{{ route('loaned', auth()->user()) }}" class="block hover:text-purple-600 text-base">Vypožičané knihy</a>
                             </li>
                         </ul>                        
                         <div class="group">

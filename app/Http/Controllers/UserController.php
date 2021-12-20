@@ -117,15 +117,10 @@ class UserController extends Controller
                 'email' => 'unique:users,email',
             ]);
         }
-
         
         $user->update($request->all());
 
         if($user->getChanges())return redirect()->route('home');
         return back()->withErrors(['notChanged' => 'nothing changed']);        
     }
-
-    
-
 }
-

@@ -13,12 +13,15 @@
                     <p class="text-2xl">Množstvo: {{ $book->quantity }} ks</p>
                     <p class="text-gray-600 text-2xl">
                         @forelse ($book->genres as $genre)
-                        {{ $genre->name, }}
+                            {{ $genre->name, }}
                         @empty
-                        Nie sú pridané žánre
+                            Nie sú pridané žánre
                         @endforelse  
                     </p>
-                    <p text-2xl>{{ $book->description }}</p>
+                    <p text-2xl class="mb-4">{{ $book->description }}</p>
+                    <form action="" method="GET">
+                        <button class="bg-blue-500 border-2 border-blue-500 text-white p-2 rounded-lg hover:bg-blue-100 hover:text-blue-500">Vypožičať</button>
+                    </form>
                 </div>
             </div>  
             <div class="min-w-full flex justify-center ">
@@ -32,7 +35,7 @@
                                     <span class="text-yellow-500">&#9733&#9733&#9733&#9733&#9733</span>
                                 </div>
                                 <div class="w-7/12 flex-grow h-2 flex rounded bg-gray-200 mt-3">
-                                    <div style="width: {{$rating['star5']}}%" class="bg-green-400 rounded"></div>
+                                    <div style="width: {{ $rating['star5'] }}%" class="bg-green-400 rounded"></div>
                                 </div>
                             </div>
                             <div class="w-full flex">
@@ -40,7 +43,7 @@
                                     <span class="text-yellow-500">&#9733&#9733&#9733&#9733</span>&#9733
                                 </div>
                                 <div class="w-7/12 flex-grow h-2 flex rounded bg-gray-200 mt-3">
-                                    <div style="width: {{$rating['star4']}}%" class="bg-green-300 rounded"></div>
+                                    <div style="width: {{ $rating['star4'] }}%" class="bg-green-300 rounded"></div>
                                 </div>
                             </div>
                             <div class="w-full flex">
@@ -48,7 +51,7 @@
                                     <span class="text-yellow-500">&#9733&#9733&#9733</span>&#9733&#9733
                                 </div>
                                 <div class="w-7/12 flex-grow h-2 flex rounded bg-gray-200 mt-3">
-                                    <div style="width: {{$rating['star3']}}%" class="bg-yellow-200 rounded"></div>
+                                    <div style="width: {{ $rating['star3'] }}%" class="bg-yellow-200 rounded"></div>
                                 </div>
                             </div>
                             <div class="w-full flex">
@@ -56,7 +59,7 @@
                                     <span class="text-yellow-500">&#9733&#9733</span>&#9733&#9733&#9733
                                 </div>
                                 <div class="w-7/12 flex-grow h-2 flex rounded bg-gray-200 mt-3">
-                                    <div style="width: {{$rating['star2']}}%" class="bg-yellow-300 rounded"></div>
+                                    <div style="width: {{ $rating['star2'] }}%" class="bg-yellow-300 rounded"></div>
                                 </div>
                             </div>
                             <div class="w-full flex">
@@ -64,7 +67,7 @@
                                 <span class="text-yellow-500">&#9733</span>&#9733&#9733&#9733&#9733
                             </div>
                             <div class="w-7/12 flex-grow h-2 flex rounded bg-gray-200 mt-3">
-                                <div style="width: {{$rating['star1']}}%" class="bg-red-400 rounded"></div>
+                                <div style="width: {{ $rating['star1']}}%" class="bg-red-400 rounded"></div>
                             </div>
                         </div>
                     </div>

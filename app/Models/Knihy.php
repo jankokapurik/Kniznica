@@ -27,8 +27,4 @@ class Knihy extends Model
 
         return $this->hasMany(Like::class);
     }
-
-    public function ownedBy(User $user) {
-
-    }
 }
