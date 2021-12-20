@@ -12,18 +12,15 @@ use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
-    public function index(Request $request) {        
-
+    public function index(Request $request) {    
         if(!$request->filter){
-
             $books= Book::Select(['books.*', 'authors.fname', 'authors.lname' ])
             ->join('authors', 'books.author_id', '=', 'authors.id')
             ->orderBy('title')
-            ->paginate(10);
+            ->paginate(10);            
         }
 
         if($request->filter){
-
             $filter = explode('|', $request->filter);
 
             $books= Book::Select(['books.*', 'authors.fname', 'authors.lname' ])
@@ -32,8 +29,11 @@ class BookController extends Controller
             ->paginate(10);
         }
 
-        $avg = Book::first()->comments()->avg('rating');
+        // $avg = Book::first()->comments()->avg('rating');
         
+        $books = Book::paginate(10);
+        // dd($books);
+
         return view('books.books', [
             'books' => $books,
         ]);

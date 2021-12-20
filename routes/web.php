@@ -113,6 +113,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
   })->name('reports');
 });
 
+//kniznica
 Route::get('/books', [BookController::class, 'index'])->name('books');
 Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
 
