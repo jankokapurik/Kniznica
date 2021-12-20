@@ -11,6 +11,6 @@ class Genre extends Model
 
     protected $fillable = [
         'name',
-        'creadtedBy'
+        'created_by',
     ];
 }

@@ -24,7 +24,11 @@ class LanguageController extends Controller
             'name' =>'required|max:100',
         ]);
 
-        Language::create($request->all());
+
+        $input = $request->all();
+        $input['created_by'] = auth()->id();
+
+        Language::create($input);
      
         return redirect()->route('languageManagement');
     }

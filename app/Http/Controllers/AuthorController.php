@@ -25,7 +25,10 @@ class AuthorController extends Controller
             'lname' =>'required|max:100',
         ]);
 
-        Author::create($request->all());
+        $input = $request->all();
+        $input['created_by'] = auth()->id();
+
+        Author::create($input);
      
         return redirect()->route('authorManagement');
     }

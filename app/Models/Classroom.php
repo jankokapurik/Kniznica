@@ -12,6 +12,7 @@ class Classroom extends Model
     
     protected $fillable = [
         'name',
+        'created_by',
     ];
 
     public function user()

@@ -25,9 +25,10 @@ class GenreController extends Controller
 
         $request->name = ucfirst($request->name);
 
-        Genre::create([
-            'name' => $request->name,
-            "createdBy" => $request->user()]);
+        $input = $request->all();
+        $input['created_by'] = auth()->id();
+        
+        Genre::create($input);
      
         return redirect()->route('genreManagement');
     }

@@ -11,6 +11,7 @@ class School extends Model
 
     protected $fillable = [
         'name',
+        'created_by',
     ];
 
     public function user() {

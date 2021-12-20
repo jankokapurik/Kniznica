@@ -23,8 +23,15 @@ class ClassroomController extends Controller
         $request->validate([
             'name' =>'required|max:10',
         ]);
+        // dd($request->all() + ['created_by' => auth()->id()]);    
 
-        Classroom::create($request->all());
+        // $input['created_by'] = auth()->id();
+        $input = $request->all();
+        $input['created_by'] = auth()->id();
+
+        // dd($input);
+
+        Classroom::create($input);
      
         return redirect()->route('classroomManagement');
     }
