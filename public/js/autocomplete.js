@@ -1,78 +1,109 @@
-function autocomplete(element, input){
+function autocomplete(input_element, input_values, input_properties) {
+    let properties = input_properties;
+    let input = input_values;
+    let input_field = input_element;
+    let container_field = document.getElementById(input_field.id + "-container");
 
-    values = [];
-    input.forEach(element => {
-        values.push([element.authors_fname, element.title]);
+    let values = [];
+    input.forEach(inp => {
+        obj = new Object();
+        properties.forEach(property => {
+            obj[property] = inp[property];
+        });    
+        values.push(obj);
     });
 
-    container = document.createElement("div");
-    container.className = "absolute bg-white inset-x-0 divide-y border-2 rounded-md"; 
-    container.id = element.id + "-container";
-    container.style.visibility= "hidden";
-    element.focus = -1;
-    element.count = 0;
-    element.parentNode.appendChild(container);
+    input_field.addEventListener("input",function(e){
+        input_value = input_field.value.toString().toLowerCase();
+        
+        container_field.innerHTML = '';
+        if(!input_value) return false;
 
-    element.addEventListener("input",function(e){            
-        var input = this.value.toString();
-        container = document.getElementById(this.id + "-container");
-        container.innerHTML = '';
 
-        if(!input) return false;
+        
+        values.forEach((value, number) => {
+            if(number < 5){   /// potreba opravit skaredy kod
+                let a = false;
+                Object.values(value).forEach(word => {            
+                    if(word.toString().toLowerCase().includes(input_value)){
+                        a = true;
+                        return true;
+                    } 
+                });
+                
+                if(a){
+                    index = 0;
+                    for(key in value){
+                        if(!index){
+                            component = document.createElement("div");
+                            component.className = "flex flex-col p-2";
+                            component.text = value[key].toString().charAt(0) + value[key].toString().slice(1);
+                            container_field.appendChild(component);
+    
+                            tytle = document.createElement("div");
+                            tytle.className = "text-base";
+                            
+                            text = value[key].toString().toLowerCase().replaceAll(input_value,'<strong>'+ input_value + '</strong>');
+                            tytle.innerHTML = text;
+                            tytle.className = "capitalize";
+                            component.appendChild(tytle);
+    
+                            subtytles = document.createElement("div");
+                            subtytles.className = "flex flex-row";
+                            component.appendChild(subtytles);
+                        }
+                        else{            
+                            subtytle = document.createElement("div");
+                            subtytle.className = "capitalize text-xs text-gray-600 mr-2";
+    
+                            text = value[key].toString().toLowerCase().replaceAll(input_value,'<strong>'+ input_value + '</strong>');
+                            subtytle.innerHTML = text;
+                            subtytles.appendChild(subtytle);
+                        }
+                        index++;
+                    }
+                }
+            }
 
-        matches = [];
-        values.forEach(function(value, index){
-            if(value.toString().toLowerCase().includes(input.toLowerCase())) {
-                matches.push(value)
-            };
-        })
-        this.count = matches.lenght;
-
-        matches.forEach(function(value, index){
-            component = document.createElement("div");
-            component.className = "p-2 hover:bg-gray-200";
-
-            text = index.toString() + ": " + value[0].toString().toLowerCase()+": "+value[1].toString().toLowerCase();
-            text2 = text.replaceAll(input,'<strong>'+ input + '</strong>');
-            component.innerHTML = text2;
-
-            container.appendChild(component);
+            
         });
-
-        if(container.innerHTML) container.style.visibility= "visible";
-        else container.style.visibility= "hidden";
     });
 
-    element.addEventListener("keydown", function(e){  
-        container = document.getElementById(this.id + "-container");            
-        count = container.childElementCount;
+
+    input_field.addEventListener("keydown", function(e){         
+        count = container_field.childElementCount;
 
         //key down
         if(e.keyCode == 40) {            
-            if(this.focus >= 0)container.childNodes[this.focus].style.backgroundColor = "white";                
+            if(this.focus >= 0)container_field.childNodes[this.focus].style.backgroundColor = "white";                
             
             if(this.focus + 1 >= count) this.focus = 0;
             else this.focus++;
 
-            container.childNodes[this.focus].style.backgroundColor = "#d1d5db";
+            container_field.childNodes[this.focus].style.backgroundColor = "#d1d5db";
         }
         //key up
         else if(e.keyCode == 38){
-            if(this.focus >= 0)container.childNodes[this.focus].style.backgroundColor = "white";
+            if(this.focus >= 0)container_field.childNodes[this.focus].style.backgroundColor = "white";
             
             if(this.focus == 0) this.focus = count-1;
             else this.focus--;
 
-            container.childNodes[this.focus].style.backgroundColor = "#d1d5db";
+            container_field.childNodes[this.focus].style.backgroundColor = "#d1d5db";
+        }
+        //key left
+        else if(e.keyCode == 39){
+            console.log(container_field.childNodes[this.focus].text);
+            input_field.value = container_field.childNodes[this.focus].text;
         }
         else this.focus = -1;
-
+        
     });
 
-    element.addEventListener("focusout", function(){
-        container.innerHTML = '';
-        container.style.visibility= "hidden";
+    input_field.addEventListener("focusout", function(){
+        console.log("FOUT");
+        container_field.innerHTML = '';
         this.focus = -1;
     });
-};
+}
 

@@ -3,7 +3,7 @@
     'values' => $values
 ])
 
-<div {{ $attributes }}>
+<div {{ $attributes->merge(['class' => 'relative']) }}>
     <form autocomplete="off" action="{{ route('search2') }}" method="get" class="flex items-center">
         @csrf
             <div class="relative">
@@ -12,9 +12,14 @@
             </div>
         <button type="submit" class="bg-blue-500 border-2 border-blue-500 text-white p-1 rounded font-medium  hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Hľadaj</button>
     </form>
+
+    <div id="{{ $name }}-input-container" class="absolute bg-white inset-x-0 divide-y border-2 rounded-md">
+    </div>
 </div>
 
-<script src="{{ URL::asset('js/autocomplete.js') }}"></script>
 <script>
-    autocomplete(document.getElementById("{{$name}}-input"), @json($values));
+    // console.log(@json($values));
+
+    // autocomplete(document.getElementById("{{$name}}-input"), @json($values));  old version
+    autocomplete(document.getElementById("{{$name}}-input"), @json($values), ['title', 'authors_lname', 'authors_fname']); //new version
 </script>
