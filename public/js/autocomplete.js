@@ -3,6 +3,7 @@ function autocomplete(input_element, input_values, input_properties) {
     let input = input_values;
     let input_field = input_element;
     let container_field = document.getElementById(input_field.id + "-container");
+    let form_field = document.getElementById(input_field.id + "-form");
 
     let values = [];
     input.forEach(inp => {
@@ -36,14 +37,23 @@ function autocomplete(input_element, input_values, input_properties) {
                     for(key in value){
                         if(!index){
                             component = document.createElement("div");
-                            component.className = "flex flex-col p-2";
+
+                            component.addEventListener("mousedown", function(e){
+                                e.preventDefault();
+
+                                input_field.value = this.text;
+                                document.getElementById(input_field.id + "-form").submit();
+                            });
+
+
+                            component.className = "flex flex-col p-2 hover:bg-gray-200";
                             component.text = value[key].toString().charAt(0) + value[key].toString().slice(1);
                             container_field.appendChild(component);
-    
+
                             tytle = document.createElement("div");
                             tytle.className = "text-base";
                             
-                            text = value[key].toString().toLowerCase().replaceAll(input_value,'<strong>'+ input_value + '</strong>');
+                            text = value[key].toString().toLowerCase().replaceAll(input_value,'<strong class="bg-blue-200 rounded-md">'+ input_value + '</strong>');
                             tytle.innerHTML = text;
                             tytle.className = "capitalize";
                             component.appendChild(tytle);
@@ -56,54 +66,79 @@ function autocomplete(input_element, input_values, input_properties) {
                             subtytle = document.createElement("div");
                             subtytle.className = "capitalize text-xs text-gray-600 mr-2";
     
-                            text = value[key].toString().toLowerCase().replaceAll(input_value,'<strong>'+ input_value + '</strong>');
+                            text = value[key].toString().toLowerCase().replaceAll(input_value,'<strong class="bg-blue-200 rounded-md">'+ input_value + '</strong>');
                             subtytle.innerHTML = text;
                             subtytles.appendChild(subtytle);
                         }
                         index++;
                     }
-                }
-            }
 
-            
+                }
+            }                        
         });
     });
 
 
     input_field.addEventListener("keydown", function(e){         
+        // e.preventDefault();
         count = container_field.childElementCount;
 
         //key down
         if(e.keyCode == 40) {            
-            if(this.focus >= 0)container_field.childNodes[this.focus].style.backgroundColor = "white";                
+            if(this.focus >= 0){
+                container_field.childNodes[this.focus].classList.remove("bg-gray-200");
+                container_field.childNodes[this.focus].classList.add("bg-white");
+            }              
             
             if(this.focus + 1 >= count) this.focus = 0;
             else this.focus++;
 
-            container_field.childNodes[this.focus].style.backgroundColor = "#d1d5db";
+            container_field.childNodes[this.focus].classList.remove("bg-white");
+            container_field.childNodes[this.focus].classList.add("bg-gray-200");            
         }
         //key up
         else if(e.keyCode == 38){
-            if(this.focus >= 0)container_field.childNodes[this.focus].style.backgroundColor = "white";
+            e.preventDefault();
+            if(this.focus >= 0){
+                container_field.childNodes[this.focus].classList.remove("bg-gray-200");
+                container_field.childNodes[this.focus].classList.add("bg-white");
+            }
             
             if(this.focus == 0) this.focus = count-1;
             else this.focus--;
 
-            container_field.childNodes[this.focus].style.backgroundColor = "#d1d5db";
+            container_field.childNodes[this.focus].classList.remove("bg-white");
+            container_field.childNodes[this.focus].classList.add("bg-gray-200");
         }
         //key left
         else if(e.keyCode == 39){
-            console.log(container_field.childNodes[this.focus].text);
             input_field.value = container_field.childNodes[this.focus].text;
         }
+        //enter
+        else if(e.keyCode == 13){
+            if(this.focus >= 0){
+                e.preventDefault();
+                input_field.value = container_field.childNodes[this.focus].text;
+                document.getElementById(input_field.id + "-form").submit();
+            }
+        }
         else this.focus = -1;
-        
     });
 
-    input_field.addEventListener("focusout", function(){
-        console.log("FOUT");
-        container_field.innerHTML = '';
+    input_field.addEventListener("focusin", function(event){
+        container_field.classList.remove("opacity-0");
+        container_field.classList.remove("invisible");
         this.focus = -1;
+    });
+
+    input_field.addEventListener("focusout", function(event){        
+        setTimeout(() => {
+            container_field.classList.add("invisible");
+            this.focus = -1;
+        }, 150);
+
+        container_field.classList.add("opacity-0");
+        
     });
 }
 

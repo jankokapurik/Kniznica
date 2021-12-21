@@ -4,7 +4,7 @@
 ])
 
 <div {{ $attributes->merge(['class' => 'relative']) }}>
-    <form autocomplete="off" action="{{ route('search2') }}" method="get" class="flex items-center">
+    <form id="{{ $name }}-input-form" autocomplete="off" action="{{ route('search2') }}" method="get" class="flex items-center">
         @csrf
             <div class="relative">
                 <label for="search" class="sr-only">Name</label>
@@ -13,7 +13,11 @@
         <button type="submit" class="bg-blue-500 border-2 border-blue-500 text-white p-1 rounded font-medium  hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Hľadaj</button>
     </form>
 
-    <div id="{{ $name }}-input-container" class="absolute bg-white inset-x-0 divide-y border-2 rounded-md">
+    <div id="{{ $name }}-input-container" class="absolute transition bg-white inset-x-0 divide-y border-2 rounded-md">
+        <div class="flex flex-col hover:bg-gray-200">
+            {{-- <div>Meno knihy</div>
+            <div> autor </div> --}}
+        </div>
     </div>
 </div>
 
