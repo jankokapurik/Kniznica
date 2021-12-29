@@ -32,7 +32,6 @@ class BookController extends Controller
         // $avg = Book::first()->comments()->avg('rating');
         
         $books = Book::paginate(10);
-        // dd($books);
 
         return view('books.books', [
             'books' => $books,
@@ -174,5 +173,21 @@ class BookController extends Controller
 
         return redirect()->route('booksManagement')->with('success','Product updated successfully');
     }
+
+    public function index_restore(){
+        
+        $books = Book::onlyTrashed()->get();
+        
+        return view('admin.restoreBooks', ['books' => $books]);
+    }
+
+    public function restore($booksid, Request $request){
+        Book::onlyTrashed()->find($booksid)->restore();
+        return back();
+    }
+
+
+
+
 
 }

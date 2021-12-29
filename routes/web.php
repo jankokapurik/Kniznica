@@ -69,6 +69,9 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
   Route::get('/book', [BookController::class, 'create'])->name('book.create');
   Route::post('/book', [BookController::class, 'store'])->name('book.store');
 
+  Route::get("/booksManagement/restore", [BookController::class, 'index_restore'])->name("book.index_restore");
+  Route::post("/book/restore/{book}", [BookController::class, 'restore'])->name("book.restore");
+  
 
   //  manazment zanrov ok
   Route::get('/genreManagement', [GenreController::class, 'index'])->name('genreManagement');
