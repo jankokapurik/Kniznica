@@ -117,11 +117,18 @@ class BookController extends Controller
     }
 
     public function destroy(Book $book) {
-
-        $book->genres()->detach();
         $book->delete();
         return back();
     }
+
+
+    // public function restore($booksid, Request $request){
+    //     Book::onlyTrashed()->find($booksid)->restore();
+    //     return back();
+    // }
+
+
+
 
     public function edit(Book $book, Author $author, Language $language) {
 
@@ -186,8 +193,9 @@ class BookController extends Controller
         return back();
     }
 
-
-
-
-
+    public function destroyForce($booksid){
+        Book::onlyTrashed()->find($booksid)->genres()->detach();
+        Book::onlyTrashed()->find($booksid)->forceDelete();
+        return back();
+    }
 }

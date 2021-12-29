@@ -71,6 +71,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
   Route::get("/booksManagement/restore", [BookController::class, 'index_restore'])->name("book.index_restore");
   Route::post("/book/restore/{book}", [BookController::class, 'restore'])->name("book.restore");
+  Route::delete('/book/delete/{book}', [BookController::class, 'destroyForce'])->name('book.destroyForce');
   
 
   //  manazment zanrov ok

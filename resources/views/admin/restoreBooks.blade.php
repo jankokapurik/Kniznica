@@ -79,17 +79,18 @@
                                     <button type="submit" class="bg-blue-500 border border-blue-500 p-1 rounded-md text-white hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Obnoviť</button>
                                 </form>
 
+                                <form action="{{ route('book.destroyForce', $book) }}" method="post" class="m-1">
+                                    
+                                    @csrf   
+                                    @method('DELETE')
+                                    <button type="submit" class="bg-red-500 border border-red-500 p-1 rounded-md text-white hover:bg-red-100 hover:text-red-500 trasition duration-500">Vymazať natrvalo</button>
+                                </form>
 
 
                                 {{-- <form action="{{ route('book.edit', $book->id) }}" class="m-1">
                                     <button class="bg-blue-500 border border-blue-500 p-1 rounded-md text-white hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Upraviť</button>
                                 </form>
-                                <form action="{{ route('book.destroy', $book) }}" method="post" class="m-1">
-                                    
-                                    @csrf   
-                                    @method('DELETE')
-                                    <button type="submit" class="bg-red-500 border border-red-500 p-1 rounded-md text-white hover:bg-red-100 hover:text-red-500 trasition duration-500">Vymazať</button>
-                                </form> --}}
+
 
                                 {{-- <form action="{{ route('loan.add', $book) }}" method="GET" class="m-1">
                                     @csrf 
@@ -100,7 +101,7 @@
                     </tr>
                     @endforeach
                     @else
-                    <p>Nie sú žiadne knihy</p>
+                    <td>Nie sú žiadne knihy</td>
                     @endif
                 </tbody>
             </table>
