@@ -1,9 +1,15 @@
 @extends('layouts.adminLayout')
 
 @section('content')
+
+<div
+	class="z-100 fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
+	id="my-modal"
+>a</div>
+
     <div class="flex w-full">
-        <div class="w-full mt-6 ml-6 bg-white p-6 rounded-l-lg" >
-            
+        <div class="w-full mt-6 ml-6 bg-white p-6 rounded-l-lg">
+
             <div class="flex flex-row mb-4">                    
                 {{-- <form action="{{ route('book.create') }}" class="mr-2">
                     @csrf

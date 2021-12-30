@@ -10,10 +10,14 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -64,18 +68,15 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function classroom() {
-
-        return $this->belongsTo(Classroom::class);
+        return $this->belongsTo(Classroom::class)->withTrashed();
     }
     
     public function school() {
-
-        return $this->belongsTo(School::class);
+        return $this->belongsTo(School::class)->withTrashed();
     }
 
     public function isAdmin() {
-        
-        return $this->user_type == "admin" ? true : false;
+        return $this->user_type == "admin" ? true : false; // ? true : false odstranit?
     }
 
     public function loan() {

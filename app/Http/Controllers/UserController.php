@@ -18,8 +18,9 @@ class UserController extends Controller
         Mail::to($user)->send(new VerifyAccount());
     }
 
+    //zobrazenie tabulky
     public function index() {
-        $users = User::get();        
+        $users = User::get();
         return view('admin.manageUsers', ['users' => $users]);
     }
 
