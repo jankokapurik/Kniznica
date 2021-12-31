@@ -15,9 +15,10 @@
                     <p><x-book :book="$book" /></p>
                 @endforeach
             @else
-                <p>Nemate vypozicane knihy</p>
-                <p>{{ $user->fname }}</p>
-
+                <h1 class="font-bold text-3xl mb-4">Nemate vypozicane knihy</h1>
+                <form action="{{ route('books') }}" method="get">
+                    <button class="bg-blue-500 text-white border-2 border-blue-500 p-2 rounded-lg hover:bg-blue-100 hover:text-blue-500">Katalog knih</button>
+                </form>
             @endif
     </div>
 @endsection

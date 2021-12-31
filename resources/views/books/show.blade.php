@@ -11,15 +11,17 @@
                     <p class="text-3xl border-bottom mb-4">{{ $book->title }}</p>
                     <p class="text-2xl">Jazyk: {{ $book->language->name }}</p>
                     <p class="text-2xl">Množstvo: {{ $book->quantity }} ks</p>
-                    <p class="text-gray-600 text-2xl">
+                    <p class="text-gray-600 text-2xl mb-2">
                         @forelse ($book->genres as $genre)
                             {{ $genre->name, }}
                         @empty
                             Nie sú pridané žánre
                         @endforelse  
                     </p>
-                    <p text-2xl class="mb-4">{{ $book->description }}</p>
-                    <form action="" method="GET">
+                    <div class="bg-gray-200 rounded-lg p-2 mb-4">
+                        <p text-2xl>{{ $book->description }}</p>
+                    </div>
+                    <form action="{{ route('loan.userCreate', ['user' => auth()->user(), 'book' => $book]) }}" method="GET">
                         <button class="bg-blue-500 border-2 border-blue-500 text-white p-2 rounded-lg hover:bg-blue-100 hover:text-blue-500">Vypožičať</button>
                     </form>
                 </div>

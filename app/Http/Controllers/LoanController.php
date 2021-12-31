@@ -109,24 +109,26 @@ class LoanController extends Controller
         return back();
     }
 
-    public function addBook(Book $book, Loan $loan) {
+    public function userCreate(Loan $loan, ser $user, Book $book) {
 
-        return redirect()->back();
-    }
+        if($user->loan) {
 
-    public function userCreate(Request $request) {
-
-        if(auth()->user->hasLoan(auth()->user())) {
-
-            dd('yes');
-            // return redirect()->route('book.add');
+            $loan = Loan::where('user_id',$user->id)->get();
+            $loan->books()->attach($book);
+            $book->quantity-=1;
+            
+            return back();
         }
+        else {
 
-        dd('no');
+            $newLoan = Loan::create([
+                'user_id' => auth()->user()->id
+            ]);
+            $newLoan->books()->attach($book->id);
+            $book->quantity-=1;
 
-        // Loan::create([
-        //     'user_id' => $request->user()->id,
-        // ]);
+            return redirect()->route('loan.addBook', $user);
+        }
 
         return view('admin.manageLoans');
     }
@@ -136,18 +138,17 @@ class LoanController extends Controller
         return view('users.loan', ['user' =>$user]);
     }
 
-    // public function edit(Lent $lent)
-    // {
-    //     if ($lent->renewed == 0)
-    //     {
-    //         $newTime = (new Carbon($lent->due_at))->addMonth(1);
-    //         $lent->update([
-    //             'due_at' => $newTime,
-    //             'renewed' => 1,
-    //         ]);
-    //         session()->flash('success', 'Renewal succeeded.');
-    //         return back();
-    //     }
-    //     return redirect()->route('home');
-    // }
+    public function renew(Loan $loan) {
+
+        if ($loan->renewed == 0) {
+
+            $newTime = $loan->to->addDays(30);
+            $loan->update([
+                'due_at' => $newTime,
+                'renewed' => 1,
+            ]);
+
+            return back();
+        }
+    }
 }

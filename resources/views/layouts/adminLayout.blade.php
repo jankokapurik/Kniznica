@@ -36,7 +36,7 @@
                     <ul class="flex items-center space-x-4"> 
                         <ul>                        
                             <li>    
-                                <a href="{{ route('loaned', auth()->user()) }}" class="block hover:text-purple-600 text-base">Vypožičané knihy</a>
+                            <a href="{{ route('loaned', auth()->user()) }}" class="block hover:text-purple-600 text-base">Vypožičané knihy</a>
                             </li>
                         </ul>                        
                         <div class="group">
@@ -117,11 +117,6 @@
                             <a href="{{ route('loanManagement') }}" class="hover:text-blue-500">
                                 <li class="p-1 hover:bg-gray-200 border-t border-gray-300">
                                     Manažment Výpožičiek
-                                </li>
-                            </a>
-                            <a href="{{ route('loans') }}" class="hover:text-blue-500">
-                                <li class="p-1 hover:bg-gray-200 border-t border-gray-300">
-                                    Výpožičky
                                 </li>
                             </a>
                             <a href="{{ route('reports') }}" class="hover:text-blue-500">
