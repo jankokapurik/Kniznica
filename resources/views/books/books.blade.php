@@ -27,11 +27,7 @@
                 @if($books->count())
                     
                     @foreach($books->sortByDesc('authors.fname') as $book)
-<<<<<<< Updated upstream
                        <x-book :book="$book"></x-book>
-=======
-                        <x-book :book="$book" />
->>>>>>> Stashed changes
                     @endforeach
 
                     {{ $books->links() }}
