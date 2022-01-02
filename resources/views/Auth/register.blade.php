@@ -6,7 +6,7 @@
             <form action="{{ route('register')}}" method="POST">
                 @csrf
                 <div class="mb-4">
-                    <label for="fname" class="sr-only">Name</label>
+                    <label for="fname" class="sr-only">Meno</label>
                     <input type="text" name="fname" placeholder="Tvoje Meno" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 @error('fname') border-red-500 @enderror trasition duration-500" value="{{ old('fname') }}">
                     @error('fname')
                         <div class="text-red-500 mt-2 text-sm">
@@ -16,8 +16,8 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="lname" class="sr-only">Name</label>
-                    <input type="text" name="lname" placeholder="Tvoje Priezvysko" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 @error('lname') border-red-500 @enderror trasition duration-500" value="{{ old('lname') }}">
+                    <label for="lname" class="sr-only">Priezvisko</label>
+                    <input type="text" name="lname" placeholder="Tvoje Priezvisko" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 @error('lname') border-red-500 @enderror trasition duration-500" value="{{ old('lname') }}">
                     @error('lname')
                         <div class="text-red-500 mt-2 text-sm">
                             {{$message}}
@@ -25,7 +25,7 @@
                     @enderror
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-4">  
                     <label for="username" class="sr-only">Username</label>
                     <input type="text" name="username" placeholder="Užívatelské meno" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 @error('username') border-red-500 @enderror trasition duration-500" value="{{ old('username') }}">
                     @error('username')

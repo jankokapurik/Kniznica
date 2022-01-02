@@ -109,28 +109,25 @@ class LoanController extends Controller
         return back();
     }
 
-    public function userCreate(Loan $loan, ser $user, Book $book) {
+    public function userCreate(Loan $loan, User $user, Book $book) {
 
         if($user->loan) {
 
-            $loan = Loan::where('user_id',$user->id)->get();
-            $loan->books()->attach($book);
+            $loan = $user->loan;
+            $loan->books()->attach($book->id);
             $book->quantity-=1;
-            
-            return back();
         }
         else {
 
-            $newLoan = Loan::create([
+            $loan = Loan::create([
                 'user_id' => auth()->user()->id
             ]);
-            $newLoan->books()->attach($book->id);
+            $loan->books()->sync($book->id);
             $book->quantity-=1;
 
-            return redirect()->route('loan.addBook', $user);
         }
 
-        return view('admin.manageLoans');
+        return redirect()->route('loanManagement');
     }
 
     public function loaned(User $user) {
