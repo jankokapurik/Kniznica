@@ -27,7 +27,7 @@
                 @if($books->count())
                     
                     @foreach($books->sortByDesc('authors.fname') as $book)
-                       <x-book :book="$book"></x-book>
+                        <x-book :book="$book"/>
                     @endforeach
 
                     {{ $books->links() }}

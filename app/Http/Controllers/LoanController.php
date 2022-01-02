@@ -71,7 +71,6 @@ class LoanController extends Controller
 
     public function destroy(Loan $loan) {
 
-        $loan->books()->delete();
         $loan->delete();
 
         return back();
@@ -127,7 +126,16 @@ class LoanController extends Controller
 
         }
 
-        return redirect()->route('loanManagement');
+        return back();
+    }
+
+    public function userDelete(Loan $loan, User $user, Book $book) {
+
+        $loan = $user->loan;
+        $loan->books()->attach($book->id);
+        $book->quantity+=1;
+
+        return back();
     }
 
     public function loaned(User $user) {
