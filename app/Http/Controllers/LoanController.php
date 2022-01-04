@@ -72,24 +72,21 @@ class LoanController extends Controller
 
         if($book->quantity > 0){
             if($user->loan) {   
-                dd($loan->books()->where('id', $book->id)->exists());
                 $loan = $user->loan;
                 $loan->books()->attach($book);
-                $book->quantity-=1;
                 $book->update();
             }
-            else {
+            else {            
                 $loan = Loan::create([
                     'user_id' => auth()->user()->id
                 ]);
                 $loan->books()->sync($book);
                 $book->quantity-=1;
                 $book->update();
-                
             }
         }
         else {
-            
+            return back()->withErrors(['msg' => 'mesage']);
         }
 
         return back();
