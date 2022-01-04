@@ -14,7 +14,7 @@
 
                 <div class="mb-4">
                     <label for="email" class="sr-only">Email</label>
-                    <input type="text" name="email" placeholder="Tvoj email" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 @error('email') border-red-500 @enderror trasition duration-500" value="{{ old('email') }}">
+                    <input type="text" name="email" placeholder="Tvoj email" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 focus:outline-none @error('email') border-red-500 @enderror trasition duration-500" value="{{ old('email') }}">
                     @error('email')
                         <div class="text-red-500 mt-2 text-sm">
                             {{$message}}
@@ -24,7 +24,7 @@
 
                 <div class="mb-4">
                     <label for="password" class="sr-only">Password</label>
-                    <input type="password" name="password" placeholder="Zadaj heslo" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 @error('password') border-red-500 @enderror trasition duration-500" value="">
+                    <input type="password" name="password" placeholder="Zadaj heslo" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 focus:outline-none @error('password') border-red-500 @enderror trasition duration-500" value="">
                     @error('password')
                         <div class="text-red-500 mt-2 text-sm">
                             {{$message}}

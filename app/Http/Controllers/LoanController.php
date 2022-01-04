@@ -34,46 +34,6 @@ class LoanController extends Controller
         Loan::create($request->all());
 
         return redirect()->route('loanManagement');
-
-        // $this->validate($request, [
-            //         'bid' => 'required|max:10',
-            //     ]);
-            //     if (Book::where('id', '=', $request->bid)->exists() == 0) {
-            //         session()->flash('warning', 'This book doesn\'t exist.');
-            //         return back();
-            //     }
-            //     if (Lent::where('bid', '=', $request->bid)->exists()) {
-            //         session()->flash('warning', 'Someone has already borrowed this book.');
-            //         return back();
-            //     }
-            //     if (Auth::user()->debt > 0) {
-            //         session()->flash('warning', 'Please pay off your debt first.');
-            //         return back();
-            //     }
-            //     Lent::create([
-            //         'uid' => Auth::user()->id,
-            //         'bid' => $request->bid,
-            //         'lent_at' => Carbon::now(),
-            //         'due_at' => Carbon::now()->addMonth(1),
-            //     ]);
-            //     $book = Book::where('id', '=', $request->bid)->first();
-            //     $bookInfo = BookInfo::where('isbn', '=', $book->isbn)->first();
-            //     $bookInfo->update([
-            //         'available' => $bookInfo->available - 1,
-            //     ]);
-            //     session()->flash('success', 'Borrowing succeeded.');
-            //     return redirect()->route('home');
-    }
-
-    public function show(Loan $loan) {     
-       
-    }
-
-    public function destroy(Loan $loan) {
-
-        $loan->delete();
-
-        return back();
     }
 
     public function edit(Loan $loan) {
@@ -110,20 +70,26 @@ class LoanController extends Controller
 
     public function userCreate(Loan $loan, User $user, Book $book) {
 
-        if($user->loan) {
-
-            $loan = $user->loan;
-            $loan->books()->attach($book->id);
-            $book->quantity-=1;
+        if($book->quantity > 0){
+            if($user->loan) {   
+                dd($loan->books()->where('id', $book->id)->exists());
+                $loan = $user->loan;
+                $loan->books()->attach($book);
+                $book->quantity-=1;
+                $book->update();
+            }
+            else {
+                $loan = Loan::create([
+                    'user_id' => auth()->user()->id
+                ]);
+                $loan->books()->sync($book);
+                $book->quantity-=1;
+                $book->update();
+                
+            }
         }
         else {
-
-            $loan = Loan::create([
-                'user_id' => auth()->user()->id
-            ]);
-            $loan->books()->sync($book->id);
-            $book->quantity-=1;
-
+            
         }
 
         return back();
@@ -132,8 +98,13 @@ class LoanController extends Controller
     public function userDelete(Loan $loan, User $user, Book $book) {
 
         $loan = $user->loan;
-        $loan->books()->attach($book->id);
+        $loan->books()->detach($book);
         $book->quantity+=1;
+        $book->update();
+
+        if(!$loan->books->count()){
+            $loan->delete();
+        }
 
         return back();
     }
@@ -143,17 +114,30 @@ class LoanController extends Controller
         return view('users.loan', ['user' =>$user]);
     }
 
-    public function renew(Loan $loan) {
+    public function returnBooks(Loan $loan) {
 
-        if ($loan->renewed == 0) {
-
-            $newTime = $loan->to->addDays(30);
-            $loan->update([
-                'due_at' => $newTime,
-                'renewed' => 1,
-            ]);
-
-            return back();
+        foreach ($loan->books as $book) {
+            $loan->books()->detach($book);
+            $book->quantity+=1;
+            $book->update();
         }
+
+        $loan->delete();
+
+        return redirect()->route('loanManagement');
     }
+
+    // public function renew(Loan $loan) {
+
+    //     if ($loan->renewed == 0) {
+
+    //         $newTime = $loan->to->addDays(30);
+    //         $loan->update([
+    //             'due_at' => $newTime,
+    //             'renewed' => 1,
+    //         ]);
+
+    //         return back();
+    //     }
+    // }
 }

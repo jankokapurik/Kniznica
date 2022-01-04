@@ -17,15 +17,24 @@
                     <select name="user_id" id="user" class="bg-gray-100 border-2 border-gray-300 w-full mb-4 p-4 rounded-lg hover:border-gray-500 focus:border-gray-600 transition duration-500">
                         <optgroup>
                             @if($users->count())
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" {{ ($loan->user == $user) ? 'selected' : ''}}>{{ $user->fname }} {{ $user->lname }}</option>
-                                @endforeach
+                            @foreach ($users as $user)
+                            <option value="{{ $user->id }}" {{ ($loan->user == $user) ? 'selected' : ''}}>{{ $user->fname }} {{ $user->lname }}</option>
+                            @endforeach
                             @endif
                         </optgroup>
                     </select>
                 </div>
                 <button type="submit" class="bg-blue-500 border-2 border-blue-500 text-white p-4 rounded-lg hover:bg-gray-100 hover:text-blue-500">Upraviť</button>
             </form>
+            <div class="flex flex-row">
+                @if($loan->approved == 1)
+                <form action="{{ route('loan.returnBooks', $loan) }}" method="post">
+                    @csrf   
+                    @method('DELETE')
+                    <button class="bg-blue-500 border-2 border-blue-500 text-white p-4 rounded-lg hover:bg-gray-100 hover:text-blue-500">Vrátiť knihy</button>
+                </form>
+                @endif
+            </div>
         </div>
-        </div>
-    @endsection
+    </div>
+@endsection

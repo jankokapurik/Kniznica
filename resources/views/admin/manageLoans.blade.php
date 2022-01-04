@@ -63,11 +63,6 @@
                                             @csrf 
                                             <button class="bg-blue-500 border border-blue-500 p-1 rounded-md text-white hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Upraviť</button>
                                         </form>
-                                        <form action="{{ route('loan.destroy', $loan) }}" method="POST" class="m-1">
-                                            @csrf   
-                                            @method('DELETE')
-                                            <button type="submit" class="bg-red-500 border border-red-500 p-1 rounded-md text-white hover:bg-red-100 hover:text-red-500 trasition duration-500">Vymazať</button>
-                                        </form>
                                     </div>
                                 </td>
                             </tr>

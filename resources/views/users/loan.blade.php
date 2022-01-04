@@ -25,9 +25,6 @@
                                     <span>nie je hodnotene</span>
                                 @endif    
                             </div>
-                    
-                    
-                    
                             <p>{{ $book->language->name }}</p>
                             <p @if (!$book->quantity)
                                 class="text-red-400"
@@ -43,9 +40,11 @@
                                 @endforelse  
                             </p>
                         </div>
-                        <form action="{{ route('loan.deletebook', ['user' => auth()->user(), 'book' => $book]) }}" method="get">
-                            <button class="p-2 bg-blue-500 text-white border-2 border-blue-500 rounded-lg hover:text-blue-500 hover:bg-blue-100">Odstranit</button>
-                        </form>
+                        @if($user->loan->approved == 0)
+                            <form action="{{ route('loan.deletebook', ['user' => auth()->user(), 'book' => $book]) }}" method="get">
+                                <button class="p-2 bg-blue-500 text-white border-2 border-blue-500 rounded-lg hover:text-blue-500 hover:bg-blue-100">Odstranit</button>
+                            </form>
+                        @endif
                     </div>
                 @endforeach
             @else

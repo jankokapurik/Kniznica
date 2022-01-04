@@ -101,7 +101,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
   
   //  manazment vypoziciek
   Route::get('/loanManagement', [LoanController::class, 'index'])->name('loanManagement');
-  Route::delete('/loan/{loan}', [LoanController::class, 'destroy'])->name('loan.destroy');
+  Route::delete('/returnBooks/{loan}', [LoanController::class, 'returnBooks'])->name('loan.returnBooks');
   Route::get('/loan/{loan}', [LoanController::class, 'edit'])->name('loan.edit');
   Route::put('/loan/{loan}', [LoanController::class, 'update'])->name('loan.update');
   Route::get('/loan', [LoanController::class, 'create'])->name('loan.create');
@@ -161,6 +161,7 @@ Route::middleware(['guest'])->group(function(){
   Route::post('/reset-password', [ResetPassword::class, 'update'])->name('password.update');
 });
 
+  //   vypozicka
 Route::get('/loaned/{user}', [LoanController::class, 'loaned'])->name('loaned'); 
 Route::get('/createLoan/{user}/{book}', [LoanController::class, 'userCreate'])->name('loan.userCreate');
 Route::get('/deleteBook/{user}/{book}', [LoanController::class, 'userDelete'])->name('loan.deletebook');

@@ -22,6 +22,14 @@
                     <li>
                         <a href="{{ route('books') }}" class="p-3 hover:text-blue-500">Library</a>
                     </li>
+                    @if (auth()->check())
+                        @if (auth()->user()->isAdmin())
+                        <li>
+                            <a href="{{ route('adminHome') }}" class="p-3 hover:text-purple-600">Admin stránka</a>
+                        </li>
+                        @else
+                        @endif
+                    @endif
                 </ul>
                 <div>
                     <form action="{{ route('search2') }}" method="get" class="flex items-center">
