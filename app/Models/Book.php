@@ -54,6 +54,10 @@ class Book extends Model
         return $this->belongsToMany(Genre::class, 'book_genre')->withTrashed();
     }
 
+    public function loans(){
+        return $this->hasMany(Loan::class)->get()->dd();
+    }
+
     // public function loans() {
         
     //     return $this->belongsToMany(Loan::class,);

@@ -21,15 +21,18 @@
                     <div class="bg-gray-200 rounded-lg p-2 mb-4">
                         <p text-2xl>{{ $book->description }}</p>
                     </div>
-
-
-                    @if ($book->quantity)
-                        <form action="{{ route('loan.userCreate', ['user' => auth()->user(), 'book' => $book]) }}" method="GET">
-                            <button class="bg-blue-500 border-2 border-blue-500 text-white p-2 rounded-lg hover:bg-blue-100 hover:text-blue-500">Vypožičať</button>
-                        </form>
+                   
+                    @if ($borrowed)
+                        <p class="text-center bg-green-500 border-2 border-green-500 text-white p-2 rounded-lg">zapoziciane</p>
                     @else
-                        <span class="bg-red-500 border-2 border-red-500 text-white p-2 rounded-lg">nedostupna</span>
-                    @endif
+                        @if ($book->quantity > 0)                            
+                            <form action="{{ route('loan.userCreate', ['user' => auth()->user(), 'book' => $book]) }}" method="GET">
+                                <button class="w-full bg-blue-500 border-2 border-blue-500 text-white p-2 rounded-lg hover:bg-blue-100 hover:text-blue-500">Vypožičať</button>
+                            </form>
+                        @else                            
+                            <p class="text-center bg-red-500 border-2 border-red-500 text-white p-2 rounded-lg">nedostupne</p>                        
+                        @endif
+                    @endif                
 
                 </div>
             </div>  

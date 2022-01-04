@@ -7,6 +7,8 @@ use App\Models\Genre;
 use App\Models\Author;
 use App\Models\Comment;
 use App\Models\Language;
+use App\Models\Loan;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -94,8 +96,21 @@ class BookController extends Controller
         $mode = $book->comments()->whereNotNull('rating')->select("rating", DB::raw('count(*) as total'))
         ->groupBy('rating')->orderBy('total', 'desc')->first()->total; //modus
 
+
+        $user = User::find(auth()->id());
+
+        try{
+            $exist = DB::table('book_loan')
+            ->where("book_id", $book->id)
+            ->where("loan_id", $user->loan->id)->first() == true;
+        }
+        catch(\Exception $e){
+            $exist = false;
+        }
+
         return view('books.show', [
             'book' => $book,
+            'borrowed' => $exist, 
             'comments' => $book->comments()->latest()->get(),
             'rating' => [
                 "avg" => $book->comments()->avg('rating'),

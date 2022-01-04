@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Loan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LoanController extends Controller
 {
@@ -47,7 +48,6 @@ class LoanController extends Controller
     }
 
     public function update(Loan $loan, Request $request) {
-
         $request->validate([
             'user_id' =>'required',
         ]);
@@ -69,12 +69,21 @@ class LoanController extends Controller
     }
 
     public function userCreate(Loan $loan, User $user, Book $book) {
-
         if($book->quantity > 0){
-            if($user->loan) {   
-                $loan = $user->loan;
-                $loan->books()->attach($book);
-                $book->update();
+            if($user->loan) {               
+                $exist = DB::table('book_loan')
+                ->where("book_id", $book->id)
+                ->where("loan_id", $user->loan->id)->first();
+
+                if($exist){ //book exist in loan
+
+                } 
+                else{ //book dont exist in loan
+                    $user->loan->books()->attach($book);
+                    $book->quantity-=1;
+                    $book->update();
+                }
+  
             }
             else {            
                 $loan = Loan::create([
