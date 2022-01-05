@@ -85,18 +85,6 @@ class BookController extends Controller
     }
 
     public function show(Book $book) {     
-        
-        if(!$book->comments()->count()){
-            return view('books.show', [
-                'book' => $book,
-                'comments' => null,
-            ]);
-        }
-
-        $mode = $book->comments()->whereNotNull('rating')->select("rating", DB::raw('count(*) as total'))
-        ->groupBy('rating')->orderBy('total', 'desc')->first()->total; //modus
-
-
         $user = User::find(auth()->id());
 
         try{
@@ -107,6 +95,21 @@ class BookController extends Controller
         catch(\Exception $e){
             $exist = false;
         }
+
+
+
+        if(!$book->comments()->count()){
+            return view('books.show', [
+                'book' => $book,
+                'borrowed' => $exist,
+                'comments' => null,
+            ]);
+        }
+
+        $mode = $book->comments()->whereNotNull('rating')->select("rating", DB::raw('count(*) as total'))
+        ->groupBy('rating')->orderBy('total', 'desc')->first()->total; //modus
+
+
 
         return view('books.show', [
             'book' => $book,
