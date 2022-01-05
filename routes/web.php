@@ -108,6 +108,8 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
   Route::post('/loan', [LoanController::class, 'store'])->name('loan.store');
   Route::get('/loan/{loan}/approve', [LoanController::class, 'approve'])->name('loan.approve');
 
+  
+
   Route::get('/vypozicky', function () {
     return view('admin.loans');
   })->name('loans');

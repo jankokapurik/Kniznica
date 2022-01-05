@@ -42,6 +42,7 @@ class LoanController extends Controller
         $users = User::get();
 
         return view('admin.editLoan', [
+            'books' => $loan->books,
             'loan' => $loan,
             'users' => $users
         ]);
