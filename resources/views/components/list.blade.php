@@ -6,14 +6,17 @@
 <div id="book_list" class="flex flex-col">
     @foreach ($oldbooks as $book)
         <div class="bg-gray-200 p-1 rounded mt-2">
-            <p>{{$book->title}}</p>
+            <div class="flex flex-row">
+                <button onclick="delete_book(event);" type="button" value="{{$book->title}}" class="mr-2 bg-red-500 p-2 rounded-md">zmazat</button>
+                <p class="mr-2 w-full bg-red-200 p-2 rounded-md">{{$book->title}}</p>
+            </div>
         </div>
     @endforeach
 
     <div id="new_book" class="bg-gray-500 text-white p-1 rounded mt-2">  
         <p id="info">pridat knihu</p>
 
-        <div id="form" class="hidden">
+        <div id="form" class="hidden" tabindex="0">
             <input id="input_field" type="text" class="text-black"> 
             <button onclick="add_book()" class="bg-white text-black rounded-sm text-sm p-0.5">pridat</button>
         </div>
@@ -21,16 +24,32 @@
 </div>
 <script>
     var global_books = [];
-    @json($values).forEach(inp => {
+    @json($oldbooks).forEach(inp => {
         global_books.push(inp['title']);
     });
 
     console.log(global_books);
     
     document.getElementById("new_book").onclick = open_search;
+    document.getElementById("new_book").onblur = close_search;
+
+    form = document.getElementById("form");
+
+    form.addEventListener('focusout', function(e){
+        if(this.contains(e.relatedTarget)) return false;
+        close_search();
+    });
 
     document.getElementById("input_field").onkeypress = function(e){
         if (e.code == "Enter") add_book();
+    };
+    function delete_book(e){
+        e.target.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode);
+
+        index = global_books.indexOf(e.target.value);
+        if(index > -1) global_books.splice(index,1);
+    
+        console.log(global_books);
     }
 
 
@@ -60,6 +79,8 @@
 
         info.className = "block"; //switchblock
         form.className = "hidden"; //switch   
+
+        document.getElementById("input_field").value = "";
     }
 
     function add_book(){

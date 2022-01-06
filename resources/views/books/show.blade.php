@@ -36,7 +36,7 @@
                         @endif
                     @endauth
                     @guest
-                        zapoziciat
+                        pre zapozicianie sa musite najprv prihlasit
                     @endguest
 
                 </div>
