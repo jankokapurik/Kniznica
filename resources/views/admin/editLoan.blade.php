@@ -27,21 +27,33 @@
                 <button type="submit" class="bg-blue-500 border-2 border-blue-500 text-white p-4 rounded-lg hover:bg-gray-100 hover:text-blue-500">Upraviť</button>
             </form>
 
-            <div class="flex flex-col">
-                @foreach ($books as $book)
-                    <div class="bg-gray-200 p-1 rounded mt-2">
-                        <p>{{$book->title}}</p>
-                    </div>
-                @endforeach
+            <x-list :values="$allBooks" :books="$books"></x-list>
 
-                <div id='add' class="bg-green-200 p-1 rounded mt-2">
-                    pridat
-                    
-                </div>                
-                
-                <x-searchbar id="meno" class="w-64" :values="$allBooks"></x-searchbar>
+    </div>
+@endsection
 
-            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             {{-- <div class="flex flex-row">
                 @if($loan->approved == 1)
@@ -53,5 +65,3 @@
                 @endif
             </div> --}}
         </div>
-    </div>
-@endsection

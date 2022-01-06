@@ -10,7 +10,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    
     <script src="{{ URL::asset('js/autocomplete.js') }}"></script>
+    <script src="{{ URL::asset('js/autocomplete2.js') }}"></script>
     
 </head>
 <body class="bg-gray-200">

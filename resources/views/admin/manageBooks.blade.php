@@ -1,6 +1,12 @@
 @extends('layouts.adminLayout')
 
 @section('content')
+
+    @if ($_GET)
+    {{ dd($_GET); }}
+    @endif
+
+
     <div class="flex w-full">
         <div class="w-full mt-6 ml-6 bg-white p-6 rounded-l-lg" >
             
@@ -11,12 +17,20 @@
                 </form>
             
                 <a href="{{ route('book.index_restore') }}" class="bg-blue-500 border-2 border-blue-500 p-2 rounded-md text-white hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Obnoviť knihy</a>
+
+                <form action="" method="get" class="m-1">
+                    <input type="text" name="test" value="test">
+                    {{-- @csrf    --}}
+                    {{-- @method('DELETE') --}}
+                    <button type="submit" class="bg-red-500 border border-red-500 p-1 rounded-md text-white hover:bg-red-100 hover:text-red-500 trasition duration-500">Vymazať</button>
+                </form>
             </div>
             
 
             <table class="w-full table-auto">
                 <thead>
                     <tr class="border-b-2 border-gray-500">
+                        <th><input type="checkbox" value="all"></th>
                         <th class=" p-1">Autor</th>
                         <th class=" p-1">Názov</th>
                         <th class=" p-1">Dátum vydania</th>
@@ -31,6 +45,11 @@
                     @if($books->count())
                     @foreach($books as $book)
                     <tr class="even:bg-gray-100 border-t border-gray-500 ">
+                        <td>
+                            <div>
+                                <input type="checkbox" value="{{$book->id}}">
+                            </div>
+                        </td>
                         <td class="">
                             <div class="flex flex-row justify-center align-middle">
                                 <h2 class="text-gray-600 p-1">{{ $book->author->fname }} {{ $book->author->lname }}</h2>

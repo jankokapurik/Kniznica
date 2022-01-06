@@ -63,13 +63,11 @@
                                             @csrf 
                                             <button class="bg-blue-500 border border-blue-500 p-1 rounded-md text-white hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Upraviť</button>
                                         </form>
-                                    
-                                        {{-- @if($loan->approved == 0)
-                                            <form method="GET" action="{{ route('loan.approve', $loan) }}" class="">
-                                                @csrf
-                                                <button type="submit" class="bg-green-500 border-2 border-green-500 text-white p-1 rounded-lg hover:bg-gray-100 hover:text-green-500">Vypožičať</button>
-                                            </form>
-                                        @endif --}}
+                                        <form action="{{ route('loan.edit', $loan) }}" class="m-1">
+                                            @csrf 
+                                            <button class="bg-red-500 border border-red-500 p-1 rounded-md text-white hover:bg-red-100 hover:text-red-500 trasition duration-500">zmazat</button>
+                                        </form>                                    
+
                                     </div>
                                 </td>
                             </tr>
