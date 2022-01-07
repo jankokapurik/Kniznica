@@ -1,8 +1,34 @@
-function autocomplete(input_element, input_values, input_properties) {
+@props([
+    'name' => $id,
+    'values' => $values
+])
+
+{{--  --}}
+
+<div class='relative text-black' id="input-field">
+    <div class="relative">
+        <label for="search" class="sr-only">Name</label>
+        <input autocomplete="off" id="{{ $name }}" type="text" name="search" placeholder="Vyhľadaj" class="bg-gray-100 border-2 border-gray-100 w-full p-1 rounded-lg mr-2 focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 trasition duration-500">
+    </div>
+
+    <div id="{{ $name }}-container" class="absolute transition bg-white inset-x-0 divide-y border-2 rounded-md">
+        <div class="flex flex-col capitalize">
+            {{-- <div>Meno knihy</div>
+            <div> autor </div>
+            <div>Meno knihy</div>
+            <div> autor </div>
+            <div>Meno knihy</div>
+            <div> autor </div> --}}
+        </div>
+    </div>
+</div>
+
+<script>    
+    function autoinput(input_element, input_values, input_properties) {
     let properties = input_properties;
     let input = input_values;
     let input_field = input_element;
-    let container_field = document.getElementById("container");
+    let container_field = document.getElementById(input_field.id + "-container");
     let form_field = document.getElementById(input_field.id + "-form");
 
     let values = [];
@@ -42,7 +68,8 @@ function autocomplete(input_element, input_values, input_properties) {
                                 e.preventDefault();
 
                                 input_field.value = this.text;
-                                document.getElementById(input_field.id + "-form").submit();
+                                // document.getElementById(input_field.id + "-form").submit();
+                                add_book();
                             });
 
 
@@ -119,7 +146,8 @@ function autocomplete(input_element, input_values, input_properties) {
             if(this.focus >= 0){
                 e.preventDefault();
                 input_field.value = container_field.childNodes[this.focus].text;
-                document.getElementById(input_field.id + "-form").submit();
+                // document.getElementById(input_field.id + "-form").submit();
+                add_book();
             }
         }
         else this.focus = -1;
@@ -142,3 +170,5 @@ function autocomplete(input_element, input_values, input_properties) {
     });
 }
 
+autoinput(document.getElementById("{{$name}}"), @json($values), ['title', 'authors_lname', 'authors_fname']); //new version
+</script>

@@ -5,143 +5,159 @@
 
 <div id="book_list" class="flex flex-col">
     @foreach ($oldbooks as $book)
-        <div class="bg-gray-200 p-1 rounded mt-2">
-            <div class="flex flex-row">
-                <button onclick="delete_book(event);" type="button" value="{{$book->title}}" class="mr-2 bg-red-500 p-2 rounded-md">zmazat</button>
-                <p class="mr-2 w-full bg-red-200 p-2 rounded-md">{{$book->title}}</p>
-            </div>
+        <div class="bg-gray-200 p-1 rounded mt-2 flex flex-row">
+            <button onclick="delete_b(event);" type="button" value="{{$book->title}}" class="mr-2 bg-red-500 p-2 rounded-md">zmazat</button>
+            <p class="mr-2 w-full bg-red-200 p-2 rounded-md">{{$book->title}}</p>
         </div>
     @endforeach
 
-    <div id="new_book" class="bg-gray-500 text-white p-1 rounded mt-2">  
-        <p id="info">pridat knihu</p>
-
-        <div id="form" class="hidden" tabindex="0">
-            <input id="input_field" type="text" class="text-black"> 
-            <button onclick="add_book()" class="bg-white text-black rounded-sm text-sm p-0.5">pridat</button>
-        </div>
-    </div>
-</div>
-<script>
-    var global_books = [];
-    @json($oldbooks).forEach(inp => {
-        global_books.push(inp['title']);
-    });
-
-    console.log(global_books);
-    
-    document.getElementById("new_book").onclick = open_search;
-    document.getElementById("new_book").onblur = close_search;
-
-    form = document.getElementById("form");
-
-    form.addEventListener('focusout', function(e){
-        if(this.contains(e.relatedTarget)) return false;
-        close_search();
-    });
-
-    document.getElementById("input_field").onkeypress = function(e){
-        if (e.code == "Enter") add_book();
-    };
-    function delete_book(e){
-        e.target.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode);
-
-        index = global_books.indexOf(e.target.value);
-        if(index > -1) global_books.splice(index,1);
-    
-        console.log(global_books);
-    }
-
-
-    function open_search(e){
-        e.preventDefault();
-        parent = document.getElementById("new_book");
-        info = document.getElementById("info");
-        form = document.getElementById("form");
-        input_field = document.getElementById("input_field");
-
-        parent.onclick = "";
-        info.className = "hidden"; 
-        form.className = "block";    
-        input_field.focus();
-
-        return false;
-    }
-
-    function close_search(e){
-        parent = document.getElementById("new_book");
-        info = document.getElementById("info");
-        form = document.getElementById("form");        
-
-        setTimeout(() => {
-            parent.onclick = open_search;    
-        }, 50);
-
-        info.className = "block"; //switchblock
-        form.className = "hidden"; //switch   
-
-        document.getElementById("input_field").value = "";
-    }
-
-    function add_book(){
-        book_list = document.getElementById("book_list");
-        new_book =  document.getElementById("new_book");
-
-        value = document.getElementById("input_field").value;
-
-        div = document.createElement("div");
-        div.className = "bg-blue-200 p-1 rounded mt-2";
-        p = document.createElement("p");
-        p.innerHTML = value;
-
-        div.appendChild(p);
-        book_list.insertBefore(div, new_book);
-
-        close_search();
-
-        global_books.push(value);
-
-        document.getElementById("input_field").value = "";
-
-        console.log(global_books);
-    }
-
-</script>
-
-
-
-
-
-{{-- <div id='add' class="bg-green-200 p-1 rounded mt-2">
-    pridat                    
-</div> --}}
-
-{{-- <div {{ $attributes->merge(['class' => 'relative']) }}>
-
-            <div class="relative">
+    <div tabindex="0" id="switcher" class="bg-green-400 p-2 rounded-md">
+        <p id="infotext" class="block">Pridať knihu</p>
+        
+        <div class="relative hidden" id="focuser">
+            <div class="flex flex-row">
                 <label for="search" class="sr-only">Name</label>
-                <input autocomplete="off" id="{{ $name }}-input" type="text" name="search" placeholder="Vyhľadaj" class="bg-gray-100 border-2 border-gray-100 w-full p-1 rounded-lg mr-2 focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 trasition duration-500">
+                <input id="input" autocomplete="off" type="text" name="search" placeholder="Vyhľadaj" class="bg-gray-100 border-2 border-gray-100 w-full p-1 rounded-lg mr-2 focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 trasition duration-500"">    
+                <button class="bg-blue-500 p-2 rounded-md">Pridať</button>
             </div>
-        <button type="submit" class="bg-blue-500 border-2 border-blue-500 text-white p-1 rounded font-medium  hover:bg-blue-100 hover:text-blue-500 trasition duration-500">pridat</button>
-
-
-    <div id="{{ $name }}-input-container" class="absolute transition bg-white inset-x-0 divide-y border-2 rounded-md">
-        <div class="flex flex-col hover:bg-gray-200">
-
+            
+            <div id="container" class="absolute transition bg-white inset-x-0 divide-y border-2 rounded-md">
+                <div class="flex flex-col capitalize">
+                </div>
+            </div>
         </div>
     </div>
-</div> --}}
 
-{{-- // let oldbooks = [];
-// @json($books).forEach(inp => {
-//     obj = new Object();
-//     // properties.forEach(property => {
-//     obj['id'] = inp['id'];
-//     obj['title'] = inp['title'];
-//     // });    
-//     values.push(obj);
-// });
+</div>
 
 
+<script>
+    let switcher = document.getElementById("switcher");
+    let infotext = document.getElementById("infotext");
+    let focuser = document.getElementById("focuser");
+    let input = document.getElementById("input");
+    let container = document.getElementById("container");
 
-// autocomplete2(document.getElementById("{{$name}}-input"), @json($values), ['title', 'authors_lname', 'authors_fname']); //new version --}}
+    let allbooks = @json($values);
+    let attributes = ["title", "authors_fname", "authors_lname"];
+
+    let bookstorage=[];
+
+    for(book of @json($oldbooks)){
+        bookstorage.push(book['title']);
+    }
+    console.log(bookstorage);
+
+    switcher.addEventListener('focusin', function(e){
+        if(this.contains(e.relatedTarget)) return false;
+        open_s();
+    }); 
+
+    switcher.addEventListener('focusout', function(e){
+        if(this.contains(e.relatedTarget)) return false;
+        close_s();
+    });
+
+    function open_s(){
+        container.innerHTML = "";
+        infotext.classList.remove('block');
+        infotext.classList.add('hidden');
+        focuser.classList.remove('hidden');
+        focuser.classList.add('block');
+
+        input.focus();
+    }
+
+    function close_s(){
+        infotext.classList.remove('hidden');
+        infotext.classList.add('block');
+        focuser.classList.remove('block');
+        focuser.classList.add('hidden');
+
+        input.value = '';
+
+        switcher.blur();
+    }
+
+    function add_b(){        
+        bookstorage.push(input.value);
+        console.log(bookstorage);
+
+        block = document.createElement('div');
+        block.className = "flex flex-row bg-gray-200 p-1 rounded mt-2";
+        
+        delete_button = document.createElement('button');
+        delete_button.className = "mr-2 bg-green-500 p-2 rounded-md";
+        delete_button.textContent = "zmazat";
+        delete_button.onclick = delete_b;
+
+        content = document.createElement('div');
+        content.className = "mr-2 w-full bg-green-200 p-2 rounded-md";
+        content.textContent = input.value;
+
+        block.appendChild(delete_button);
+        block.appendChild(content);
+
+        switcher.parentNode.insertBefore(block, switcher);
+        close_s();
+    }
+
+    function delete_b(event) {        
+        console.log(event.target.value);
+        index = bookstorage.indexOf(event.target.value);
+        bookstorage.splice(index, 1);
+        console.log(bookstorage);
+
+        event.target.parentNode.remove();
+    }
+
+    //////solo
+    input.addEventListener('input', function(e){
+        container.innerHTML = "";
+        // console.log(input.value);
+        if(!(input.value)) return false;                
+        
+        for(book of allbooks){            
+            contain = false;
+            for(attribute of attributes){
+                if(book[attribute].toLowerCase().includes(input.value.toLowerCase())) contain = true;
+            }
+            
+            if(contain){
+                block = document.createElement('div');
+                block.className = "flex flex-col";
+
+                title = document.createElement('div');
+                title.textContent = book[attributes[0]];
+
+                body = document.createElement('div');
+                body.className = "flex flex-row";
+
+                for(attribute of attributes.slice(1, attributes.lenght)){
+                    child = document.createElement('div');
+                    child.className = "mr-2";
+
+                    child.textContent = book[attribute];
+                    body.appendChild(child);
+                }
+
+                block.appendChild(title);
+                block.appendChild(body);
+                block.value = book[attributes[0]];
+
+                block.addEventListener('click',function(e){
+                    // console.log("CLICK");
+                    input.value = this.value;
+
+                    action();
+                });
+
+                container.appendChild(block);
+            }
+        }
+    });
+    function action() {
+        add_b();
+    }
+    
+</script>

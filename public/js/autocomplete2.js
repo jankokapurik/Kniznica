@@ -1,11 +1,15 @@
-function autocomplete2(input_element, input_values, input_properties) {
+function autocomplete2(input_element, input_values, input_properties, act='true') {
     let properties = input_properties;
     let input = input_values;
     let input_field = input_element;
+
     let container_field = document.getElementById(input_field.id + "-container");
     let form_field = document.getElementById(input_field.id + "-form");
+    let action = act;
 
     let values = [];
+
+    console.log("autocomplete2 call");
     input.forEach(inp => {
         obj = new Object();
         properties.forEach(property => {
@@ -42,7 +46,8 @@ function autocomplete2(input_element, input_values, input_properties) {
                                 e.preventDefault();
 
                                 input_field.value = this.text;
-                                document.getElementById(input_field.id + "-form").submit();
+                                
+                                if(action) document.getElementById(input_field.id + "-form").submit();
                             });
 
 
@@ -119,7 +124,7 @@ function autocomplete2(input_element, input_values, input_properties) {
             if(this.focus >= 0){
                 e.preventDefault();
                 input_field.value = container_field.childNodes[this.focus].text;
-                document.getElementById(input_field.id + "-form").submit();
+                if(action) document.getElementById(input_field.id + "-form").submit();
             }
         }
         else this.focus = -1;
