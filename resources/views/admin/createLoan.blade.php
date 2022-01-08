@@ -6,10 +6,14 @@
             <form action="{{ route('loan.store') }}" method="POST">
                 @csrf
                 <div class>
+                    @if ($errors->any())
+                        {{ $errors->first() }}
+                    @endif
+
                     <label for="user_id" class="sr-only">Používateľ</label>
                     <select name="user_id" id="user_id" class="bg-gray-100 border-2 border-gray-300 w-full mb-4 p-4 rounded-lg hover:border-gray-500 focus:border-gray-600 transition duration-500">
-                        <optgroup>
-                            <option value="0">Vyber užívateľa</option>
+                        <optgroup>                            
+                            <option value="">Vyber užívateľa</option>
                             @if($users->count())
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->fname }} {{ $user->lname }}</option>

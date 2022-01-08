@@ -17,8 +17,7 @@ class LoanController extends Controller
         return view('admin.manageLoans', ['loans' => $loans]);
     }
 
-    public function create() {
-        
+    public function create() {   
         $users = User::get();
 
         return view('admin.createLoan', [
@@ -27,9 +26,8 @@ class LoanController extends Controller
     }
     
     public function store(Request $request) {
-
         $request->validate([
-            'user_id' =>'required',
+            'user_id' =>'required|unique:loans,user_id',     
         ]);
 
         Loan::create($request->all());
@@ -48,20 +46,30 @@ class LoanController extends Controller
         ]);
     }
 
+    // public function
+    // public function deleteLoan(Loan $loan, Request $request){
+
+    // }
+
     public function update(Loan $loan, Request $request) {
-        $request->validate([
-            'user_id' =>'required',
-        ]);
+        // $request->validate([
+        //     'user_id' =>'required',
+        // ]);
         
+        $user = User::find($request->user_id);
+        
+        // dd($loan);
+
         $loan->books()->detach();
         if($request->books){
             foreach($request->books as $booksid){
-                auth()->user()->loan->books()->attach(Book::find($booksid));
+                $loan->books()->attach(Book::find($booksid));
             }
         }
        
         $loan->update($request->all());
 
+        
         return redirect()->route('loanManagement');
     }
 
