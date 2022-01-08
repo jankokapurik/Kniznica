@@ -6,12 +6,12 @@
 <div id="book_list" class="flex flex-col">
     @foreach ($oldbooks as $book)
         <div class="bg-gray-200 p-1 rounded mt-2 flex flex-row">
-            <button onclick="delete_b(event);" type="button" value="{{$book->title}}" class="mr-2 bg-red-500 p-2 rounded-md">zmazat</button>
-            <p class="mr-2 w-full bg-red-200 p-2 rounded-md">{{$book->title}}</p>
+            <button onclick="delete_b(event);" type="button" value="{{$book->id}}" class="mr-2 bg-red-500 p-2 rounded-md">zmazat</button>
+            <p class="mr-2 w-full bg-gray-200 p-2 rounded-md">{{$book->title}}</p>
         </div>
     @endforeach
 
-    <div tabindex="0" id="switcher" class="bg-green-400 p-2 rounded-md">
+    <div tabindex="0" id="switcher" class="bg-green-400 p-2 rounded-md mt-2">
         <p id="infotext" class="block">Pridať knihu</p>
         
         <div class="relative hidden" id="focuser">
@@ -37,14 +37,17 @@
     let focuser = document.getElementById("focuser");
     let input = document.getElementById("input");
     let container = document.getElementById("container");
+    focuser.focusvalue = -1;
+
 
     let allbooks = @json($values);
-    let attributes = ["title", "authors_fname", "authors_lname"];
+
+    let attributes = ["title", "authors_fname", "authors_lname", "id"];
 
     let bookstorage=[];
 
     for(book of @json($oldbooks)){
-        bookstorage.push(book['title']);
+        bookstorage.push(book['id']);
     }
     console.log(bookstorage);
 
@@ -79,20 +82,21 @@
         switcher.blur();
     }
 
-    function add_b(){        
-        bookstorage.push(input.value);
+    function add_b(indexId){      
+        bookstorage.push(indexId);
         console.log(bookstorage);
 
         block = document.createElement('div');
         block.className = "flex flex-row bg-gray-200 p-1 rounded mt-2";
         
         delete_button = document.createElement('button');
-        delete_button.className = "mr-2 bg-green-500 p-2 rounded-md";
+        delete_button.className = "mr-2 bg-red-500 p-2 rounded-md";
         delete_button.textContent = "zmazat";
         delete_button.onclick = delete_b;
+        delete_button.value = indexId;
 
         content = document.createElement('div');
-        content.className = "mr-2 w-full bg-green-200 p-2 rounded-md";
+        content.className = "mr-2 w-full bg-gray-200 p-2 rounded-md";
         content.textContent = input.value;
 
         block.appendChild(delete_button);
@@ -103,8 +107,9 @@
     }
 
     function delete_b(event) {        
-        console.log(event.target.value);
-        index = bookstorage.indexOf(event.target.value);
+        console.log("INDEX: " + event.target.value);
+        index = bookstorage.indexOf(parseInt(event.target.value));
+
         bookstorage.splice(index, 1);
         console.log(bookstorage);
 
@@ -114,21 +119,22 @@
     //////solo
     input.addEventListener('input', function(e){
         container.innerHTML = "";
-        // console.log(input.value);
+        focuser.focusvalue = -1;
         if(!(input.value)) return false;                
         
         for(book of allbooks){            
             contain = false;
             for(attribute of attributes){
-                if(book[attribute].toLowerCase().includes(input.value.toLowerCase())) contain = true;
+                if(book[attribute].toString().toLowerCase().includes(input.value.toString().toLowerCase())) contain = true;
             }
-            
-            if(contain){
+
+            if(contain && !bookstorage.includes(book.id)){
                 block = document.createElement('div');
-                block.className = "flex flex-col";
+                block.className = "flex flex-col hover:bg-gray-200";
 
                 title = document.createElement('div');
-                title.textContent = book[attributes[0]];
+                title.innerHTML = book[attributes[0]].toString().toLowerCase().
+                replaceAll(input.value.toString().toLowerCase(), "<strong>" + input.value.toString().toLowerCase() + "</strong>");
 
                 body = document.createElement('div');
                 body.className = "flex flex-row";
@@ -137,25 +143,108 @@
                     child = document.createElement('div');
                     child.className = "mr-2";
 
-                    child.textContent = book[attribute];
+                    child.innerHTML = book[attribute].toString().toLowerCase().
+                    replaceAll(input.value.toString().toLowerCase(), "<strong>" + input.value.toString().toLowerCase() + "</strong>");
+
                     body.appendChild(child);
                 }
 
                 block.appendChild(title);
                 block.appendChild(body);
+
+
                 block.value = book[attributes[0]];
+                block.indexId = book['id']; //book['id']
 
                 block.addEventListener('click',function(e){
-                    // console.log("CLICK");
                     input.value = this.value;
-
-                    action();
+                    add_b(this.indexId);
                 });
 
                 container.appendChild(block);
             }
         }
     });
+
+    input.addEventListener("keydown",function(e){
+        console.log(e.code);
+
+        if(e.code == 'Enter'){
+            if(focuser.focusvalue >= 0){
+                e.preventDefault();
+                input.value = container.childNodes[focuser.focusvalue].firstChild.textContent;
+                console.log("INDEXOF==" + container.childNodes[focuser.focusvalue].indexId);
+                add_b(container.childNodes[focuser.focusvalue].indexId);
+                return false;
+            }
+            if(container.childElementCount){
+                e.preventDefault();
+                input.value = container.childNodes[0].firstChild.textContent;
+                console.log(container.firstChild.indexId);
+                add_b("INDEXOF==" + container.firstChild.indexId);
+                return false;
+            }
+            else{
+                console.log("INVALID");
+            }
+        }
+
+        if(e.code == 'ArrowDown'){
+            if(container.childElementCount){
+                if(focuser.focusvalue > -1){
+                    container.childNodes[focuser.focusvalue].classList.remove('bg-gray-100');
+                    container.childNodes[focuser.focusvalue].classList.add('bg-white');
+                }
+
+                focuser.focusvalue ++;                
+                if(focuser.focusvalue >= container.childElementCount){
+                    focuser.focusvalue = 0;
+                }
+
+                container.childNodes[focuser.focusvalue].classList.remove('bg-white');
+                container.childNodes[focuser.focusvalue].classList.add('bg-gray-100');
+            }
+        }
+
+        if(e.code == 'ArrowUp'){
+            e.preventDefault();
+
+            if(container.childElementCount){
+                if(focuser.focusvalue > -1){
+                    container.childNodes[focuser.focusvalue].classList.remove('bg-gray-100');
+                    container.childNodes[focuser.focusvalue].classList.add('bg-white');
+                }
+           
+                if(focuser.focusvalue >= 0){
+                    focuser.focusvalue --;
+                }
+
+                if(focuser.focusvalue > -1){
+                    container.childNodes[focuser.focusvalue].classList.remove('bg-white');
+                    container.childNodes[focuser.focusvalue].classList.add('bg-gray-100');
+                }
+
+            }
+        }
+
+        if(e.code == 'ArrowRight'){
+            if(focuser.focusvalue >= 0){
+                e.preventDefault();
+            }
+
+            if(container.childElementCount){
+                input.value = container.childNodes[focuser.focusvalue].firstChild.textContent;
+            }                
+        }
+
+        if(e.code == 'ArrowLeft'){
+            if(focuser.focusvalue >= 0){
+                e.preventDefault();
+            }           
+        }
+        
+    });
+
     function action() {
         add_b();
     }
