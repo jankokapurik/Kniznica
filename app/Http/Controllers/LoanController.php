@@ -52,14 +52,20 @@ class LoanController extends Controller
         $request->validate([
             'user_id' =>'required',
         ]);
+        
+        $loan->books()->detach();
+        if($request->books){
+            foreach($request->books as $booksid){
+                auth()->user()->loan->books()->attach(Book::find($booksid));
+            }
+        }
        
         $loan->update($request->all());
 
         return redirect()->route('loanManagement');
     }
 
-    public function approve(Loan $loan, Request $request) {
-
+    public function approve(Loan $loan, Request $request) {        
         $loan->update([
             'approved' => 1,
             'from' => now(),

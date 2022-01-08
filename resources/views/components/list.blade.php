@@ -27,7 +27,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 
@@ -37,12 +36,14 @@
     let focuser = document.getElementById("focuser");
     let input = document.getElementById("input");
     let container = document.getElementById("container");
+    let formstorage = document.getElementById("formstorage");
+
     focuser.focusvalue = -1;
 
 
     let allbooks = @json($values);
 
-    let attributes = ["title", "authors_fname", "authors_lname", "id"];
+    let attributes = ["title", "authors_fname", "authors_lname"];
 
     let bookstorage=[];
 
@@ -84,6 +85,13 @@
 
     function add_b(indexId){      
         bookstorage.push(indexId);
+        
+        form_unit = document.createElement("input");
+        form_unit.name = "books[]";
+        form_unit.value = indexId;
+        form_unit.type = "hidden";
+        formstorage.appendChild(form_unit);
+
         console.log(bookstorage);
 
         block = document.createElement('div');
@@ -109,6 +117,15 @@
     function delete_b(event) {        
         console.log("INDEX: " + event.target.value);
         index = bookstorage.indexOf(parseInt(event.target.value));
+
+        for(form_unit of formstorage.childNodes){
+            if(form_unit.value == event.target.value){
+                form_unit.remove();
+            }
+            console.log("FU:" + form_unit);
+
+        }
+        
 
         bookstorage.splice(index, 1);
         console.log(bookstorage);
