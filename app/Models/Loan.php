@@ -14,9 +14,14 @@ class Loan extends Model
         'approved',
         'from',
         'to',
-        'createdBy'
+        'createdBy',
+        'reserved_until',
+        'user_confirmed',
+        'renewed'
     ];
 
+    protected $dates = ['created_at', 'updated_at', 'to'];
+    
     public function user() {
 
         return $this->belongsTo(User::class);

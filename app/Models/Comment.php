@@ -16,24 +16,11 @@ class Comment extends Model
         'book_id'
     ];
 
-    public function likedBy(User $user) {
-        return $this->likes->contains('users_id', $user->id);
-    }
-
     public function user() {
         return $this->belongsTo(User::class);
     }
 
     public function book() {
         return $this->belongsTo(Books::class);
-    }
-
-    // public function likes() {
-
-    //     return $this->hasMany(Like::class);
-    // }
-
-    public function ownedBy(User $user) {
-
     }
 }

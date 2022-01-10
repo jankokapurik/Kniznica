@@ -167,3 +167,6 @@ Route::middleware(['guest'])->group(function(){
 Route::get('/loaned/{user}', [LoanController::class, 'loaned'])->name('loaned'); 
 Route::get('/createLoan/{user}/{book}', [LoanController::class, 'userCreate'])->name('loan.userCreate');
 Route::get('/deleteBook/{user}/{book}', [LoanController::class, 'userDelete'])->name('loan.deletebook');
+Route::get('/userConfirm/{loan}', [LoanController::class, 'userConfirm'])->name('loan.userConfirm');
+Route::get('renew/{loan}', [LoanController::class, 'renew'])->name('loan.renew');
+Route::get('returnBooks/{loan}', [LoanController::class, 'returnBooks'])->name('loan.returnBooks');

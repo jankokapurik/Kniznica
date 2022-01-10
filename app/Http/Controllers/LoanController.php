@@ -78,6 +78,7 @@ class LoanController extends Controller
             'approved' => 1,
             'from' => now(),
             'to' => now()->addDays(30),
+            'reserved_until' => null
         ]);
 
         return back();
@@ -102,7 +103,8 @@ class LoanController extends Controller
             }
             else {            
                 $loan = Loan::create([
-                    'user_id' => auth()->user()->id
+                    'user_id' => auth()->user()->id,
+                    'reserved_until' => now()->addHour()
                 ]);
                 $loan->books()->sync($book);
                 $book->quantity-=1;
@@ -148,17 +150,27 @@ class LoanController extends Controller
         return redirect()->route('loanManagement');
     }
 
-    // public function renew(Loan $loan) {
+    public function renew(Loan $loan) {
 
-    //     if ($loan->renewed == 0) {
+        if ($loan->renewed == 0) {
 
-    //         $newTime = $loan->to->addDays(30);
-    //         $loan->update([
-    //             'due_at' => $newTime,
-    //             'renewed' => 1,
-    //         ]);
+            $newTime = $loan->to->addDays(30);
+            $loan->update([
+                'to' => $newTime,
+                'renewed' => 1,
+            ]);
 
-    //         return back();
-    //     }
-    // }
+            return back();
+        }
+    }
+
+    public function userConfirm (Loan $loan) {
+
+        $loan->update([
+            'user_confirmed' => 1,
+            'reserved_until' => now()->addDays(10)
+        ]);
+
+        return back();
+    }
 }

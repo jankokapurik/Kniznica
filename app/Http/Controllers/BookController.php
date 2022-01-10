@@ -5,16 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Genre;
 use App\Models\Author;
-use App\Models\Comment;
 use App\Models\Language;
-use App\Models\Loan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
-    public function index(Request $request) {    
+    public function index(Request $request) {  
+          
         if(!$request->filter){
             $books= Book::Select(['books.*', 'authors.fname', 'authors.lname' ])
             ->join('authors', 'books.author_id', '=', 'authors.id')
@@ -96,8 +95,6 @@ class BookController extends Controller
             $exist = false;
         }
 
-
-
         if(!$book->comments()->count()){
             return view('books.show', [
                 'book' => $book,
@@ -108,8 +105,6 @@ class BookController extends Controller
 
         $mode = $book->comments()->whereNotNull('rating')->select("rating", DB::raw('count(*) as total'))
         ->groupBy('rating')->orderBy('total', 'desc')->first()->total; //modus
-
-
 
         return view('books.show', [
             'book' => $book,
@@ -146,9 +141,6 @@ class BookController extends Controller
     //     Book::onlyTrashed()->find($booksid)->restore();
     //     return back();
     // }
-
-
-
 
     public function edit(Book $book, Author $author, Language $language) {
 
