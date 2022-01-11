@@ -7,8 +7,10 @@
                 <h1 class="font-bold text-3xl mb-2">Tvoja vypozicka</h1>
                 <div class="mb-4 ml-4"> 
                     <p>Vypozicanych knih: {{ $user->loan->books->count() }}</p>
-                    <p>Vypozicane od: {{ $user->loan->from }}</p>
-                    <p>Vypozicane do: {{ $user->loan->to }}</p>
+                    @if ($user->loan->approved == 1)   
+                        <p>Vypozicane od: {{ $user->loan->from }}</p>
+                        <p>Vypozicane do: {{ $user->loan->to }}</p>
+                    @endif
                 </div>
                 <h1 class="font-bold text-3xl mb-2">Vypozicane knihy</h1>
                 @foreach ($user->loan->books as $book)
@@ -25,13 +27,7 @@
                                     <span>nie je hodnotene</span>
                                 @endif    
                             </div>
-                            <p>{{ $book->language->name }}</p>
-                            <p @if (!$book->quantity)
-                                class="text-red-400"
-                                @else
-                                class="text-green-700"
-                            @endif>{{ $book->quantity }} ks</p>
-                    
+                            <p>{{ $book->language->name }}</p>                    
                             <p class="text-gray-600 p-1">
                                 @forelse ($book->genres as $genre)
                                     {{ $genre->name, }}
@@ -56,8 +52,9 @@
                             </form>
                         @endif
                     @elseif ($user->loan->reserved_until > now() && $user->loan->user_confirmed == 0)
+                        <h1 class="font-bold text-2xl ml-2 mt-2">Výpožičku je potrebné dokončiť do {{ $user->loan->reserved_until }}</h1>
                         <form action="{{ route('loan.userConfirm', $user->loan) }}" method="get" class="mt-4 ml-2">
-                            <button class="p-2 bg-blue-500 text-white border-2 border-blue-500 rounded-lg hover:text-blue-500 hover:bg-blue-100">Vypožičať</button>
+                            <button class="p-2 bg-blue-500 text-white border-2 border-blue-500 rounded-lg hover:text-blue-500 hover:bg-blue-100"><span class="text-2xl font-bold">Vypožičať</span></button>
                         </form>                    
                     @elseif ($user->loan->user_confirmed == 1)
                         <h1 class="font-bold text-3xl mt-4">Knihy si môžete vyzdvihnúť v internátnej knižnici do {{ $user->loan->reserved_until }}</h1>                   

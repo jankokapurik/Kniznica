@@ -46,11 +46,6 @@ class LoanController extends Controller
         ]);
     }
 
-    // public function
-    // public function deleteLoan(Loan $loan, Request $request){
-
-    // }
-
     public function update(Loan $loan, Request $request) {
         // $request->validate([
         //     'user_id' =>'required',

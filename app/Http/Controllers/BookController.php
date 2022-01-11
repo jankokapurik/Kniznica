@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Loan;
+use App\Models\User;
 use App\Models\Genre;
 use App\Models\Author;
 use App\Models\Language;
-use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
     public function index(Request $request) {  
-          
+
         if(!$request->filter){
             $books= Book::Select(['books.*', 'authors.fname', 'authors.lname' ])
             ->join('authors', 'books.author_id', '=', 'authors.id')
@@ -31,8 +33,6 @@ class BookController extends Controller
         }
 
         // $avg = Book::first()->comments()->avg('rating');
-        
-        $books = Book::paginate(10);
 
         return view('books.books', [
             'books' => $books,
@@ -200,14 +200,37 @@ class BookController extends Controller
         return view('admin.restoreBooks', ['books' => $books]);
     }
 
-    public function restore($booksid, Request $request){
+    public function restore($booksid){
+
         Book::onlyTrashed()->find($booksid)->restore();
         return back();
     }
 
     public function destroyForce($booksid){
+
         Book::onlyTrashed()->find($booksid)->genres()->detach();
         Book::onlyTrashed()->find($booksid)->forceDelete();
         return back();
+    }
+
+    public function cancelReservations() {
+        
+        $loans = Loan::get();
+        $dt = new Carbon();
+
+        foreach ($loans as $loan) {
+            if ($loan->reserved_until < now()) {
+                foreach ($loan->books as $book) {
+                    $loan->books()->detach($book); 
+                    $book->quantity+=1;
+                    $book->update();
+                }
+        
+                if(!$loan->books->count()){
+                    $loan->delete();
+                }
+            }
+        }
+        return redirect()->route('books');
     }
 }

@@ -21,7 +21,7 @@
                         <a href="{{ route('home') }}" class="p-3 hover:text-purple-600">Domov</a>
                     </li>
                     <li>
-                        <a href="{{ route('books') }}" class="p-3 hover:text-purple-600">Library</a>
+                        <a href="{{ route('cancelReservations') }}" class="p-3 hover:text-purple-600">Knižnica</a>
                     </li>
                     @if (auth()->check())
                         @if (auth()->user()->isAdmin())

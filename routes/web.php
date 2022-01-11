@@ -123,6 +123,8 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 Route::get('/books', [BookController::class, 'index'])->name('books');
 Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
 
+Route::get('cancelReservations', [BookController::class, 'cancelReservations'])->name('cancelReservations');
+
 Route::get('/comments', [CommentController::class, 'index'])->name('comments');
 Route::post('/comments', [CommentController::class, 'store']);
 

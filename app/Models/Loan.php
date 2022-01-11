@@ -20,7 +20,7 @@ class Loan extends Model
         'renewed'
     ];
 
-    protected $dates = ['created_at', 'updated_at', 'to'];
+    protected $dates = ['created_at', 'updated_at', 'to', 'reserved_until'];
     
     public function user() {
 
