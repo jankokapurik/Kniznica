@@ -126,7 +126,7 @@ Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show')
 Route::get('cancelReservations', [BookController::class, 'cancelReservations'])->name('cancelReservations');
 
 Route::get('/comments', [CommentController::class, 'index'])->name('comments');
-Route::post('/comments', [CommentController::class, 'store']);
+
 
 Route::delete('/comment.destroy/{comment}',[CommentController::class, 'destroy'])->name('comment.destroy');
 
@@ -155,7 +155,19 @@ Route::middleware(['auth'])->group(function(){
 Route::middleware(['auth', 'verified'])->group(function(){
   Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
   Route::get('/verification/welcome', [VerificationController::class,'welcome']);
+
+  Route::get('/createLoan/{user}/{book}', [LoanController::class, 'userCreate'])->name('loan.userCreate');
+  Route::get('/deleteBook/{user}/{book}', [LoanController::class, 'userDelete'])->name('loan.deletebook');
+  Route::get('/userConfirm/{loan}', [LoanController::class, 'userConfirm'])->name('loan.userConfirm');
+
+
+  Route::post('/comments', [CommentController::class, 'store']);
+  
 });
+Route::get('renew/{loan}', [LoanController::class, 'renew'])->name('loan.renew');
+Route::get('returnBooks/{loan}', [LoanController::class, 'returnBooks'])->name('loan.returnBooks');
+Route::get('/loaned/{user}', [LoanController::class, 'loaned'])->name('loaned');
+
 
 //RESETING PASSWORD
 Route::middleware(['guest'])->group(function(){
@@ -163,12 +175,5 @@ Route::middleware(['guest'])->group(function(){
   Route::post('/forgot', [ResetPassword::class, 'email'])->name('password.email');
   Route::get('/reset-password/{token}', [ResetPassword::class, 'reset'])->name('password.reset');
   Route::post('/reset-password', [ResetPassword::class, 'update'])->name('password.update');
+  
 });
-
-  //   vypozicka
-Route::get('/loaned/{user}', [LoanController::class, 'loaned'])->name('loaned'); 
-Route::get('/createLoan/{user}/{book}', [LoanController::class, 'userCreate'])->name('loan.userCreate');
-Route::get('/deleteBook/{user}/{book}', [LoanController::class, 'userDelete'])->name('loan.deletebook');
-Route::get('/userConfirm/{loan}', [LoanController::class, 'userConfirm'])->name('loan.userConfirm');
-Route::get('renew/{loan}', [LoanController::class, 'renew'])->name('loan.renew');
-Route::get('returnBooks/{loan}', [LoanController::class, 'returnBooks'])->name('loan.returnBooks');

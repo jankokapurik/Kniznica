@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="flex justify-center">
-        <div class="w-8/12 bg-white p-6 rounded-lg m-10 flex flex-col justify-around">
+        <div class="w-8/12 bg-white p-24 rounded-lg m-10 flex flex-col justify-around">
             <div class="flex mb-8 h-96 ">
                 <img src="{{ asset('/images/'.$book->image) }}" alt="Obrázok knihy" class="w-1/3 h-full object-contain">
                 {{-- max-w-3xl --}}
@@ -19,8 +19,8 @@
                             Nie sú pridané žánre
                         @endforelse  
                     </p>
-                    <div class="bg-gray-200 rounded-lg p-2 mb-4">
-                        <p text-2xl>{{ $book->description }}</p>
+                    <div class="bg-gray-200 rounded-lg p-2 mb-4 text-ellipsis overflow-auto h-36">
+                        <p>{{ $book->description }}</p>
                     </div>
                    
                     @auth                                            
@@ -40,15 +40,11 @@
                         pre zapozicianie sa musite najprv prihlasit
                     @endguest
 
-                    <div class="bg-gray-200 rounded-lg p-2 mb-4 h-36 overflow-hidden">
-                        <p>{{ $book->description }}</p>
-                    </div>
-
                 </div>
             </div>  
             <div class="min-w-full flex justify-center ">
                 <div class="mb-10 w-full flex justify-center">
-                    <div class="flex flex-col w-8/12">
+                    <div class="flex flex-col w-full">
 
                         @if($comments)
                         <div>
