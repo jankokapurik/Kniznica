@@ -4,14 +4,15 @@
 
     <div class="flex justify-center">
         <div class="w-8/12 bg-white p-6 rounded-lg m-10 flex flex-col justify-around">
-            <div class="flex mb-8">
-                <img src="{{ asset('/images/'.$book->image) }}" alt="Obrázok knihy" class="max-w-3xl">
-                <div class="ml-8 width-max">
-                    <a href="{{ route('books.show', $book) }}" class="font-bold text-3xl">{{ $book->author->fname }} {{ $book->author->lname }}</a>
-                    <p class="text-3xl border-bottom mb-4">{{ $book->title }}</p>
-                    <p class="text-2xl">Jazyk: {{ $book->language->name }}</p>
-                    <p class="text-2xl">Množstvo: {{ $book->quantity }} ks</p>
-                    <p class="text-gray-600 text-2xl mb-2">
+            <div class="flex mb-8 h-96 ">
+                <img src="{{ asset('/images/'.$book->image) }}" alt="Obrázok knihy" class="w-1/3 h-full object-contain">
+                {{-- max-w-3xl --}}
+                <div class="ml-8 w-1/3">
+                    <p class="text-5xl">{{ $book->title }}</p>
+                    <p class="text-2xl mb-2">{{ $book->author->fname }} {{ $book->author->lname }}</p>
+                    <p class="text-m">Jazyk: {{ $book->language->name }}</p>
+                    <p class="text-m">Množstvo: {{ $book->quantity }} ks</p>
+                    <p class="text-gray-600 text-m mb-2">
                         @forelse ($book->genres as $genre)
                             {{ $genre->name, }}
                         @empty
@@ -38,6 +39,10 @@
                     @guest
                         pre zapozicianie sa musite najprv prihlasit
                     @endguest
+
+                    <div class="bg-gray-200 rounded-lg p-2 mb-4 h-36 overflow-hidden">
+                        <p>{{ $book->description }}</p>
+                    </div>
 
                 </div>
             </div>  
@@ -88,43 +93,46 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <table class="table-fixe w-full bg-green-200">
-                        <tr>
-                            <td class="w-2/10">5 hviezdicok</td>
-                            <td class="">
-                                
-                            </td>
-                        </tr>
-                    </table> --}}
+
                     @auth
-                    <x-writecomment :book="$book"/>
+                    {{-- <x-writecomment :book="$book"/> --}}
+                        @if (!$hasComment)
+                            <x-writecomment :book="$book"/>
+                        @else
+                            <div class="p-2 bg-red-200">Uz ste komentovali</div>
+                        @endif
+                        
                     @endauth
                     @guest
-                    <div class="bg-white p-6 rounded-lg m-10">
+                    {{-- <div class="bg-white p-6 rounded-lg m-10">
                         pripojit sa do diskusie
-                    </div>
+                    </div> --}}
+                        <div class="p-2 bg-red-200">Pripojit sa</div>
                     @endguest
                     @foreach ($comments as $comment)
-                    <div class="bg-white rounded-lg" >
+                    {{-- <div class="bg-white rounded-lg" >
                         <x-comment :comment="$comment" />
-                    </div>
+                    </div> --}}
+                        <div class="bg-white rounded-lg" >
+                            <x-comment :comment="$comment" />
+                        </div>
                     @endforeach
                     @else
-                    <div>
-                        Nie je ziaden koment
-                    </div>
-                    @auth
-                    <x-writecomment :book="$book"/>
-                    @endauth
-                    @guest
-                    <div class="w-8/12 bg-white p-6 rounded-lg m-10">
-                        pripojit sa do diskusie
-                    </div>
-                    @endguest
+                        <div>
+                            Nie je ziaden koment
+                        </div>
+                        @auth
+                            <x-writecomment :book="$book"/>
+                        @endauth
+                        @guest
+                            <div class="w-8/12 bg-white p-6 rounded-lg m-10">
+                                pripojit sa do diskusie
+                            </div>
+                        @endguest
                     @endif
                 </div>
-                </div>
             </div>
-    </div>                    
+        </div>
+    </div>
 </div>
 @endsection

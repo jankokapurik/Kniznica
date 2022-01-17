@@ -11,7 +11,7 @@
             <form action="{{ route('search2') }}" method="get" class="flex flex-row" id="formstorage">
                 <label for="search" class="sr-only">Name</label>
                 <input id="input" autocomplete="off" type="text" name="search" placeholder="Vyhľadaj" class="bg-gray-100 border-2 border-gray-100 w-full p-1 rounded-lg mr-2 focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 trasition duration-500"">    
-                <button class="bg-blue-500 p-2 rounded-md text-white">Hladat</button>
+                <button class="bg-blue-500 p-2 rounded-md">Hladat</button>
             </form>
             
             <div id="container" class="absolute transition bg-white inset-x-0 divide-y border-2 rounded-md">
@@ -21,6 +21,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     let switcher = document.getElementById("switcher");

@@ -5,7 +5,7 @@
     <a href="">{{ $comment->user->fname }}</a>
     <span class="text-grey-600 text-sm text-blue-400">{{ $comment->created_at->diffForHumans() }}</span>
 
-    <x-ratingbar :rating="$comment->rating"/>
+    {{-- <x-ratingbar :rating="$comment->rating"/> --}}
 
     <p>{{ $comment->comment }}</p>
 
