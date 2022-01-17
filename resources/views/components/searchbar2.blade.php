@@ -5,7 +5,8 @@
 ])
 
 <div {{ $attributes->merge(['class' => 'relative']) }}>
-    {{-- <form id="{{ $name }}-input-form" autocomplete="off" action="{{ route('search2') }}" method="get" class="flex items-center">
+    {{-- <form id="{{ $name }}-input-form" autocomplete="off" 
+     method="get" class="flex items-center">
         @csrf --}}
             <div class="relative">
                 <label for="search" class="sr-only">Name</label>

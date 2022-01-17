@@ -13,6 +13,22 @@ class SearchController extends Controller
     public function index(){
         $text = $_GET['search'];
 
+        // %. +'a%)'+ .%
+
+
+        // dd($text);
+
+
+        $results = Book::select('books.*', 'authors.fname', 'authors.lname')
+        ->join('authors','books.author_id','=','authors.id')
+        ->where('books.title', 'LIKE', '%'.$text.'%')
+        ->orWhere('authors.fname', 'LIKE', '%'.$text.'%')
+        ->orWhere('authors.lname', 'LIKE', '%'.$text.'%')
+        ->orWhereRaw("concat(fname, ' ', lname) like '%'.$text.'%' ")
+        ->toSql();
+
+        // dd($results);"
+
         $results = Book::select('books.*', 'authors.fname', 'authors.lname')
             ->join('authors','books.author_id','=','authors.id')
             ->where('books.title', 'LIKE', '%'.$text.'%')
@@ -26,3 +42,8 @@ class SearchController extends Controller
         ]);
     }
 }
+
+
+
+// "select `books`.*, `authors`.`fname`, `authors`.`lname` from `books` inner join `authors` on `books`.`author_id` = `authors`.`id` where (`books`.`title` LIKE ? or `authors`.`fname` LIKE ? or `authors`.`lname` LIKE ? or concat(fname, ' ', lname) like '%'. .'%' ) and `books`.`deleted_at` is null;   aaaaaaaaaaaaaaaaaaaaaaaaaa 
+//  select `books`.*, `authors`.`fname`, `authors`.`lname` from `books` inner join `authors` on `books`.`author_id` = `authors`.`id` where (`books`.`title` LIKE ? or `authors`.`fname` LIKE ? or `authors`.`lname` LIKE ? or concat(fname, ' ', lname) like '%'.;"

@@ -2,8 +2,6 @@
     'values' => $values,
 ])
 
-
-
 <div id="book_list" class="flex flex-col">
     <div tabindex="0" id="switcher">
         
@@ -25,7 +23,6 @@
 
 <script>
     let switcher = document.getElementById("switcher");
-    let infotext = document.getElementById("infotext");
     let focuser = document.getElementById("focuser");
     let input = document.getElementById("input");
     let container = document.getElementById("container");
@@ -55,8 +52,8 @@
 
     function open_s(){
         container.innerHTML = "";
-        infotext.classList.remove('block');
-        infotext.classList.add('hidden');
+        // infotext.classList.remove('block');
+        // infotext.classList.add('hidden');
         focuser.classList.remove('hidden');
         focuser.classList.add('block');
 

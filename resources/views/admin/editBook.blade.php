@@ -28,7 +28,8 @@
                 </div>
                 <div class="mb-4">
                     <label class="font-bold text-gray-800 sr-only" for="title">Názov</label>
-                    <input class="bg-gray-100 border-2 w-full p-4 text-gray-600 rounded-lg focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 @error('title') border-red-500 @enderror" type="text" id="title" name="title" value="{{ $book->title }}">
+                    <input class="bg-gray-100 border-2 w-full p-4 text-gray-600 rounded-lg focus:out
+                    ne-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 @error('title') border-red-500 @enderror" type="text" id="title" name="title" value="{{ $book->title }}">
                     @error('title')
                         <div class="text-red-500 mt-2 text-sm">
                             {{$message}}
