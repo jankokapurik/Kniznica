@@ -85,6 +85,12 @@ class BookController extends Controller
 
     public function show(Book $book) {     
         $user = User::find(auth()->id());
+        if($user){
+            $hasComment = $user->comments()->where('book_id', $book->id)->count();
+        }
+        else{
+            $hasComment = 0;
+        }         
 
         try{
             $exist = DB::table('book_loan')
@@ -100,6 +106,7 @@ class BookController extends Controller
                 'book' => $book,
                 'borrowed' => $exist,
                 'comments' => null,
+                'hasComment' => 0   
             ]);
         }
 
@@ -110,6 +117,7 @@ class BookController extends Controller
             'book' => $book,
             'borrowed' => $exist, 
             'comments' => $book->comments()->latest()->get(),
+            'hasComment' => $hasComment,
             'rating' => [
                 "avg" => $book->comments()->avg('rating'),
                 "star5" => round($book->comments()->where('rating',5)->count('rating') * 100 / $mode ),
@@ -119,6 +127,7 @@ class BookController extends Controller
                 "star1" => round($book->comments()->where('rating',1)->count('rating')/$mode * 100),
                 // "mode" =>  $mode
             ]
+
         ]);
     }
 

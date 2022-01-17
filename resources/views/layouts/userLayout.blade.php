@@ -33,7 +33,8 @@
                     @endif
                 </ul>            
                 
-                <x-searchbar id="meno" class="w-64" :values="$allBooks"></x-searchbar>
+                {{-- <x-searchbar id="meno" class="w-64" :values="$allBooks"></x-searchbar> --}}
+                <x-search :values="$allBooks"></x-search>
                   
                 <div>
                     @auth

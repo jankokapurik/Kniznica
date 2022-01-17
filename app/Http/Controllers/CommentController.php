@@ -36,6 +36,9 @@ class CommentController extends Controller
             'rating' => $request->rating,
         ]);
 
+        if($request->user()->comments()->where('book_id', $request->book)->count())
+        throw ValidationException::withMessages(['msg' => ['not unique']]);
+
         return back();
     }
 
