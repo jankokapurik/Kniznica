@@ -12,14 +12,11 @@
                 <button class="bg-blue-500 p-2 rounded-md text-white">Hladat</button>
             </form>
             
-            <div id="container" class="absolute transition bg-white inset-x-0 divide-y border-2 rounded-md">
-                <div class="flex flex-col capitalize">
-                </div>
+            <div id="container" class="hidden transition bg-white inset-x-0 divide-y border-2 rounded-md capitalize">
             </div>
         </div>
     </div>
 </div>
-
 
 <script>
     let switcher = document.getElementById("switcher");
@@ -29,20 +26,13 @@
     let formstorage = document.getElementById("formstorage");
 
     focuser.focusvalue = -1;
-
-
     let allbooks = @json($values);
 
     let attributes = ["title", "authors_fname", "authors_lname"];
 
-    let bookstorage=[];
-
-
-    console.log(bookstorage);
-
     switcher.addEventListener('focusin', function(e){
         if(this.contains(e.relatedTarget)) return false;
-        // open_s();
+        if(container.childElementCount) open_s();
     }); 
 
     switcher.addEventListener('focusout', function(e){
@@ -51,27 +41,22 @@
     });
 
     function open_s(){
-        container.innerHTML = "";
-        // infotext.classList.remove('block');
-        // infotext.classList.add('hidden');
-        focuser.classList.remove('hidden');
-        focuser.classList.add('block');
-
-        input.focus();
+        container.classList.remove('hidden');
+        container.classList.add('absolute');
     }
 
     function close_s(){
-        container.innerHTML = "";
-    }
-
-    function add_b(indexId){      
-        formstorage.submit();
+        container.classList.remove('absolute');
+        container.classList.add('hidden');
     }
 
     input.addEventListener('input', function(e){
         container.innerHTML = "";
         focuser.focusvalue = -1;
-        if(!(input.value)) return false;                
+        if(!(input.value)) {
+            close_s();
+            return false;
+        }
         
         for(book of allbooks){            
             contain = false;
@@ -79,7 +64,7 @@
                 if(book[attribute].toString().toLowerCase().includes(input.value.toString().toLowerCase())) contain = true;
             }
 
-            if(contain && !bookstorage.includes(book.id)){
+            if(contain){
                 block = document.createElement('div');
                 block.className = "flex flex-col hover:bg-gray-200";
 
@@ -109,12 +94,15 @@
 
                 block.addEventListener('click',function(e){
                     input.value = this.value;
-                    add_b(this.indexId);
+                    formstorage.submit();
                 });
 
                 container.appendChild(block);
             }
         }
+
+        if(!container.childElementCount) close_s();
+        else open_s();
     });
 
     input.addEventListener("keydown",function(e){
@@ -122,21 +110,8 @@
 
         if(e.code == 'Enter'){
             if(focuser.focusvalue >= 0){
-                e.preventDefault();
                 input.value = container.childNodes[focuser.focusvalue].firstChild.textContent;
-                console.log("INDEXOF==" + container.childNodes[focuser.focusvalue].indexId);
-                add_b(container.childNodes[focuser.focusvalue].indexId);
-                return false;
-            }
-            if(container.childElementCount){
-                e.preventDefault();
-                input.value = container.childNodes[0].firstChild.textContent;
-                console.log(container.firstChild.indexId);
-                add_b("INDEXOF==" + container.firstChild.indexId);
-                return false;
-            }
-            else{
-                console.log("INVALID");
+                formstorage.submit();
             }
         }
 
@@ -174,7 +149,6 @@
                     container.childNodes[focuser.focusvalue].classList.remove('bg-white');
                     container.childNodes[focuser.focusvalue].classList.add('bg-gray-100');
                 }
-
             }
         }
 
@@ -192,12 +166,7 @@
             if(focuser.focusvalue >= 0){
                 e.preventDefault();
             }           
-        }
-        
+        }        
     });
-
-    function action() {
-        add_b();
-    }
     
 </script>
