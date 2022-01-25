@@ -5,8 +5,13 @@
     <div class="flex justify-center">
         <div class="w-8/12 bg-white p-24 rounded-lg m-10 flex flex-col justify-around">
             <div class="flex mb-8 h-96 ">
-                <img src="{{ asset('/images/'.$book->image) }}" alt="Obrázok knihy" class="w-1/3 h-full object-contain">
-                {{-- max-w-3xl --}}
+                
+                @if($book->image)
+                    <img src="{{ asset('/images/'.$book->image) }}" alt="Obrázok knihy" class="w-1/3 h-full object-contain">
+                @else
+                    <img src="{{ asset('/images/'."default_book.jpg") }}" alt="Obrázok knihy" class="w-1/3 h-full object-contain">
+                @endif
+                
                 <div class="ml-8 w-1/3">
                     <p class="text-5xl">{{ $book->title }}</p>
                     <p class="text-2xl mb-2">{{ $book->author->fname }} {{ $book->author->lname }}</p>
@@ -19,8 +24,8 @@
                             Nie sú pridané žánre
                         @endforelse  
                     </p>
-                    <div class="bg-gray-200 rounded-lg p-2 mb-4 text-ellipsis overflow-auto h-36">
-                        <p>{{ $book->description }}</p>
+                    <div class="bg-gray-200 rounded-lg p-2 mb-4 text-ellipsis overflow-hidden h-36">
+                        <p class="">{{ $book->description }}</p>
                     </div>
                    
                     @auth                                            

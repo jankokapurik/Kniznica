@@ -9,7 +9,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('login')}}" method="POST">
+            <form action="{{ route('login') }}" method="POST">
                 @csrf
 
                 <div class="mb-4">
@@ -24,27 +24,38 @@
 
                 <div class="mb-4">
                     <label for="password" class="sr-only">Password</label>
-                    <input type="password" name="password" placeholder="Zadaj heslo" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 focus:outline-none @error('password') border-red-500 @enderror trasition duration-500" value="">
+                    <input type="password" name="password" placeholder="Zadaj heslo" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 focus:outline-none @error('password') border-red-500 @enderror @error('fail') border-red-500 @enderror trasition duration-500" value="">
+
+                    @if ($errors->has('password'))
+                        FAIL
+                    @endif
+
                     @error('password')
                         <div class="text-red-500 mt-2 text-sm">
                             {{$message}}
                         </div>
                     @enderror
+                    @error('fail')
+                        <div class="text-red-500 mt-2 text-sm">
+                            {{$message}}
+                        </div>
+                    @enderror
+
                 </div>
-
-                @if (session('status')==='Invalid login details')
-                <a href="{{ route('password.request') }}" class="rounded-lg mb-6 text-red-600 text-center">
-                    Forgotten password??
-                </a>
-                @endif
-
-                <div class="mb-4">
-                    <div class="flex items-center">
+                
+                <div class="flex w-full justify-between mb-1">
+                    <div>
                         <input type="checkbox" name="remember" id="remember" class="mr-2 trasition duration-500">
                         <label for="remember">Remeber me</label>
                     </div>
-                </div>
 
+                    @error('fail')
+                        <a href="{{ route('password.request') }}" class="rounded-lg text-blue-600 text-center">
+                            Forgotten password??
+                        </a>
+                    @enderror
+                </div>
+                
                 <div>
                     <button type="submit" class="border-2 border-blue-500 bg-blue-500 text-white px-4 py-3 rounded font-medium w-full hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Prihlásiť sa</button>
                 </div>

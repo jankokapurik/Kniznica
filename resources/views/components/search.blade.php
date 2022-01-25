@@ -2,19 +2,16 @@
     'values' => $values,
 ])
 
-<div id="book_list" class="flex flex-col">
-    <div tabindex="0" id="switcher">
-        
-        <div class="relative" id="focuser">
-            <form action="{{ route('search2') }}" method="get" class="flex flex-row" id="formstorage">
+<div id="book_list" class="flex flex-col">        
+    <div class="relative" id="focuser">
+        <form action="{{ route('search2') }}" method="get" class="flex flex-row" id="formstorage">
+            <div class="relative" tabindex="0" id="switcher">
                 <label for="search" class="sr-only">Name</label>
-                <input id="input" autocomplete="off" type="text" name="search" placeholder="Vyhľadaj" class="bg-gray-100 border-2 border-gray-100 w-full p-1 rounded-lg mr-2 focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 trasition duration-500"">    
-                <button class="bg-blue-500 p-2 rounded-md text-white">Hladat</button>
-            </form>
-            
-            <div id="container" class="hidden transition bg-white inset-x-0 divide-y border-2 rounded-md capitalize">
+                <input id="input" autocomplete="off" type="text" name="search" placeholder="Vyhľadaj" class="bg-gray-100 border-2 border-gray-100 p-1 rounded-lg focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 trasition duration-500">    
+                <div id="container" class="hidden transition bg-white inset-x-0 divide-y border-2 rounded-md capitalize"></div>
             </div>
-        </div>
+            <button class="bg-blue-500 p-1 rounded-md text-white ml-2">Hladat</button>
+        </form>            
     </div>
 </div>
 

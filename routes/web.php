@@ -52,7 +52,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
   Route::get('/classroom', [ClassroomController::class, 'create'])->name('classroom.create');
   Route::post('/classroom', [ClassroomController::class, 'store'])->name('classroom.store');
 
-  //  manazment skol ok
+  //  manazment school
   Route::get('/schoolManagement', [SchoolController::class, 'index'])->name('schoolManagement');
   Route::delete('/school/{school}', [SchoolController::class, 'destroy'])->name('school.destroy');
   Route::get('/school/{school}', [SchoolController::class, 'edit'])->name('school.edit');
