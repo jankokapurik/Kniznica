@@ -24,18 +24,9 @@
 
                 <div class="mb-4">
                     <label for="password" class="sr-only">Password</label>
-                    <input type="password" name="password" placeholder="Zadaj heslo" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 focus:outline-none @error('password') border-red-500 @enderror @error('fail') border-red-500 @enderror trasition duration-500" value="">
-
-                    @if ($errors->has('password'))
-                        FAIL
-                    @endif
+                    <input type="password" name="password" placeholder="Zadaj heslo" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 focus:outline-none @error('password') border-red-500 @enderror trasition duration-500" value="">
 
                     @error('password')
-                        <div class="text-red-500 mt-2 text-sm">
-                            {{$message}}
-                        </div>
-                    @enderror
-                    @error('fail')
                         <div class="text-red-500 mt-2 text-sm">
                             {{$message}}
                         </div>
