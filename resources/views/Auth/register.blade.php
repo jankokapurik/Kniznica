@@ -63,17 +63,19 @@
                 
                 <div class="mb-4">
                     <label for="school_id" class="sr-only">Trieda</label>
-                    <select name="school_id" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 focus:border-gray-600 @error('school_id') border-red-500 @enderror trasition duration-500" value=""> 
-                        <optgroup class="font-bold" label="Škola">
-                            <option value=>Vyber svoju školu</option>
-                        @if($schools->count())
-                            @foreach($schools as $school)
-                                <option value={{ $school->id }} @if ($school->id == old('school_id')) selected @endif>{{ $school->name }}</option>
-                            @endforeach
-                        @else
-                            <p>Nie je ziaden post</p>
-                        @endif
+                    <select required name="school_id" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 focus:border-gray-600 
+                    invalid:text-gray-400  @error('school_id') border-red-500 @enderror trasition duration-500" value=""> 
+                        <option value="" disabled selected hidden>Vyber svoju školu</option>
+                        <optgroup class="font-bold text-black" label="Škola">
+                            @if($schools->count())
+                                @foreach($schools as $school)
+                                    <option class="text-black" value={{ $school->id }} @if ($school->id == old('school_id')) selected @endif>{{ $school->name }}</option>
+                                @endforeach
+                            @else
+                                <p>Nie je ziaden post</p>
+                            @endif                            
                         </optgroup>
+                        
                         @error('school_id')
                             <div class="text-red-500 mt-2 text-sm">
                                 {{$message}}
@@ -83,18 +85,20 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="classroom_id   " class="sr-only">Trieda</label>
-                    <select name="classroom_id" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 focus:border-gray-600 @error('classroom_id') border-red-500 @enderror trasition duration-500" value="">
-                    <optgroup label="Trieda">
-                        <option class="font-bold" value=>Vyber svoju triedu</option>
-                        @if($classrooms->count())
-                            @foreach($classrooms as $classroom)
-                                <option value={{ $classroom->id }} @if ($classroom->id == old('classroom_id')) selected @endif>{{ $classroom->name }}</option>
-                            @endforeach
-                        @else
-                            <p>Nie je ziaden post</p>
-                        @endif
+                    <label for="classroom_id" class="sr-only">Trieda</label>
+                    <select required name="classroom_id" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 focus:border-gray-600 
+                    invalid:text-gray-400  @error('classroom_id') border-red-500 @enderror trasition duration-500" value=""> 
+                        <option value="" disabled selected hidden>Vyber svoju triedu</option>
+                        <optgroup class="font-bold text-black" label="Trieda">
+                            @if($classrooms->count())
+                                @foreach($classrooms as $classroom)
+                                    <option class="text-black" value={{ $classroom->id }} @if ($classroom->id == old('classroom_id')) selected @endif>{{ $classroom->name }}</option>
+                                @endforeach
+                            @else
+                                <p>Nie je ziaden post</p>
+                            @endif                            
                         </optgroup>
+                        
                         @error('classroom_id')
                             <div class="text-red-500 mt-2 text-sm">
                                 {{$message}}

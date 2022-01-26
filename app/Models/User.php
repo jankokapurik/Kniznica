@@ -88,4 +88,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return $this->loan->contains('user_id', auth()->user()->id);
     }
+
+
+    public function sendEmailVerificationNotification(){
+        dd("email here");
+        $this->notify(new App\Notifications\Custom)        
+    }
 }

@@ -19,6 +19,7 @@ class VerificationController extends Controller
     }
 
     public function show(Request $request){
+        // dd($this->redirectPath());
         return $request->user()->hasVerifiedEmail()
             ? redirect($this->redirectPath())
             : view('verification.notice', [

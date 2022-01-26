@@ -25,11 +25,10 @@ class LoginController extends Controller
 
         if(!auth()->attempt($request->only('email', 'password'), $request->remember)) {
             throw ValidationException::withMessages([
-                'password' => 'incorect password for this email',
+                'password' => 'incorect password or email',
                 'fail' => true
-        ]);
+            ]);
         }
-
         return redirect()->route('home');
     }
 

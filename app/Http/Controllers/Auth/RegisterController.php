@@ -33,8 +33,8 @@ class RegisterController extends Controller
         $schools = School::get();
 
         return view('auth.register', [
-            'classrooms' => $classrooms,
-            'schools' => $schools
+            'classrooms' => $classrooms->sortBy('name'),
+            'schools' => $schools->sortBy('name')
         ]);
     }
 
@@ -50,13 +50,9 @@ class RegisterController extends Controller
             'classroom_id' => 'required', 
         ]);
 
-        $data = $request;
-        $data['fname'] = ucfirst($request->fname);
-        $data['lname'] = ucfirst($request->lname);
-
         $user = User::create([
-            'fname' => $data['fname'],
-            'lname' => $data['lname'],
+            'fname' => ucfirst($request->fname),
+            'lname' => ucfirst($request->lname),
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -67,7 +63,7 @@ class RegisterController extends Controller
         event(new Registered($user));  
         auth()->login($user);
 
-        auth()->attempt($data->only('email', 'password'));
+        auth()->attempt($request->only('email', 'password'));
 
         return redirect()->route('home'); 
     }

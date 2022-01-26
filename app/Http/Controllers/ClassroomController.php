@@ -21,11 +21,9 @@ class ClassroomController extends Controller
     
     public function store(Request $request) {
         $request->validate([
-            'name' =>'required|max:10',
+            'name' =>'required|max:10|unique:classrooms,name',
         ]);
-        // dd($request->all() + ['created_by' => auth()->id()]);    
-
-        // $input['created_by'] = auth()->id();
+        
         $input = $request->all();
         $input['created_by'] = auth()->id();
 

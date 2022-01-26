@@ -59,7 +59,7 @@ class UserController extends Controller
             'email' =>'required|email|max:255',
             'school_id' => 'required',
             'classroom_id' => 'required',
-            'user_type' =>'required||max:255',
+            // 'user_type' =>'required||max:255',
         ]);
         // dd('next');
         // dd($request->all());
