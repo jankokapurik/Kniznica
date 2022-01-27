@@ -17,7 +17,7 @@
     
 </head>
 <body class="bg-gray-200">
-    <div class="flex flex-col h-screen">
+    <div class="flex flex-col min-h-screen">
         <header>
             <nav class="p-6 bg-white flex justify-between">
                 <ul class="flex items-center">
