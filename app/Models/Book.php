@@ -22,6 +22,9 @@ class Book extends Model
         'image',
         'description',
         'created_by',
+        'cathegory',
+        'quantity',
+        'available'
     ];
     
     public function author()
