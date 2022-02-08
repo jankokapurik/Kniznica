@@ -29,7 +29,7 @@ class BookController extends Controller
             $books= Book::Select(['books.*', 'authors.fname', 'authors.lname' ])
             ->join('authors', 'books.author_id', '=', 'authors.id')
             ->orderBy($filter[0],$filter[1])
-            ->paginate(10);
+            ->paginate(10); 
         }
 
         // $avg = Book::first()->comments()->avg('rating');

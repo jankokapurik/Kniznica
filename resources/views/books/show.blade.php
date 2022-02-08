@@ -18,6 +18,7 @@
                     <p class="text-m">Jazyk: {{ $book->language->name }}</p>
                     <p class="text-m">Množstvo: {{ $book->quantity }} ks</p>
                     <p class="text-gray-600 text-m mb-2">
+
                         @forelse ($book->genres as $genre)
                             {{ $genre->name, }}
                         @empty

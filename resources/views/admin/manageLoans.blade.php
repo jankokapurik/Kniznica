@@ -21,64 +21,74 @@
                 <tbody>
                     @if($loans->count())
                         @foreach($loans as $loan)
-                            <tr class="even:bg-gray-100 border-t border-gray-500">
-                                <td>
-                                    <div class="flex flex-row justify-center align-middle">
-                                        <p class=" text-gray-900 p-1">{{ $loan->user->fname }} {{ $loan->user->lname }}</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="flex flex-row justify-center align-middle">
-                                        <p class=" text-gray-900 p-1">
-                                            @if( $loan->approved == 1)
-                                                Áno
-                                            @elseif($loan->approved == 0)
-                                                Nie
-                                            @endif
-                                        </p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="flex flex-row justify-center align-middle">
-                                        <p class=" text-gray-900 p-1">{{ $loan->from }}</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="flex flex-row justify-center align-middle">
-                                        <p class=" text-gray-900 p-1">{{ $loan->to }}</p>
-                                    </div>
-                                </td>
-                                <td class="">
-                                    <div class="flex flex-row justify-center align-middle divide-x divide-red-300">
-                                        @forelse ($loan->books as $book)
-                                        <p class="text-gray-600 p-1">{{ $book->title, }}</p>
-                                        @empty
-                                        <p class="text-gray-600 p-1">Nie sú pridané knihy</p>
-                                        @endforelse  
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="flex flex-row justify-center align-middle">
-                                        <form action="{{ route('loan.edit', $loan) }}" class="m-1" method="GET">
-                                            @csrf 
-                                            <button class="bg-blue-500 border border-blue-500 p-1 rounded-md text-white hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Upraviť</button>
-                                        </form>
-                                        <form action="{{ route('loan.returnBooks', $loan) }}" class="m-1" method="POST">
-                                            @csrf 
-                                            @method('DELETE')
-                                            <button class="bg-red-500 border border-red-500 p-1 rounded-md text-white hover:bg-red-100 hover:text-red-500 trasition duration-500">zmazat</button>
-                                        </form>
-                                        
-                                        @if($loan->approved == 0)
-                                            <form method="GET" action="{{ route('loan.approve', $loan) }}" class="m-1">
-                                                @csrf
-                                                <button class="bg-green-500 border border-green-500 p-1 rounded-md text-white hover:bg-green-100 hover:text-green-500 trasition duration-500">Vypožičať</button>                                                
+                            @if ($loan->user_confirmed == 1)
+                                <tr class="even:bg-gray-100 border-t border-gray-500">
+                                    <td>
+                                        <div class="flex flex-row justify-center align-middle">
+                                            <p class=" text-gray-900 p-1">{{ $loan->user->fname }} {{ $loan->user->lname }}</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex flex-row justify-center align-middle">
+                                            <p class=" text-gray-900 p-1">
+                                                @if( $loan->approved == 1)
+                                                    Áno
+                                                @elseif($loan->approved == 0)
+                                                    Nie
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex flex-row justify-center align-middle">
+                                            <p class=" text-gray-900 p-1">{{ $loan->from }}</p>
+                                        </div>
+                                    </td>
+                                    @if ($loan->approved == 1)
+                                        <td>
+                                            <div class="flex flex-row justify-center align-middle">
+                                                <p class=" text-gray-900 p-1">{{ $loan->to }}</p>
+                                            </div>
+                                        </td>
+                                    @elseif ($loan->approved == 0)
+                                        <td>
+                                            <div class="flex flex-row justify-center align-middle">
+                                                <p class=" text-gray-900 p-1">Neprevzaná</p>
+                                            </div>
+                                        </td>
+                                    @endif
+                                    <td class="">
+                                        <div class="flex flex-row justify-center align-middle divide-x divide-red-300">
+                                            @forelse ($loan->books as $book)
+                                            <p class="text-gray-600 p-1">{{ $book->title, }}</p>
+                                            @empty
+                                            <p class="text-gray-600 p-1">Nie sú pridané knihy</p>
+                                            @endforelse  
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex flex-row justify-center align-middle">
+                                            <form action="{{ route('loan.edit', $loan) }}" class="m-1" method="GET">
+                                                @csrf 
+                                                <button class="bg-blue-500 border border-blue-500 p-1 rounded-md text-white hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Upraviť</button>
                                             </form>
-                                        @endif
+                                            <form action="{{ route('loan.returnBooks', $loan) }}" class="m-1" method="POST">
+                                                @csrf 
+                                                @method('DELETE')
+                                                <button class="bg-red-500 border border-red-500 p-1 rounded-md text-white hover:bg-red-100 hover:text-red-500 trasition duration-500">zmazat</button>
+                                            </form>
+                                            
+                                            @if($loan->approved == 0)
+                                                <form method="GET" action="{{ route('loan.approve', $loan) }}" class="m-1">
+                                                    @csrf
+                                                    <button class="bg-green-500 border border-green-500 p-1 rounded-md text-white hover:bg-green-100 hover:text-green-500 trasition duration-500">Vypožičať</button>                                                
+                                                </form>
+                                            @endif
 
-                                    </div>
-                                </td>
-                            </tr>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
                     @else
                     <p>Nie sú žiadne výpožičky</p>

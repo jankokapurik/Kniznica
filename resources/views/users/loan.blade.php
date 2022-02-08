@@ -45,19 +45,19 @@
                 @endforeach
                 @if ($user->loan)
                     @if ($user->loan->approved == 1)
-                        <h1 class="font-bold text-3xl mt-4">Knihy je potrebné vrátiť do {{ $user->loan->to }}</h1>
+                        <h1 class="font-bold text-3xl mt-4">Knihy je potrebné vrátiť do {{ $user->loan->to->format('d.m.Y') }}</h1>
                         @if ($user->loan->renewed == 0)
                             <form action="{{ route('loan.renew', $user->loan) }}" method="get" class="mt-2">
                                 <button class="bg-green-500 text-white border-2 border-green-500 p-2 rounded-lg hover:bg-green-100 hover:text-green-500"><span class="text-3xl font-bold">Predĺžiť</span></button>
                             </form>
                         @endif
                     @elseif ($user->loan->reserved_until > now() && $user->loan->user_confirmed == 0)
-                        <h1 class="font-bold text-2xl ml-2 mt-2">Výpožičku je potrebné dokončiť do {{ $user->loan->reserved_until }}</h1>
+                        <h1 class="font-bold text-2xl ml-2 mt-2">Výpožičku je potrebné dokončiť do {{ $user->loan->reserved_until->format('H:m') }}</h1>
                         <form action="{{ route('loan.userConfirm', $user->loan) }}" method="get" class="mt-4 ml-2">
                             <button class="p-2 bg-blue-500 text-white border-2 border-blue-500 rounded-lg hover:text-blue-500 hover:bg-blue-100"><span class="text-2xl font-bold">Vypožičať</span></button>
                         </form>                    
                     @elseif ($user->loan->user_confirmed == 1)
-                        <h1 class="font-bold text-3xl mt-4">Knihy si môžete vyzdvihnúť v internátnej knižnici do {{ $user->loan->reserved_until }}</h1>                   
+                        <h1 class="font-bold text-3xl mt-4">Knihy si môžete vyzdvihnúť v internátnej knižnici do {{ $user->loan->reserved_until->format('d.m.Y') }}</h1>                   
                     @endif
                 @endif
             @else
