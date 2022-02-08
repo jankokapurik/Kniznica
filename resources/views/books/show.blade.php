@@ -94,16 +94,14 @@
                                 <div style="width: {{ $rating['star1']}}%" class="bg-red-400 rounded"></div>
                             </div>
                         </div>
-                    </div>
-
+                    </div>                    
                     @auth
                     {{-- <x-writecomment :book="$book"/> --}}
                         @if (!$hasComment)
                             <x-writecomment :book="$book"/>
                         @else
                             <div class="p-2 bg-red-200">Uz ste komentovali</div>
-                        @endif
-                        
+                        @endif                       
                     @endauth
                     @guest
                     {{-- <div class="bg-white p-6 rounded-lg m-10">
