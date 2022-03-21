@@ -1,6 +1,6 @@
 @props(['book' => $book])
 
-<div class="p-2 w-full flex">
+<div class="p-2 w-full flex" id="book{{$book->id}}">
     @if($book->image)
         <img src="{{ asset('/images/'.$book->image) }}" height="200" width="100" alt="kniha" class="mr-4">
     @else

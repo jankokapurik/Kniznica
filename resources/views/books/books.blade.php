@@ -16,12 +16,15 @@
                 <button>Zorad</button>
             </form> --}}
 
-            <div>
-                <input type="checkbox" name="language" value="madarsky">
-                <label for="madarsky">madarsky</label>
-                <input type="checkbox" name="language" value="anglicky">
-                <label for="anglicky">anglicky</label>
+            <div id="filter">
+                <div id="filter_language">
+                    <input type="checkbox" name="language" value="madarsky">
+                    <label for="madarsky">madarsky</label>
+                    <input type="checkbox" name="language" value="anglicky">
+                    <label for="anglicky">anglicky</label>
+                </div>
             </div>
+
 
 
 
@@ -40,15 +43,8 @@
                 @if($books->count())
                     
                     @foreach($books->sortByDesc('authors.fname') as $book)
-                        <x-book :book="$books->find(32)"/>
-
-                        @php
-
-                            // dd($book);
-                            // dd($books->find(32));
-                            // dd($books->find('id', 32));
-                        @endphp
-
+                        {{-- <x-book :book="$books->find(32)"/> --}}
+                        <x-book :book="$book"/>
                     @endforeach
 
                     {{ $books->links() }}
@@ -60,22 +56,34 @@
     </div>
 
 
-    {{-- <script>
+    <script>
+        let results = [];
+        let box = document.getElementById("mybox");
+
+        document.getElementById("filter").addEventListener("change",filter);
+
         for(book of @json($books).data){
-            console.log(book);
-            generate(book);
+            console.log(book.language.name);
+        
+            if(book.language.name != 'Slovensky'){
+                results.push("book"+book.id);
+            }
         }
 
-        function generate(book) {
-            box = document.getElementById("mybox");
-            box.innerHTML = ""; //clear
+        // filter();
+        function filter() {
             
-            child = document.createElement("div");
-            child.innerHTML = "Texk";
 
-            box.appendChild(child);
-            console.log(box.innerHTML);
+            for (let index = 0; index < box.childElementCount; index++) {
+                box.children[index].style.display = "flex";
+            }
+
+            for(result of results){
+                elem = document.getElementById(result);
+                elem.style.display = "none";
+            }
         }
 
-    </script> --}}
+    </script>
+    
 @endsection
