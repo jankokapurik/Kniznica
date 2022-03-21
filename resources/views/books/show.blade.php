@@ -18,6 +18,7 @@
                     <p class="text-m">Jazyk: {{ $book->language->name }}</p>
                     <p class="text-m">Množstvo: {{ $book->quantity }} ks</p>
                     <p class="text-gray-600 text-m mb-2">
+
                         @forelse ($book->genres as $genre)
                             {{ $genre->name, }}
                         @empty
@@ -30,14 +31,16 @@
                    
                     @auth                                            
                         @if ($borrowed)
-                            <p class="text-center bg-green-500 border-2 border-green-500 text-white p-2 rounded-lg">zapoziciane</p>
+                            <p class="text-center bg-green-500 border-2 border-green-500 text-white p-2 rounded-lg">Vypožičiane</p>
                         @else
                             @if ($book->quantity > 0)                            
                                 <form action="{{ route('loan.userCreate', ['user' => auth()->user(), 'book' => $book]) }}" method="GET">
                                     <button class="w-full bg-blue-500 border-2 border-blue-500 text-white p-2 rounded-lg hover:bg-blue-100 hover:text-blue-500">Vypožičať</button>
                                 </form>
-                            @else                            
-                                <p class="text-center bg-red-500 border-2 border-red-500 text-white p-2 rounded-lg">nedostupne</p>                        
+                            @elseif($book->quantiy == 0)                           
+                                <form action="{{ route('loan.userCreate', ['user' => auth()->user(), 'book' => $book]) }}" method="GET">
+                                    <button class="w-full bg-blue-500 border-2 border-blue-500 text-white p-2 rounded-lg hover:bg-blue-100 hover:text-blue-500">Rezervovať</button>
+                                </form>                      
                             @endif
                         @endif
                     @endauth
@@ -50,9 +53,8 @@
             <div class="min-w-full flex justify-center ">
                 <div class="mb-10 w-full flex justify-center">
                     <div class="flex flex-col w-full">
-
                         @if($comments)
-                        <div>
+                        <div class=" mb-6">
                             <div class="w-full flex">
                                 <div class="p-1"> 
                                     <span class="text-yellow-500">&#9733&#9733&#9733&#9733&#9733</span>
@@ -95,24 +97,17 @@
                         </div>
                     </div>                    
                     @auth
-                    {{-- <x-writecomment :book="$book"/> --}}
                         @if (!$hasComment)
                             <x-writecomment :book="$book"/>
                         @else
-                            <div class="p-2 bg-red-200">Uz ste komentovali</div>
+                            <div class="p-2 bg-red-50 border-2 border-red-500 rounded-md mb-4">Už ste komentovali</div>
                         @endif                       
                     @endauth
                     @guest
-                    {{-- <div class="bg-white p-6 rounded-lg m-10">
-                        pripojit sa do diskusie
-                    </div> --}}
                         <div class="p-2 bg-red-200">Pripojit sa</div>
                     @endguest
                     @foreach ($comments as $comment)
-                    {{-- <div class="bg-white rounded-lg" >
-                        <x-comment :comment="$comment" />
-                    </div> --}}
-                        <div class="bg-white rounded-lg" >
+                        <div class="bg-white rounded-lg " >
                             <x-comment :comment="$comment" />
                         </div>
                     @endforeach

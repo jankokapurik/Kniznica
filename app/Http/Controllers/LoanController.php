@@ -79,24 +79,49 @@ class LoanController extends Controller
         return back();
     }
 
-    public function userCreate(Loan $loan, User $user, Book $book) {
-        if($book->quantity > 0){
-            if($user->loan) {               
-                $exist = DB::table('book_loan')
-                ->where("book_id", $book->id)
-                ->where("loan_id", $user->loan->id)->first();
+    public function userCreate(User $user, Book $book) {
+        
+            if($user->loan) 
+            {       
+                if($user->loan->books()->count() < 11) 
+                {
+                    if($book->quantity > 0) 
+                    {
+                        $exist = DB::table('book_loan')
+                        ->where("book_id", $book->id)
+                        ->where("loan_id", $user->loan->id)->first();
+                        
+                        if($exist){ //book exist in loan
+                        return back()->with('msg', 'Táto kniha už je vypožičaná');
+                        } 
+                        else{ //book dont exist in loan
+                            $user->loan->books()->attach($book);
+                            $book->quantity-=1;
+                            $book->update();
+                        }
+                    }
+                    if($book->quantity == 0) 
+                    {
+                        $exist = DB::table('book_loan')
+                        ->where("book_id", $book->id)
+                        ->where("loan_id", $user->loan->id)->first();
+                        
+                        if($exist){ //book exist in loan
+                        return back()->with('msg', 'Táto kniha už je vypožičaná');
+                        } 
+                        else{ //book dont exist in loan
+                            $user->loan->books()->attach($book);
+                            $book->quantity-=1;
+                            $book->reserved_by = auth()->user()->id;
+                            $book->update();
 
-                if($exist){ //book exist in loan
-
-                } 
-                else{ //book dont exist in loan
-                    $user->loan->books()->attach($book);
-                    $book->quantity-=1;
-                    $book->update();
-                }
+                        }
+                    }
+                }        
   
             }
-            else {            
+            else 
+            {            
                 $loan = Loan::create([
                     'user_id' => auth()->user()->id,
                     'reserved_until' => now()->addHour()
@@ -105,11 +130,6 @@ class LoanController extends Controller
                 $book->quantity-=1;
                 $book->update();
             }
-        }
-        else {
-            return back()->withErrors(['msg' => 'mesage']);
-        }
-
         return back();
     }
 
@@ -146,13 +166,32 @@ class LoanController extends Controller
     }
 
     public function renew(Loan $loan) {
+        // if
+        // {
+        //     foreach($loan->books() as $book)
+        //     {
+        //         if
+        //     }
+        // }
 
-        if ($loan->renewed == 0) {
+        if ($loan->renewed == 0) 
+        {
 
             $newTime = $loan->to->addDays(30);
             $loan->update([
                 'to' => $newTime,
                 'renewed' => 1,
+            ]);
+
+            return back();
+        }
+
+        if ($loan->renewed == 1) 
+        {
+            $newTime = $loan->to->addDays(30);
+            $loan->update([
+                'to' => $newTime,
+                'renewed' => 2,
             ]);
 
             return back();

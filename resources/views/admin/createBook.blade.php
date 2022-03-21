@@ -81,7 +81,7 @@
                     <label for="image" class="sr-only">Fotka</label>
                     <input type="file" name="image" id="image" placeholder="Fotka" class="bg-gray-100 border-2 w-full p-4 text-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 hover:border-gray-300 trasition duration-500">
                 </div>
-                <h1 class="text-3xl mb-2">Vyber zanre knihy</h1>
+                <h1 class="text-3xl mb-2">Vyber žánre</h1>
                 <div class="flex mb-6">
                     @if ($genres->count())
                     @foreach ($genres as $genre)   
@@ -94,6 +94,23 @@
                     </div>
                     @endforeach
                     @endif
+                </div>
+                <h1 class="text-3xl mb-2">Vyber typ</h1>
+                <div class="mb-4">
+                    <select required name="cathegory" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 focus:border-gray-600 
+                    invalid:text-gray-400  @error('cathegory') border-red-500 @enderror trasition duration-500" value=""> 
+                        <option value="" disabled selected hidden>Vyber typ</option>
+                        <optgroup class="font-bold text-black" label="Trieda">
+                            <option class="text-black" value="kniha" @if (old('cathegory') == "kniha") {{ 'selected' }} @endif>Kniha</option>
+                            <option class="text-black" value="časopis" @if (old('cathegory') == "časopis") {{ 'selected' }} @endif>Časopis</option>                               
+                        </optgroup>
+                        
+                        @error('classroom_id')
+                            <div class="text-red-500 mt-2 text-sm">
+                                {{$message}}
+                            </div>
+                        @enderror
+                    </select>
                 </div>
                 <div class="mb-4">
                     <button type="submit" class="bg-green-500 border-2 border-green-500 text-white p-4 rounded-lg hover:bg-green-100 hover:text-green-500 trasition duration-500">Pridať</button>

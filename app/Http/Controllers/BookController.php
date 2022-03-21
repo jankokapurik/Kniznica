@@ -29,7 +29,7 @@ class BookController extends Controller
             $books= Book::Select(['books.*', 'authors.fname', 'authors.lname' ])
             ->join('authors', 'books.author_id', '=', 'authors.id')
             ->orderBy($filter[0],$filter[1])
-            ->paginate(10);
+            ->paginate(10); 
         }
 
         // $avg = Book::first()->comments()->avg('rating');
@@ -62,11 +62,12 @@ class BookController extends Controller
             'quantity' => 'required',
             'language_id' => 'required',
             'image' => 'mimes:jpg,png,jpeg|max:5048',
-            'description' => 'required'
+            'description' => 'required',
+            'cathegory' => 'required'
         ]);
 
-        $input = $request->only('author_id', 'title', 'releaseDate', 'quantity', 'language_id', 'releaseDate', 'image');
-        
+        $input = $request->only('author_id', 'title', 'releaseDate', 'quantity', 'language_id', 'releaseDate', 'image', 'cathegory');
+        array_push($input, "available", $input['quantity']);
         $input['created_by'] = auth()->id();
         
         if($request->hasFile('image')) {

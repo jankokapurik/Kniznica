@@ -83,7 +83,7 @@
             </nav>
         </header>
         <main class="flex-grow h-full mb-6">
-            <div class="flex flex-row">
+            <div class="flex flex-row min-h-screen">
                 <div class="mt-6 p-3 h-screen rounded-r-lg bg-white">
                     <nav class="w-max">
                         <ul class="divide-y divide-gray-500">

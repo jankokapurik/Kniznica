@@ -92,7 +92,7 @@
             </div>
         </main>
         <footer>
-            <div class="bg-gray-800 p-10 text-gray-200 min-w-screen min-h-16 flex justify-around">
+            <div class="bg-gray-800 p-10 text-gray-200 min-w-screen min-h-16 flex justify-around static bottom-0">
                 <div class="h-max w-max flex flex-col justify-content-center align-items-center">
                     <p>Email: kniznica@spseke.sk</p>    
                     <p>Tel: 0940 434 556</p>
