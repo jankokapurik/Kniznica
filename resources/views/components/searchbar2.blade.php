@@ -28,16 +28,10 @@
     let oldbooks = [];
     @json($books).forEach(inp => {
         obj = new Object();
-        // properties.forEach(property => {
         obj['id'] = inp['id'];
         obj['title'] = inp['title'];
-        // });    
         values.push(obj);
     });
-
-    console.log(oldbooks);
-
-
 
     autocomplete2(document.getElementById("{{$name}}-input"), @json($values), ['title', 'authors_lname', 'authors_fname']); //new version
 </script>
