@@ -15,19 +15,23 @@
                 </select>
                 <button>Zorad</button>
             </form> --}}
-
             <div id="filter">
+                Filtrovať podľa jazyka
                 <div id="filter_language">
-                    <input type="checkbox" name="language" value="madarsky">
-                    <label for="madarsky">madarsky</label>
-                    <input type="checkbox" name="language" value="anglicky">
-                    <label for="anglicky">anglicky</label>
+                    @foreach ($languages as $language)
+                        <input type="checkbox" name="language" value="{{$language->id}}">
+                        <label for="{{$language->name}}">{{$language->name}}</label>
+                    @endforeach
+                </div>
+
+                Filtrovať podľa žáneru
+                <div id="filter_genre">
+                    @foreach ($genres as $genre)
+                        <input type="checkbox" name="genre" value="{{$genre->id}}">
+                        <label for="{{$genre->name}}">{{$genre->name}}</label>
+                    @endforeach
                 </div>
             </div>
-
-
-
-
 
             <div class=" w-full flex flex-row align-middle p-4 border-b border-gray-300">
                 <form action="" method="GET" class="mr-4 space-x-6">
@@ -44,6 +48,16 @@
                     
                     @foreach($books->sortByDesc('authors.fname') as $book)
                         {{-- <x-book :book="$books->find(32)"/> --}}
+
+                            {{-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa --}}
+                                
+                            
+
+                          
+
+
+                            {{-- {{dd($book->genres->pluck("name")->toArray())}} --}}
+                            {{-- {{dd($book->genres->pluck("name"))}} --}}
                         <x-book :book="$book"/>
                     @endforeach
 
@@ -59,29 +73,69 @@
     <script>
         let results = [];
         let box = document.getElementById("mybox");
+        let bookgenres = [];
 
-        document.getElementById("filter").addEventListener("change",filter);
+        bookgenres = new Object();  
+        @foreach ($books as $book)
+            bookgenres[@json($book->id)] = @json($book->genres->pluck("id")->toArray());
+        @endforeach
+
+        console.log(bookgenres);
+
+        document.getElementById("filter").addEventListener("change", filterBooks);
 
         for(book of @json($books).data){
-            console.log(book.language.name);
-        
+            results = [];
             if(book.language.name != 'Slovensky'){
-                results.push("book"+book.id);
+                results.push("book" + book.id); //to hide
             }
         }
 
-        // filter();
-        function filter() {
-            
-
+        function filterBooks() {
             for (let index = 0; index < box.childElementCount; index++) {
-                box.children[index].style.display = "flex";
+                box.children[index].style.display = "none";
             }
 
-            for(result of results){
-                elem = document.getElementById(result);
-                elem.style.display = "none";
+            for(book of @json($books).data){
+                if(filter(book)){
+                    elem = document.getElementById("book"+book.id);
+                    elem.style.display = "flex";
+                }
             }
+        }
+
+
+
+
+        function filter(book){
+            languages = [];
+            lang_inputs = document.getElementById("filter_language").getElementsByTagName("input");
+            for (lang_input of lang_inputs) {
+                if(lang_input.checked){
+                    languages.push(lang_input.value);
+                }
+            }
+
+
+
+            genre_inputs = document.getElementById("filter_genre").getElementsByTagName("input");
+            for (genre_input of genre_inputs) {
+                if(genre_input.checked){
+                    languages.push(genre_input.value);
+                }
+            }
+
+
+            if(languages.length > 0){//check if is than checj...
+                if(!languages.includes(book.language.id.toString())) return false;
+            }
+
+
+            // if(genres.length > 0){//check if is than checj...
+            //     if(!genres.includes(book.genre.id.toString())) return false;
+            // }
+
+            return true;
         }
 
     </script>

@@ -34,8 +34,13 @@ class BookController extends Controller
 
         // $avg = Book::first()->comments()->avg('rating');
 
+        $languages = Language::get();
+        $genres = Genre::get();
+
         return view('books.books', [
             'books' => $books,
+            'languages' => $languages,
+            'genres' => $genres,
         ]);
 
     }
