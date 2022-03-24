@@ -69,7 +69,7 @@
 
     <script>
         let results = [];
-        let box = document.getElementById("mybox");
+        // let box = document.getElementById("mybox");
         let bookgenres = [];
 
         bookgenres = new Object();  
@@ -81,58 +81,55 @@
 
         document.getElementById("filter").addEventListener("change", filterBooks);
 
-        for(book of @json($books).data){
-            results = [];
-            if(book.language.name != 'Slovensky'){
-                results.push("book" + book.id); //to hide
-            }
-        }
-
         function filterBooks() {
-            for (let index = 0; index < box.childElementCount; index++) {
-                box.children[index].style.display = "none";
-            }
-
             for(book of @json($books).data){
-                if(filter(book)){
-                    elem = document.getElementById("book"+book.id);
-                    elem.style.display = "flex";
-                }
+                if(filter(book)) show(document.getElementById("book"+book.id));
+                else hide(document.getElementById("book"+book.id));
             }
         }
-
-
-
 
         function filter(book){
             languages = [];
+            genres = [];
+            book_genres = bookgenres[book.id]
+            
             lang_inputs = document.getElementById("filter_language").getElementsByTagName("input");
             for (lang_input of lang_inputs) {
                 if(lang_input.checked){
-                    languages.push(lang_input.value);
+                    languages.push(parseInt(lang_input.value));
                 }
             }
-
-
 
             genre_inputs = document.getElementById("filter_genre").getElementsByTagName("input");
             for (genre_input of genre_inputs) {
                 if(genre_input.checked){
-                    languages.push(genre_input.value);
+                    genres.push(parseInt(genre_input.value));
                 }
             }
 
-
+            lan_filter = false;
             if(languages.length > 0){
-                if(!languages.includes(book.language.id.toString())) return false;
-            }
+                if(languages.includes(book.language.id)) lan_filter = true;    
+            } 
+            else lan_filter = true;
+            
+            gen_filter = false;
+            if(genres.length > 0){
+                for (book_genre of book_genres) {
+                    if(genres.includes(book_genre)) gen_filter = true;
+                }
+            } 
+            else gen_filter = true;
 
+            return lan_filter && gen_filter;
+        }
+        
+        function hide(element) {
+            if(element.style.display != "none") element.style.display = "none";
+        }
 
-            // if(genres.length > 0){
-            //     if(!genres.includes(book.genre.id.toString())) return false;
-            // }
-
-            return true;
+        function show(element) {
+            if(element.style.display != "flex") element.style.display = "flex";
         }
 
     </script>
