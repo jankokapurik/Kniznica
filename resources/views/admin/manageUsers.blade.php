@@ -69,7 +69,6 @@
                             </div>
                         </td>
                         </tr>
-                        {{-- <div class="m-4 w-full rounded-lg border-2 border-gray-300 flex flex-row"> --}}
                     @endforeach
                     @else
                     <p>Nie sú žiadny používatelia</p>
