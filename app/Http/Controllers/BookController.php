@@ -14,26 +14,26 @@ use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
-    public function index(Request $request) {  
+    public function index() {  
 
-        if(!$request->filter){
+        // if(!$request->filter){
             $books= Book::Select(['books.*', 'authors.fname', 'authors.lname' ])
             ->join('authors', 'books.author_id', '=', 'authors.id')
-            ->orderBy('title')
-            ->paginate(10);            
-        }
+            ->orderBy('title')->get();
+            // ->paginate(10);
+            // dd($books);
+        // }
 
-        if($request->filter){
-            $filter = explode('|', $request->filter);
+        // if($request->filter){
+        //     $filter = explode('|', $request->filter);
 
-            $books= Book::Select(['books.*', 'authors.fname', 'authors.lname' ])
-            ->join('authors', 'books.author_id', '=', 'authors.id')
-            ->orderBy($filter[0],$filter[1])
-            ->paginate(10); 
-        }
+        //     $books= Book::Select(['books.*', 'authors.fname', 'authors.lname' ])
+        //     ->join('authors', 'books.author_id', '=', 'authors.id')
+        //     ->orderBy($filter[0],$filter[1])
+        //     ->paginate(10); 
+        // }
 
         // $avg = Book::first()->comments()->avg('rating');
-
         $languages = Language::get();
         $genres = Genre::get();
 
@@ -59,7 +59,6 @@ class BookController extends Controller
     }
     
     public function store(Request $request) {
-
         $request->validate([
             'author_id' => 'required',
             'title' =>'required|max:200|min:3',
@@ -131,26 +130,19 @@ class BookController extends Controller
                 "star3" => round($book->comments()->where('rating',3)->count('rating')/$mode * 100),
                 "star2" => round($book->comments()->where('rating',2)->count('rating')/$mode * 100),
                 "star1" => round($book->comments()->where('rating',1)->count('rating')/$mode * 100),
-                // "mode" =>  $mode
             ]
-
         ]);
     }
 
     public function manage() {
-
         $books = Book::get();
-        
         return view('admin.manageBooks', ['books' => $books]);
     }
 
     public function destroy(Book $book) {
-
-        
         $book->delete();
         return back();
     }
-
 
     // public function restore($booksid, Request $request){
     //     Book::onlyTrashed()->find($booksid)->restore();
@@ -231,7 +223,7 @@ class BookController extends Controller
     public function cancelReservations() {
         
         $loans = Loan::get();
-        $dt = new Carbon();
+        // $dt = new Carbon();
 
         foreach ($loans as $loan) {
             if ($loan->reserved_until < now()) {
