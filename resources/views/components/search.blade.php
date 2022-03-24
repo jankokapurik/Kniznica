@@ -2,7 +2,7 @@
     'values' => $values,
 ])
 
-<div id="book_list" class="flex flex-col">        
+<div id="searchMain" class="flex flex-col">        
     <div class="relative flex" id="searchFocuser">
         <div class="relative" tabindex="0" id="searchSwitcher">
             <label for="search" class="sr-only">Name</label>
@@ -102,8 +102,6 @@
     });
 
     input.addEventListener("keydown",function(e){
-        console.log(e.code);
-
         if(e.code == 'Enter'){
             if(focuser.focusvalue >= 0){
                 input.value = container.childNodes[focuser.focusvalue].firstChild.textContent;

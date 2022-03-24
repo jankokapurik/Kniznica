@@ -5,9 +5,10 @@
         <div class="w-8/12 bg-white p-6 rounded-lg" >
             
             {{-- <x-searchbar id="meno" class="w-64" :values="$allBooks"></x-searchbar> --}}
-            <x-search :values="$allBooks"></x-search>
+            
 
             <div id="filter">
+                <x-search :values="$allBooks"></x-search>
                 <p>Filtrovať podľa jazyka</p>
                 <div id="filter_language">
                     @foreach ($languages as $language)
@@ -26,12 +27,6 @@
             </div>
 
             <div class=" w-full flex flex-row align-middle p-4 border-b border-gray-300">
-                {{-- <form action="" method="GET" class="mr-4 space-x-6">                    
-                    <button name="filter" value="title|ASC" class="hover:text-blue-500 transition duration-500 hover:underline">Názov ↓</button>
-                    <button name="filter" value="title|DESC" class="hover:text-blue-500 transition duration-500 hover:underline">Názov ↑</button>
-                    <button name="filter" value="fname|ASC" class="hover:text-blue-500 transition duration-500 hover:underline">Autor ↓</button>
-                    <button name="filter" value="fname|DESC" class="hover:text-blue-500 transition duration-500 hover:underline">Autor ↑</button>
-                </form> --}}
 
             </div>
             <div id="mybox" class="p-4 mb-4 w-full divide-y divide-gray-300 flex flex-col-reverse">
@@ -43,8 +38,6 @@
                     <p>Nie je ziadna kniha</p>
                 @endif
             </div> 
-
-
         </div>
     </div>
 
@@ -52,27 +45,35 @@
     <script>
         let results = [];
         let bookgenres = [];
+        let input_text = "";
         bookgenres = new Object();
 
         @foreach ($books as $book)
             bookgenres[@json($book->id)] = @json($book->genres->pluck("id")->toArray());
         @endforeach
 
-        document.getElementById("filter").addEventListener("change", function () {
+        document.getElementById("filter").addEventListener("change", updateBooks);
+
+        
+
+        function updateBooks () {
             for(book of @json($books)){
                 if(filter(book)) 
                     show(document.getElementById("book" + book.id));
                 else 
                     hide(document.getElementById("book" + book.id));
             }
-        });
+        }
 
         function filter(book){
+            console.log("Trigger");
+            // console.log(book);
             languages = [];
             genres = [];
-            book_genres = bookgenres[book.id]
+            book_genres = bookgenres[book.id];
+            console.log(input_text);
+            input_text = document.getElementById("searchInput").value;
             
-            // lang_inputs = ;
             for (lang_input of document.getElementById("filter_language").getElementsByTagName("input")) {
                 if(lang_input.checked){
                     languages.push(parseInt(lang_input.value));
@@ -99,7 +100,18 @@
             } 
             else gen_filter = true;
 
-            return lan_filter && gen_filter;
+            key_filter = false;
+            if(input_text.length > 0){
+                if(book.title.toLowerCase().includes(input_text.toLowerCase())){
+                    key_filter = true;
+                    console.log("T");
+                }
+                // else if(book.author.fname.toLowerCase().includes(input_text.toLowerCase())) key_filter = true;
+                // else if(book.author.lname.toLowerCase().includes(input_text.toLowerCase())) key_filter = true;
+            } 
+            else key_filter = true;
+
+            return (lan_filter && gen_filter) && key_filter;
         }
         
         function hide(element) {

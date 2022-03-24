@@ -15,23 +15,9 @@ use Illuminate\Support\Facades\DB;
 class BookController extends Controller
 {
     public function index() {  
-
-        // if(!$request->filter){
-            $books= Book::Select(['books.*', 'authors.fname', 'authors.lname' ])
-            ->join('authors', 'books.author_id', '=', 'authors.id')
-            ->orderBy('title')->get();
-            // ->paginate(10);
-            // dd($books);
-        // }
-
-        // if($request->filter){
-        //     $filter = explode('|', $request->filter);
-
-        //     $books= Book::Select(['books.*', 'authors.fname', 'authors.lname' ])
-        //     ->join('authors', 'books.author_id', '=', 'authors.id')
-        //     ->orderBy($filter[0],$filter[1])
-        //     ->paginate(10); 
-        // }
+        $books= Book::Select(['books.*', 'authors.fname', 'authors.lname' ])
+        ->join('authors', 'books.author_id', '=', 'authors.id')
+        ->orderBy('title')->get();
 
         // $avg = Book::first()->comments()->avg('rating');
         $languages = Language::get();
