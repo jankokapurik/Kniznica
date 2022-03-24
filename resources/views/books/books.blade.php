@@ -15,8 +15,13 @@
                 </select>
                 <button>Zorad</button>
             </form> --}}
+            {{-- <div class="bg-red-200 w-full"> --}}                
+            {{-- </div> --}}
+            {{-- <x-searchbar id="meno" class="w-64" :values="$allBooks"></x-searchbar> --}}
+                {{-- <x-search :values="$allBooks"></x-search> --}}
+
             <div id="filter">
-                Filtrovať podľa jazyka
+                <p>Filtrovať podľa jazyka</p>
                 <div id="filter_language">
                     @foreach ($languages as $language)
                         <input type="checkbox" name="language" value="{{$language->id}}">
@@ -24,7 +29,7 @@
                     @endforeach
                 </div>
 
-                Filtrovať podľa žáneru
+                <p>Filtrovať podľa žáneru</p>                
                 <div id="filter_genre">
                     @foreach ($genres as $genre)
                         <input type="checkbox" name="genre" value="{{$genre->id}}">
@@ -47,14 +52,6 @@
                 @if($books->count())
                     
                     @foreach($books->sortByDesc('authors.fname') as $book)
-                        {{-- <x-book :book="$books->find(32)"/> --}}
-
-                            {{-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa --}}
-                                
-                            
-
-                          
-
 
                             {{-- {{dd($book->genres->pluck("name")->toArray())}} --}}
                             {{-- {{dd($book->genres->pluck("name"))}} --}}
@@ -126,12 +123,12 @@
             }
 
 
-            if(languages.length > 0){//check if is than checj...
+            if(languages.length > 0){
                 if(!languages.includes(book.language.id.toString())) return false;
             }
 
 
-            // if(genres.length > 0){//check if is than checj...
+            // if(genres.length > 0){
             //     if(!genres.includes(book.genre.id.toString())) return false;
             // }
 

@@ -25,12 +25,12 @@
                         <a href="{{ route('home') }}" class="p-3 hover:text-purple-600">Domov</a>
                     </li>
                     <li>
-                        <a href="{{ route('books') }}" class="p-3 hover:text-blue-500">Library</a>
+                        <a href="{{ route('books') }}" class="p-3 hover:text-blue-500">Knižnica</a>
                     </li>
                     @if (auth()->check())
                         @if (auth()->user()->isAdmin())
                         <li>
-                            <a href="{{ route('adminHome') }}" class="p-3 hover:text-purple-600">Admin stránka</a>
+                            <a href="{{ route('adminHome') }}" class="p-3 hover:text-purple-600">Stránka pre knihovníka</a>
                         </li>
                         @else
                         @endif
@@ -61,10 +61,10 @@
                             <ul class="absolute w-32 right-0">
                     
                                 <li class="bg-white hidden group-hover:block">
-                                    <a href="/user/{{ auth()->user()->id }}" class="block hover:text-purple-600 text-base">Profile</a>
+                                    <a href="/user/{{ auth()->user()->id }}" class="block hover:text-purple-600 text-base">Profil</a>
                                 </li>
                                 <li class="bg-white hidden group-hover:block">
-                                    <a href="{{ route('verification.notice') }}" class="block hover:text-purple-600 text-base">Verify accont</a>
+                                    <a href="{{ route('verification.notice') }}" class="block hover:text-purple-600 text-base">Overiť účet</a>
                                 </li>
 
                                 <li class="bg-white hidden group-hover:block">
@@ -73,9 +73,7 @@
                                         <button class="hover:text-purple-600 text-base block" type="submit">Odhlásiť sa</button>
                                     </form>
                                 </li>
-
-                            </ul>
-                            
+                            </ul>                            
                         </div>                        
                     </ul>
                     @endauth          
@@ -89,7 +87,7 @@
                         <ul class="divide-y divide-gray-500">
                             <a href="{{ route('adminHome') }}" class="hover:text-blue-500">
                                 <li class="p-1 hover:bg-gray-200 active:bg-gray-400">
-                                    Admin domov
+                                    Domov
                                 </li>
                             </a>
                             <a href="{{ route('booksManagement') }}" class=" hover:text-blue-500">
@@ -104,7 +102,7 @@
                             </a>
                             <a href="{{ route('classroomManagement') }}" class=" hover:text-blue-500">
                                 <li class="p-1 hover:bg-gray-200 border-t border-gray-300">
-                                        Manažment tried
+                                    Manažment tried
                                 </li>
                             </a>
                             <a href="{{ route('schoolManagement') }}" class=" hover:text-blue-500">
@@ -129,14 +127,14 @@
                             </a>
                             <a href="{{ route('loanManagement') }}" class="hover:text-blue-500">
                                 <li class="p-1 hover:bg-gray-200 border-t border-gray-300">
-                                    Manažment Výpožičiek
+                                    Manažment výpožičiek
                                 </li>
                             </a>
-                            <a href="{{ route('reports') }}" class="hover:text-blue-500">
+                            {{-- <a href="{{ route('reports') }}" class="hover:text-blue-500">
                                 <li class="p-1 hover:bg-gray-200 border-t border-gray-300">
                                     Reporty
                                 </li>
-                            </a>
+                            </a> --}}
                         </ul>
                     </nav>
                 </div>

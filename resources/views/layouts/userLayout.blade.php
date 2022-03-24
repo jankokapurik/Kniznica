@@ -26,17 +26,17 @@
                     @if (auth()->check())
                         @if (auth()->user()->isAdmin())
                         <li>
-                            <a href="{{ route('adminHome') }}" class="p-3 hover:text-purple-600">Admin stránka</a>
+                            <a href="{{ route('adminHome') }}" class="p-3 hover:text-purple-600">Stránka pre knihovníka</a>
                         </li>
                         @else
                         @endif
                     @endif
-                </ul>            
-                
-                {{-- <x-searchbar id="meno" class="w-64" :values="$allBooks"></x-searchbar> --}}
-
-                {{-- <x-search :values="$allBooks"></x-search> --}}
+                </ul>
                   
+
+                            {{-- <x-searchbar id="meno" class="w-64" :values="$allBooks"></x-searchbar> --}}
+                {{-- <x-search :values="$allBooks"></x-search> --}}
+
                 <div>
                     @auth
                     <ul class="flex items-center space-x-4"> 
@@ -54,10 +54,10 @@
                             <ul class="absolute w-32 right-0">
                     
                                 <li class="bg-white hidden group-hover:block">
-                                    <a href="/user/{{ auth()->user()->id }}" class="block hover:text-purple-600 text-base">Profile</a>
+                                    <a href="/user/{{ auth()->user()->id }}" class="block hover:text-purple-600 text-base">Profil</a>
                                 </li>
                                 <li class="bg-white hidden group-hover:block">
-                                    <a href="{{ route('verification.notice') }}" class="block hover:text-purple-600 text-base">Verify accont</a>
+                                    <a href="{{ route('verification.notice') }}" class="block hover:text-purple-600 text-base">Overiť účet</a>
                                 </li>
 
                                 <li class="bg-white hidden group-hover:block">
