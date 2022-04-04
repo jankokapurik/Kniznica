@@ -18,7 +18,7 @@
 
             <form action="{{ route('verification.resend') }}" method="POST" class="d-inline">
                 @csrf                
-                <button class="bg-blue-500 border-2 border-blue-500 text-white px-4 py-3 rounded font-medium w-full hover:bg-blue-100 hover:text-blue-500 trasition duration-500" type="submit">post verify email</button>
+                <button class="bg-blue-500 border-2 border-blue-500 text-white px-4 py-3 rounded font-medium w-full hover:bg-blue-100 hover:text-blue-500 trasition duration-500" type="submit">Odoslať overovací mail</button>
             </form>
             @endif
         </div>

@@ -8,7 +8,7 @@
         <div class="mb-4 bg-white">
             <label for="rating"></label>
             <div class="flex">
-                <p class="p-1 mt-0">Your rating:</p>
+                <p class="p-1 mt-0">Vaše hodnotenie:</p>
                 <div class="ratingsystem text-xl flex flex-row-reverse">
                     <input type="radio" name="rating" value="5" id="rate-5">
                     <label for="rate-5">&#9733</label>
@@ -30,7 +30,7 @@
             <label for="body" class="sr-only">Body</label>
             <textarea name="body" id="body" cols="30" rows="4" class="bg-gray-100 w-full p-4 rounded-lg 
             border-2 outline-none focus:border-gray-400 transition duration-500
-            @error('body') border-red-500 @enderror" placeholder="Post something!"></textarea>
+            @error('body') border-red-500 @enderror" placeholder="Pošlite niečo!"></textarea>
     
             @error('body')
                 <div class="text-red-500 mt-2 text-sm">
