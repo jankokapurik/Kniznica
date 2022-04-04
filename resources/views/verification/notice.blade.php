@@ -5,16 +5,16 @@
     <div class="flex justify-center">
         <div class="w-8/12 bg-white p-6 rounded-lg m-10 flex flex-col justify-around">
             @if(session('resent'))
-            <h1 class="text-3xl">Thank you</h1>
-            <div class="mb-14">only one step more...</div>
+            <h1 class="text-3xl">Ďakujeme Vám</h1>
+            <div class="mb-14">Ešte jeden krok...</div>
 
                 <div class="bg-green-500 p-4 rounded-lg mb-6 text-white text-center">
-                    A fresh verification link has been sent to your email address
+                    Na vašu mailovú adresu bol odoslaný nový overovací odkaz
                 </div>
             
             @else
-            <h1 class="text-3xl">Verification</h1>
-            <div class="mb-14">You need to verify your account first, when you want order books, write comments ...</div>
+            <h1 class="text-3xl">Overovanie účtu</h1>
+            <div class="mb-14">Najpr si musíte overiť účet, aby ste mohli objednávať knihy, alebo písať recenzie</div>
 
             <form action="{{ route('verification.resend') }}" method="POST" class="d-inline">
                 @csrf                
