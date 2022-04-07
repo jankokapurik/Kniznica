@@ -18,9 +18,6 @@
 
                 <ul class="flex items-center">
                     <li>
-                        <a href="{{ route('home') }}" class="p-3 hover:text-purple-600">Domov</a>
-                    </li>
-                    <li>
                         <a href="{{ route('cancelReservations') }}" class="p-3 hover:text-purple-600">Knižnica</a>
                     </li>
                     @if (auth()->check())
@@ -32,11 +29,12 @@
                         @endif
                     @endif
                 </ul>
-                  
-
-                            {{-- <x-searchbar id="meno" class="w-64" :values="$allBooks"></x-searchbar> --}}
-                {{-- <x-search :values="$allBooks"></x-search> --}}
-
+                <a href="{{ route('home') }}">
+                    <div class="flex align-middle">
+                        <p class="text-4xl mr-2 font-mono">Knižnica</p>
+                        <img src="{{ asset('/images/logoSPSE.png') }}" width="40px" height="40px">
+                    </div>
+                </a>
                 <div>
                     @auth
                     <ul class="flex items-center space-x-4"> 

@@ -38,11 +38,15 @@
                     <div>
                         <input type="checkbox" name="remember" id="remember" class="mr-2 trasition duration-500">
                         <label for="remember">Remeber me</label>
+                        <div class="flex">
+                            <p>Nemáte účet? </p> &nbsp 
+                            <a href="{{ route('register') }}" class="text-blue-500 hover:underline"> Zaregistrujte sa</a>
+                        </div>
                     </div>
 
                     @error('fail')
                         <a href="{{ route('password.request') }}" class="rounded-lg text-blue-600 text-center">
-                            Forgotten password??
+                            Zabudnuté heslo?
                         </a>
                     @enderror
                 </div>

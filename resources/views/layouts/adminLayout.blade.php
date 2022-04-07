@@ -22,9 +22,6 @@
             <nav class="p-6 bg-white flex justify-between">
                 <ul class="flex items-center">
                     <li>
-                        <a href="{{ route('home') }}" class="p-3 hover:text-purple-600">Domov</a>
-                    </li>
-                    <li>
                         <a href="{{ route('books') }}" class="p-3 hover:text-blue-500">Knižnica</a>
                     </li>
                     @if (auth()->check())
@@ -36,14 +33,12 @@
                         @endif
                     @endif
                 </ul>
-                <div>
-                    {{-- <form action="{{ route('search2') }}" method="get" class="flex items-center">
-                        @csrf
-                        <label for="search" class="sr-only">Name</label>
-                        <input type="text" name="search" placeholder="Vyhľadaj" value="" class="bg-gray-100 border-2 border-gray-100 w-full p-1 rounded-lg mr-2 focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 trasition duration-500">
-                        <button type="submit" class="bg-blue-500 border-2 border-blue-500 text-white p-1 rounded font-medium  hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Hľadaj</button>
-                    </form> --}}
-                </div>
+                <a href="{{ route('home') }}">
+                    <div class="flex align-middle">
+                        <p class="text-4xl mr-2">Knižnica</p>
+                        <img src="{{ asset('/images/logoSPSE.png') }}" width="40px" height="40px">
+                    </div>
+                </a>
                 <ul class="flex items-center ">
                     @auth
                     <ul class="flex items-center space-x-4"> 

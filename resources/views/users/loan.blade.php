@@ -24,7 +24,7 @@
                                     <span class="pr-1">{{ round($a = $book->rating(),1) }}</span>
                                     <x-ratingbar :rating="round($a)"/>    
                                 @else
-                                    <span>nie je hodnotene</span>
+                                <span class="text-gray-500">Nie je hodnotené</span>
                                 @endif    
                             </div>
                             <p>{{ $book->language->name }}</p>                    

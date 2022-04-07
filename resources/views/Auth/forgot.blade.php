@@ -23,11 +23,11 @@
                 </div>
 
                 <span>
-                    info: Na tento email Vám bude zaslaný kód na obnovenie hesla
+                    Info: Na tento email Vám bude zaslaný kód na obnovenie hesla
                 </span>
 
                 <div>
-                    <button type="submit" class="border-2 border-blue-500 bg-blue-500 text-white px-4 py-3 rounded font-medium w-full hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Odoslať</button>
+                    <button type="submit" class="border-2 border-blue-500 bg-blue-500 text-white px-4 py-3 rounded font-medium w-full hover:bg-blue-100 hover:text-blue-500 trasition duration-500 mt-4">Odoslať</button>
                 </div>
 
             </form>

@@ -661,20 +661,11 @@ video {
 .static {
 	position: static;
 }
-.fixed {
-	position: fixed;
-}
 .absolute {
 	position: absolute;
 }
 .relative {
 	position: relative;
-}
-.inset-0 {
-	top: 0px;
-	right: 0px;
-	bottom: 0px;
-	left: 0px;
 }
 .inset-x-0 {
 	left: 0px;
@@ -688,9 +679,6 @@ video {
 }
 .m-1 {
 	margin: 0.25rem;
-}
-.m-4 {
-	margin: 1rem;
 }
 .m-10 {
 	margin: 2.5rem;
@@ -719,8 +707,8 @@ video {
 .mb-1 {
 	margin-bottom: 0.25rem;
 }
-.mr-4 {
-	margin-right: 1rem;
+.mr-5 {
+	margin-right: 1.25rem;
 }
 .mb-8 {
 	margin-bottom: 2rem;
@@ -733,6 +721,9 @@ video {
 }
 .mt-3 {
 	margin-top: 0.75rem;
+}
+.mr-4 {
+	margin-right: 1rem;
 }
 .mt-0 {
 	margin-top: 0px;
@@ -748,6 +739,15 @@ video {
 }
 .mb-14 {
 	margin-bottom: 3.5rem;
+}
+.mb-5 {
+	margin-bottom: 1.25rem;
+}
+.mt-5 {
+	margin-top: 1.25rem;
+}
+.mt-10 {
+	margin-top: 2.5rem;
 }
 .block {
 	display: block;
@@ -814,9 +814,6 @@ video {
 .flex-col {
 	flex-direction: column;
 }
-.flex-col-reverse {
-	flex-direction: column-reverse;
-}
 .items-center {
 	align-items: center;
 }
@@ -828,11 +825,6 @@ video {
 }
 .justify-around {
 	justify-content: space-around;
-}
-.space-x-6 > :not([hidden]) ~ :not([hidden]) {
-	--tw-space-x-reverse: 0;
-	margin-right: calc(1.5rem * var(--tw-space-x-reverse));
-	margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 .space-x-4 > :not([hidden]) ~ :not([hidden]) {
 	--tw-space-x-reverse: 0;
@@ -863,9 +855,6 @@ video {
 }
 .overflow-hidden {
 	overflow: hidden;
-}
-.overflow-y-auto {
-	overflow-y: auto;
 }
 .overflow-ellipsis {
 	text-overflow: ellipsis;
@@ -960,10 +949,6 @@ video {
 	--tw-bg-opacity: 1;
 	background-color: rgba(239, 68, 68, var(--tw-bg-opacity));
 }
-.bg-gray-600 {
-	--tw-bg-opacity: 1;
-	background-color: rgba(75, 85, 99, var(--tw-bg-opacity));
-}
 .bg-green-400 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(52, 211, 153, var(--tw-bg-opacity));
@@ -999,9 +984,6 @@ video {
 .bg-gray-800 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(31, 41, 55, var(--tw-bg-opacity));
-}
-.bg-opacity-50 {
-	--tw-bg-opacity: 0.5;
 }
 .object-contain {
 	-o-object-fit: contain;
@@ -1084,6 +1066,18 @@ video {
 .text-xl {
 	font-size: 1.25rem;
 	line-height: 1.75rem;
+}
+.text-9xl {
+	font-size: 8rem;
+	line-height: 1;
+}
+.text-6xl {
+	font-size: 3.75rem;
+	line-height: 1;
+}
+.text-4xl {
+	font-size: 2.25rem;
+	line-height: 2.5rem;
 }
 .font-bold {
 	font-weight: 700;

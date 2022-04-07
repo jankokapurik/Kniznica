@@ -83,7 +83,7 @@
                     <img src="{{ asset('/images/'.$book->image) }}" height="100" width="50" alt="kniha" class="mr-2">
                     <input type="file" name="image" id="image" class="bg-gray-100 border-2 w-full p-4 text-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600 hover:border-gray-300 trasition duration-500 @error('image') border-red-500 @enderror">
                     @error('image')
-                        <div class="text-red-500 mt-2 text-sm">
+                        <div class="text-red-500 mt-2 text-sm"> 
                             {{$message}}
                         </div>
                     @enderror
