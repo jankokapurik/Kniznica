@@ -29,7 +29,8 @@
             <form method="POST" action="{{ route('loan.update', $loan) }}">
                 @csrf
                 @method('PUT')
-                <div id="formstorage">            
+                <div id="formstorage">   
+                    @foreach($books as $book)         
                         <input name='books[]' type="hidden" value='{{ $book->id }}' />
                     @endforeach        
                 </div>

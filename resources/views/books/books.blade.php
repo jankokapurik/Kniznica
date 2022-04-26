@@ -38,9 +38,11 @@
             </div>
             <div id="mybox" class="p-4 mb-4 w-full flex flex-col divide-y divide-gray-300">
                 @if($books->count())
+
                     @foreach($books as $book)
                         <x-book :book="$book"/> 
-                    @endforeach 
+                    @endforeach
+                     
                     @else
                     <p>Nie je žiadna kniha</p>
                 @endif
