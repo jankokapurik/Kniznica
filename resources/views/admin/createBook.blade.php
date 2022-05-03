@@ -85,13 +85,13 @@
                 <div class="flex mb-6">
                     @if ($genres->count())
                     @foreach ($genres as $genre)   
-                    <div class="cursor-pointer">
-                        <label class="cursor-pointer">
-                            <input type="checkbox" name="genre[]" id="genre" value="{{ $genre->id }}" class="peer hidden">
-                            <span class="block m-1 bg-gray-200 text-gray-400 py-2 px-3 rounded-full transition duration-500 overflow-hidden text-lg peer-checked:bg-blue-500 peer-checked:text-white peer-checked:shadow-2xl peer-checked:ring-blue-500
-                            ">{{ $genre->name }}</span>
-                        </label>
-                    </div>
+                        <div class="cursor-pointer">
+                            <label class="cursor-pointer">
+                                <input type="checkbox" name="genre[]" id="genre" value="{{ $genre->id }}" class="peer hidden">
+                                <span class="block m-1 bg-gray-200 text-gray-400 py-2 px-3 rounded-full transition duration-500 overflow-hidden text-lg peer-checked:bg-blue-500 peer-checked:text-white peer-checked:shadow-2xl peer-checked:ring-blue-500
+                                ">{{ $genre->name }}</span>
+                            </label>
+                        </div>
                     @endforeach
                     @endif
                 </div>
