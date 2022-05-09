@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div>
-                        <p>Filtrovať podľa žáneru</p>                
+                        <p>Filtrovať podľa žánra</p>                
                         <div id="filter_genre">
                             @foreach ($genres as $genre)
                             <input type="checkbox" name="genre" value="{{$genre->id}}">
