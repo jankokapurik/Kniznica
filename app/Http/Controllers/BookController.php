@@ -80,7 +80,7 @@ class BookController extends Controller
             'genres' => $genres,
             'paginator' => [
                 'pages' => range($min, $max),
-                'actualPage' => 2,
+                'actualPage' => $page,
             ]
         ]);
 
