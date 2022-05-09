@@ -14,21 +14,69 @@ use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
-    public function index($request = null) {  
-        if($request){
-            $filter = explode('|', $request->filter);
+    public function index(Request $request) {  
+        $fetchedBooks = Book::Select(['books.*', 'authors.fname', 'authors.lname', 'languages.name' ])
+        ->join('authors', 'books.author_id', '=', 'authors.id')
+        ->join('languages', 'books.language_id', '=', 'languages.id')
+        ->orderBy('title')->get();
+        
+        $requestedGenres = $request->input('genre');
+        // dd($requestedGenres);
 
-            $books= Book::Select(['books.*', 'authors.fname', 'authors.lname' ])
-            ->join('authors', 'books.author_id', '=', 'authors.id')
-            ->orderBy('title')->get()
-            ->orderBy($filter[0],$filter[1])
-            ->paginate(10);
+        $books = $fetchedBooks->filter(function ($value) use ($requestedGenres){
+            // dd($requestedGenres);
+            // dd($value->genres);
+            return $value;
+        });
+
+        // dd($books);
+
+        
+
+        if(!$request->input('genre') && !$request->input('language'))
+        {
+            $books = $books->where('authors.fname', 'LIKE', "%{$request->search}%")
+            ->orWhere('authors.lname', 'LIKE', "%{$request->search}%")
+            ->orWhere('books.title', 'LIKE', "%{$request->search}%")->get();
         }
-        else{
-            $books= Book::Select(['books.*', 'authors.fname', 'authors.lname' ])
-            ->join('authors', 'books.author_id', '=', 'authors.id')
-            ->orderBy('title')->get();
+
+        if(!$request->input('genre') && $request->input('language'))
+        {
+            $books = $books->where('authors.fname', 'LIKE', "%{$request->search}%")
+            ->orWhere('authors.lname', 'LIKE', "%{$request->search}%")
+            ->orWhere('books.title', 'LIKE', "%{$request->search}%") 
+            ->where('books.language','LIKE' )->get();
         }
+
+        // $books->forget([0,1]);
+
+        // dd($request->input('genre'));
+        // dd($request->input('language'));
+
+        //// $collection->forget($key);
+
+
+        // if($request->input('language')){
+        //     dd($request->input('language'));
+        // }
+
+        
+        // dd($request->get);
+        // if($request){
+        //     $filter = explode('|', $request->filter);
+
+        //     $books= Book::Select(['books.*', 'authors.fname', 'authors.lname' ])
+        //     ->join('authors', 'books.author_id', '=', 'authors.id')
+        //     ->orderBy('title')->get()
+        //     ->orderBy($filter[0],$filter[1])
+        //     ->paginate(10);
+        // }
+        // else{
+        //     $books= Book::Select(['books.*', 'authors.fname', 'authors.lname' ])
+        //     ->join('authors', 'books.author_id', '=', 'authors.id')
+        //     ->orderBy('title')->get();
+        // }
+
         // $avg = Book::first()->comments()->avg('rating');
         $languages = Language::get();
         $genres = Genre::get();

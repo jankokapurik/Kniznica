@@ -7,7 +7,7 @@
             {{-- <x-searchbar id="meno" class="w-64" :values="$allBooks"></x-searchbar> --}}
             
 
-            <div id="filter">
+            <form id="filter" action={{ route("books") }}>
                 <div class="flex justify-center mb-4">
                     <x-search :values="$allBooks"></x-search>
                 </div>
@@ -16,22 +16,26 @@
                         <p>Filtrovať podľa jazyka</p>
                         <div id="filter_language">
                             @foreach ($languages as $language)
-                            <input type="checkbox" name="language" value="{{$language->id}}">
-                            <label for="{{$language->name}}">{{$language->name}}</label>
+                                <input type="checkbox" name="language[]" value="{{ $language->id }}" >
+                                <label for="{{$language->name}}">{{$language->name}}</label>
                             @endforeach
                         </div>
                     </div>
                     <div>
                         <p>Filtrovať podľa žáneru</p>                
                         <div id="filter_genre">
-                            @foreach ($genres as $genre)
+                            {{-- @foreach ($genres as $genre)
                             <input type="checkbox" name="genre" value="{{$genre->id}}">
                             <label for="{{$genre->name}}">{{$genre->name}}</label>
+                            @endforeach --}}
+                            @foreach ($genres as $genre)
+                                <input type="checkbox" name="genre[]" value="{{ $genre->id }}" >
+                                <label for="{{$genre->name}}">{{$genre->name}}</label>
                             @endforeach
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
 
             <div class="w-full flex flex-row align-middle p-4 border-b border-gray-300">
 
