@@ -18,7 +18,7 @@ class BookController extends Controller
         $books = Book::Select(['books.*', 'authors.fname', 'authors.lname', 'languages.name' ])
         ->join('authors', 'books.author_id', '=', 'authors.id')
         ->join('languages', 'books.language_id', '=', 'languages.id')
-        ->orderBy('title')->get();
+        ->orderBy('title')->paginate(2);
         
         $requestedGenres = $request->input('genre');
         $requestedLanguages = $request->input('language');
