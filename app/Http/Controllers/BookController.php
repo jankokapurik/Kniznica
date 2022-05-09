@@ -18,7 +18,10 @@ class BookController extends Controller
         $books = Book::Select(['books.*', 'authors.fname', 'authors.lname', 'languages.name' ])
         ->join('authors', 'books.author_id', '=', 'authors.id')
         ->join('languages', 'books.language_id', '=', 'languages.id')
-        ->orderBy('title')->paginate(2);
+        ->orderBy('title')->get();
+
+        // dd($books);
+        // ->paginate(2);
         
         $requestedGenres = $request->input('genre');
         $requestedLanguages = $request->input('language');
@@ -59,10 +62,26 @@ class BookController extends Controller
         $languages = Language::get();
         $genres = Genre::get();
 
+        $booksPerPage = 2;
+        $booksTotal = $books->count();
+        $pagesCount = intval(ceil($booksTotal/$booksPerPage));
+        $page = $request->input('page');
+       
+        if($page == null) $page = 1;
+
+        if($booksTotal > 0) $books = $books->chunk($booksPerPage)[$page-1];
+
+        $min = max([$page-2, 1]);
+        $max = min([$page+2, $pagesCount]);
+
         return view('books.books', [
             'books' => $books,
             'languages' => $languages,
             'genres' => $genres,
+            'paginator' => [
+                'pages' => range($min, $max),
+                'actualPage' => 2,
+            ]
         ]);
 
     }

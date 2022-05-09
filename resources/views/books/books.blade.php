@@ -1,10 +1,11 @@
 @extends('layouts.userLayout')
 
 @section('content')
-    <div class="flex justify-center">
+
+    <form class="flex justify-center" action={{ route("books") }}>
         <div class="w-8/12 bg-white p-6 rounded-lg" >
 
-            <form id="filter" action={{ route("books") }}>
+            <div>
                 <div class="flex justify-center mb-4">
                     <x-search :values="$allBooks"></x-search>
                 </div>
@@ -28,7 +29,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
 
             <div class="w-full flex flex-row align-middle p-4 border-b border-gray-300">
 
@@ -40,12 +41,26 @@
                         <x-book :book="$book"/> 
                     @endforeach 
 
-                    {{ $books->links() }}
+                    {{-- {{ $books->links() }} --}}
+
+                    {{-- {{dd($paginator['pagesCount'])}} --}}
+
+                    <div>
+                        @foreach ($paginator['pages'] as $page)
+                            @if ($page == $paginator['actualPage'])
+                                <input type="radio" id={{ $page }} name="page" value={{ $page }}>
+                                <label for={{ $page }}><strong>{{ $page }}</strong></label>
+                            @else
+                                <input type="radio" id={{ $page }} name="page" value={{ $page }}>
+                                <label for={{ $page }}>{{ $page }}</label>
+                            @endif
+                        @endforeach
+                    </div>
                      
                     @else
                     <p>Nie je žiadna kniha</p>
                 @endif
             </div> 
         </div>
-    </div>
+    </form>
 @endsection
