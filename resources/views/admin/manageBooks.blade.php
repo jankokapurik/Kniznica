@@ -60,12 +60,14 @@
                                 @endforelse  
                             </div>
                         </td>
-                        <td class="">
-                            <div class="flex flex-row justify-center align-middle">
+                        <td>
+                            @if($book->image)
                                 <img src="{{ asset('/images/'.$book->image) }}" alt="kniha" class="max-h-10 w-10">
-                            </div>
+                            @else
+                                <img src="{{ asset('/images/'."default_book.jpg") }}" alt="kniha" class="max-h-10 w-10">
+                            @endif
                         </td>
-                        <td class="">
+                        <td>
                             <div class="flex flex-row justify-center align-middle">
                                 <form action="{{ route('book.edit', $book->id) }}" class="m-1">
                                     <button class="bg-blue-500 border border-blue-500 p-1 rounded-md text-white hover:bg-blue-100 hover:text-blue-500 trasition duration-500">Upraviť</button>
