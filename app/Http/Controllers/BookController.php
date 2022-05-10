@@ -9,6 +9,7 @@ use App\Models\Genre;
 use App\Models\Author;
 use App\Models\Language;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -100,8 +101,13 @@ class BookController extends Controller
         $pagesCount = intval(ceil($booksTotal/$booksPerPage));
        
         
+        try{
+            if($booksTotal > 0) $books = $books->chunk($booksPerPage)[$page-1];
+        }catch(Exception $e){
+            $books = $books->chunk($booksPerPage)[0];
+        }
 
-        if($booksTotal > 0) $books = $books->chunk($booksPerPage)[$page-1];
+            
 
         $min = max([$page-2, 1]);
         $max = min([$page+2, $pagesCount]);
