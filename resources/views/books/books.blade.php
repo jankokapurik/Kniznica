@@ -18,7 +18,7 @@
                                 <div class="w-1/3  flex flex-nowrap">
                                     <input class="self-center" type="checkbox" name="language[]" value="{{ $language->id }}" 
                                     {{ (is_array(old('language'))) && (in_array($language->id ,old('language'))) ? "checked" : ""}}>
-                                    <label class="self-center" for="{{$language->name}}">{{$language->name}}</label>
+                                    <label class="ml-1 self-center" for="{{$language->name}}">{{$language->name}}</label>
                                 </div>
                             @endforeach
                         </div>
@@ -32,7 +32,7 @@
                                 <div class="w-1/3 flex flex-nowrap">
                                     <input class="self-center" type="checkbox" name="genre[]" value="{{ $genre->id }}" 
                                     {{ (is_array(old('genre'))) && (in_array($genre->id ,old('genre'))) ? "checked" : ""}}>
-                                    <label class="self-center" for="{{$genre->name}}">{{$genre->name}}</label>
+                                    <label class="ml-1 self-center" for="{{$genre->name}}">{{$genre->name}}</label>
                                 </div>
                             @endforeach
                         </div>
