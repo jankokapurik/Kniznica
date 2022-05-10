@@ -14,7 +14,8 @@
                         <p>Filtrovať podľa jazyka</p>
                         <div id="filter_language">
                             @foreach ($languages as $language)
-                                <input type="checkbox" name="language[]" value="{{ $language->id }}" >
+                                <input type="checkbox" name="language[]" value="{{ $language->id }}" 
+                                {{ (is_array(old('language'))) && (in_array($language->id ,old('language'))) ? "checked" : ""}}>
                                 <label for="{{$language->name}}">{{$language->name}}</label>
                             @endforeach
                         </div>
@@ -23,7 +24,8 @@
                         <p>Filtrovať podľa žánra</p>                
                         <div id="filter_genre">
                             @foreach ($genres as $genre)
-                                <input type="checkbox" name="genre[]" value="{{ $genre->id }}" >
+                                <input type="checkbox" name="genre[]" value="{{ $genre->id }}" 
+                                {{ (is_array(old('genre'))) && (in_array($genre->id ,old('genre'))) ? "checked" : ""}}>
                                 <label for="{{$genre->name}}">{{$genre->name}}</label>
                             @endforeach
                         </div>
@@ -41,14 +43,10 @@
                         <x-book :book="$book"/> 
                     @endforeach 
 
-                    {{-- {{ $books->links() }} --}}
-
-                    {{-- {{dd($paginator['pagesCount'])}} --}}
-
                     <div>
                         @foreach ($paginator['pages'] as $page)
                             @if ($page == $paginator['actualPage'])
-                                <input type="radio" id={{ $page }} name="page" value={{ $page }}>
+                                <input type="radio" id={{ $page }} name="page" value={{ $page }} checked>
                                 <label for={{ $page }}><strong>{{ $page }}</strong></label>
                             @else
                                 <input type="radio" id={{ $page }} name="page" value={{ $page }}>

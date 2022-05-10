@@ -74,6 +74,8 @@ class BookController extends Controller
         $min = max([$page-2, 1]);
         $max = min([$page+2, $pagesCount]);
 
+        $request->flash();
+        
         return view('books.books', [
             'books' => $books,
             'languages' => $languages,
@@ -195,7 +197,7 @@ class BookController extends Controller
         $authors = Author::get();
         $languages = Language::get();
         $genres = Genre::get();
-        var_dump($book->genre);
+        // var_dump($book->genre);
 
         return view('admin.editBook', [
             'book' => $book,

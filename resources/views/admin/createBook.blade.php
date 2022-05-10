@@ -6,7 +6,7 @@
             <form action="{{ route('book.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-4">
-                    <label for="author_id   " class="sr-only">Autor</label>
+                    <label for="author_id" class="sr-only">Autor</label>
                     <select name="author_id" class="bg-gray-100 border-2 w-full p-4 rounded-lg hover:border-gray-300 focus:border-gray-500 @error('author_id') border-red-500 @enderror trasition duration-500" value="">
                     <optgroup label="Autor">
                         <option class="font-bold" value=>Vyber autora</option>
@@ -15,7 +15,7 @@
                                 <option value="{{ $author->id }}" {{ (old('author_id') == $author->id ? "selected":"") }}>{{ $author->fname}} {{ $author->lname}}</option>
                             @endforeach
                         @else
-                            <p>Nie je ziaden autor</p>
+                            <p>Nie je žiaden autor</p>
                         @endif
                         </optgroup>
                         @error('author_id')
@@ -58,11 +58,11 @@
                     <optgroup label="Jazyk">
                         <option class="font-bold">Vyber jazyk</option>
                         @if($languages->count())
-                            @foreach($languages as $language    )
+                            @foreach($languages as $language)
                                 <option value="{{ $language->id}}" {{ (old('language_id') == $language->id ? "selected":"") }}>{{ $language->name}}</option>
                             @endforeach
                         @else
-                            <p>Nie je ziaden jazyk</p>
+                            <p>Nie je žiaden jazyk</p>
                         @endif
                         </optgroup>
                         @error('language_id')
