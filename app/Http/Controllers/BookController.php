@@ -96,7 +96,7 @@ class BookController extends Controller
             if($page == null) $page = 1;
         }
 
-        $booksPerPage = 2;
+        $booksPerPage = 4;
         $booksTotal = $books->count();
         $pagesCount = intval(ceil($booksTotal/$booksPerPage));
        
