@@ -8,11 +8,12 @@
             <label for="search" class="sr-only">Name</label>
             <input id="searchInput" autocomplete="off" type="text"
              name="search" placeholder="Vyhľadaj" class="bg-gray-100 border-2 border-gray-100 p-1 rounded-lg focus:outline-none focus:border-gray-400 focus:ring-0 hover:border-gray-300 trasition duration-500"
-             value="{{ old('search') }}">    
+             {{-- value="{{ old('search') }}" --}}
+             >    
              
             <div id="searchContainer" class="hidden transition bg-white inset-x-0 divide-y border-2 rounded-md capitalize"></div>
         </div>
-        <button id="searchButton" class="bg-blue-500 p-1 rounded-md text-white ml-2">Hladat</button>
+        <button id="searchButton" class="bg-blue-500 p-1 rounded-md text-white ml-2">Hľadať</button>
     </div>
 </div>
 

@@ -11,7 +11,7 @@
                 </div>
                 <div class="flex">
                     <div class="mr-5">
-                        <p>Filtrovať podľa jazyka</p>
+                        <strong>Filtrovať podľa jazyka</strong>
                         <div id="filter_language">
                             @foreach ($languages as $language)
                                 <input type="checkbox" name="language[]" value="{{ $language->id }}" 
@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div>
-                        <p>Filtrovať podľa žánra</p>                
+                        <strong>Filtrovať podľa žánra</strong>                
                         <div id="filter_genre">
                             @foreach ($genres as $genre)
                                 <input type="checkbox" name="genre[]" value="{{ $genre->id }}" 
@@ -48,10 +48,10 @@
                             @foreach ($paginator['pages'] as $page)
                                 @if ($page == $paginator['actualPage'])
                                     <input type="radio" id={{ $page }} name="page" value={{ $page }} checked  class="hidden">
-                                    <label class="bg-gray-300 w-8 text-center p-1 border-2 border-gray-500 m-1  rounded" for={{ $page }}><strong>{{ $page }}</strong></label>
+                                    <label class="bg-gray-300 w-8 text-center p-1 border-2 border-gray-500 m-1 cursor-pointer rounded" for={{ $page }}>{{ $page }}</label>
                                 @else
                                     <input type="radio" id={{ $page }} name="page" value={{ $page }} onclick="submit()" class="hidden">
-                                    <label class="bg-gray-100 w-8 text-center p-1 border-2 border-gray-500 m-1  rounded" for={{ $page }}>{{ $page }}</label>
+                                    <label class="bg-gray-100 w-8 text-center p-1 border-2 border-gray-500 m-1 cursor-pointer rounded" for={{ $page }}>{{ $page }}</label>
                                 @endif
                             @endforeach
                         </div>
@@ -63,21 +63,4 @@
             </div> 
         </div>
     </form>
-
-    <script>
-
-        function submitA() {
-            a = document.createElement("input");
-            a.type="radio";
-            a.id=1;
-            a.name="page";
-            a.value=1;
-
-            a.className="hidden";
-
-            a.checked = true;
-            document.getElementById("form").appendChild(a);
-            document.getElementById("form").submit();
-        }
-    </script>
 @endsection

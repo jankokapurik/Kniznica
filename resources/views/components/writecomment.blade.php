@@ -39,7 +39,7 @@
             @enderror
 
             <div>
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 reounded font-medium">Pridať</button>
+                <button type="submit" class="bg-blue-500 border-2 border-blue-500 p-2 rounded-md text-white hover:bg-blue-100 hover:text-blue-500 trasition duration-500 mt-2">Pridať</button>
             </div>
         </div>
     </form>

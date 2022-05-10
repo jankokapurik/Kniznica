@@ -1,9 +1,6 @@
 @extends('layouts.userLayout')
 
 @section('content')
-        {{-- <x-edit :comment="$comment"/> --}}
-    {{-- <x-comment :comment="$comment" /> --}}
-
     <div class="w-8/12 bg-white p-6 rounded-lg m-10">
 
         <form action="{{ route('comment.edit', ['comment' => $comment]) }}" method="post" class="mb-4">
@@ -13,8 +10,7 @@
             <div class="mb-4">
 
                 <label for=""></label>
-                {{-- <x-ratingbar :rating="$comment->rating"/> --}}
-                <x-input-rating name="rating" value="5"></x-input-rating>
+                <x-input-rating name="rating" value="{{ $comment->rating }}"></x-input-rating>
                     
 
                 <label for="body" class="sr-only">Body</label>
@@ -29,7 +25,7 @@
                 @enderror
     
                 <div>
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 reounded font-medium">zmenit</button>
+                    <button type="submit" class="bg-blue-500 border-2 border-blue-500 p-2 rounded-md text-white hover:bg-blue-100 hover:text-blue-500 trasition duration-500 mt-2">Zmeniť</button>
                 </div>
             </div>
         </form>

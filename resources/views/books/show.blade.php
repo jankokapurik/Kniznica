@@ -18,7 +18,6 @@
                     <p class="text-m">Jazyk: {{ $book->language->name }}</p>
                     <p class="text-m">Množstvo: {{ $book->quantity }} ks</p>
                     <p class="text-gray-600 text-m mb-2">
-
                         @forelse ($book->genres as $genre)
                             {{ $genre->name, }}
                         @empty
@@ -45,15 +44,15 @@
                         @endif
                     @endauth
                     @guest
-                        pre zapozicianie sa musite najprv prihlasit
+                        Pre zapožičanie sa musíte najprv prihlásiť
                     @endguest
-
                 </div>
             </div>  
+
+            @if($comments)
             <div class="min-w-full flex justify-center ">
                 <div class="mb-10 w-full flex justify-center">
-                    <div class="flex flex-col w-full">
-                        @if($comments)
+                    <div class="flex flex-col w-full">                        
                         <div class=" mb-6">
                             <div class="w-full flex">
                                 <div class="p-1"> 
@@ -95,35 +94,34 @@
                                 <div style="width: {{ $rating['star1']}}%" class="bg-red-400 rounded"></div>
                             </div>
                         </div>
-                    </div>                    
+                    </div>                                    
+
+                    @endif
+
+                    @guest
+                        <a href="{{route('login')}}" class="w-full bg-gray-200 p-5 rounded-lg mt-4 text-center">Aby ste mohli písať komentáre musíte sa najprv prihlásiť.</a>
+                    @endguest
+
                     @auth
-                        @if (!$hasComment)
+                        @if ($hasComment)
+                            <div class="w-full bg-gray-200 p-5 rounded-lg mt-4 text-center">Už ste komentovali.</div>
+                        @else                            
                             <x-writecomment :book="$book"/>
-                        @else
-                            <div class="p-2 bg-red-50 border-2 border-red-500 rounded-md mb-4">Už ste komentovali</div>
                         @endif                       
                     @endauth
-                    @guest
-                        <div class="p-2 bg-red-200">Pripojit sa</div>
-                    @endguest
-                    @foreach ($comments as $comment)
-                        <div class="bg-white rounded-lg " >
-                            <x-comment :comment="$comment" />
-                        </div>
-                    @endforeach
-                    @else
-                        <div>
-                            Nie je ziaden koment
-                        </div>
-                        @auth
-                            <x-writecomment :book="$book"/>
-                        @endauth
-                        @guest
-                            <div class="w-8/12 bg-white p-6 rounded-lg m-10">
-                                pripojit sa do diskusie
+
+                    @if ($comments != null)
+                        @foreach ($comments as $comment)
+                            <div class="bg-white rounded-lg " >
+                                <x-comment :comment="$comment" />
                             </div>
-                        @endguest
+                        @endforeach   
+                    @else
+                        <div class="w-full bg-gray-200 p-5 rounded-lg mt-4 text-center">
+                            Ku tejto knihe nie je napísaný žiaden komentár.
+                        </div>
                     @endif
+
                 </div>
             </div>
         </div>

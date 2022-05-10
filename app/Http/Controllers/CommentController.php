@@ -16,7 +16,6 @@ class CommentController extends Controller
     }
 
     public function index() {
-        dd("coment index");
         $coments = Comment::latest()->with(['user', 'likes'])->paginate(10);
         
         return view('knihy.knihy', [
@@ -51,15 +50,17 @@ class CommentController extends Controller
     public function edit(Request $request,Comment $comment){
         $this->validate($request, [
             'body' => 'required'
-        ]); 
+        ]);
 
-        
-        if($comment->comment === $request->body){
-            throw ValidationException::withMessages(['body' => 'The body field wasn\'t changed']);
+        if($comment->comment == $request->body && $comment->rating == $request->rating){
+            throw ValidationException::withMessages(['body' => 'Správa nebola zmenená']);
         };
 
         $this->authorize('update', $comment);
-        $comment->update(array('comment'=>$request->body));
+        $comment->update(array(
+            'comment'=>$request->body,
+            'rating'=>$request->rating
+    ));
         
         return redirect('books/'.$comment->book_id);
     }

@@ -6,6 +6,6 @@
             <p class="ratingshow-filled text-sm">&#9733</p>
         @else
             <p class="ratingshow-empty text-sm">&#9733</p>
-        @endif            
+        @endif
     @endfor
 </div>

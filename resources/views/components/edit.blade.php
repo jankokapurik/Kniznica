@@ -19,7 +19,7 @@
             @enderror
 
             <div>
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 reounded font-medium">zmenit</button>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 reounded font-medium">Zmeniť</button>
             </div>
         </div>
     </form>
