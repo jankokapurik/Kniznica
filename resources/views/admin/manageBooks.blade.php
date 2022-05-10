@@ -62,7 +62,7 @@
                         </td>
                         <td class="">
                             <div class="flex flex-row justify-center align-middle">
-                                <img src="{{ asset('/images/'.$book->image) }}" height="100" width="50" alt="kniha">
+                                <img src="{{ asset('/images/'.$book->image) }}" alt="kniha" class="max-h-10 w-10">
                             </div>
                         </td>
                         <td class="">
