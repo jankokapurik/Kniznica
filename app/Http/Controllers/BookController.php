@@ -28,6 +28,28 @@ class BookController extends Controller
         $requestedSearch = $request->input('search');
         
 
+        // if($request->input('search') != old('search')){
+        //     dump("zmena");
+        //     dump($request->input('search'));
+        //     dump(old('search'));
+        // }
+
+        // if($request->input('language') != old('language')){
+        //     dump("zmena");
+        //     dump($request->input('language'));
+        //     dump(old('language'));
+        // }
+
+
+        // if($request->input('genre') != old('genre')){
+        //     dump("zmena");
+        //     dump($request->input('genre'));
+        //     dump(old('genre'));
+        // }
+
+
+    
+
         if($requestedGenres != null){
             $books = $books->filter(function ($value) use ($requestedGenres){
                 $genres = $value->genres->pluck("id");
@@ -62,12 +84,22 @@ class BookController extends Controller
         $languages = Language::get();
         $genres = Genre::get();
 
+
+        if(($request->input('search') != old('search')) ||
+        ($request->input('language') != old('language')) ||
+        ($request->input('genre') != old('genre'))){
+           $page = 1;
+        }
+        else{
+            $page = $request->input('page');
+            if($page == null) $page = 1;
+        }
+
         $booksPerPage = 2;
         $booksTotal = $books->count();
         $pagesCount = intval(ceil($booksTotal/$booksPerPage));
-        $page = $request->input('page');
        
-        if($page == null) $page = 1;
+        
 
         if($booksTotal > 0) $books = $books->chunk($booksPerPage)[$page-1];
 
@@ -75,7 +107,7 @@ class BookController extends Controller
         $max = min([$page+2, $pagesCount]);
 
         $request->flash();
-        
+
         return view('books.books', [
             'books' => $books,
             'languages' => $languages,

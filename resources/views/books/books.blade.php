@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <form class="flex justify-center" action={{ route("books") }}>
+    <form id="form" class="flex justify-center" action={{ route("books") }}>
         <div class="w-8/12 bg-white p-6 rounded-lg" >
 
             <div>
@@ -43,16 +43,18 @@
                         <x-book :book="$book"/> 
                     @endforeach 
 
-                    <div>
-                        @foreach ($paginator['pages'] as $page)
-                            @if ($page == $paginator['actualPage'])
-                                <input type="radio" id={{ $page }} name="page" value={{ $page }} checked>
-                                <label for={{ $page }}><strong>{{ $page }}</strong></label>
-                            @else
-                                <input type="radio" id={{ $page }} name="page" value={{ $page }}>
-                                <label for={{ $page }}>{{ $page }}</label>
-                            @endif
-                        @endforeach
+                    <div class="flex justify-center">
+                        <div class="flex">
+                            @foreach ($paginator['pages'] as $page)
+                                @if ($page == $paginator['actualPage'])
+                                    <input type="radio" id={{ $page }} name="page" value={{ $page }} checked  class="hidden">
+                                    <label class="bg-gray-300 w-8 text-center p-1 border-2 border-gray-500 m-1  rounded" for={{ $page }}><strong>{{ $page }}</strong></label>
+                                @else
+                                    <input type="radio" id={{ $page }} name="page" value={{ $page }} onclick="submit()" class="hidden">
+                                    <label class="bg-gray-100 w-8 text-center p-1 border-2 border-gray-500 m-1  rounded" for={{ $page }}>{{ $page }}</label>
+                                @endif
+                            @endforeach
+                        </div>
                     </div>
                      
                     @else
@@ -61,4 +63,21 @@
             </div> 
         </div>
     </form>
+
+    <script>
+
+        function submitA() {
+            a = document.createElement("input");
+            a.type="radio";
+            a.id=1;
+            a.name="page";
+            a.value=1;
+
+            a.className="hidden";
+
+            a.checked = true;
+            document.getElementById("form").appendChild(a);
+            document.getElementById("form").submit();
+        }
+    </script>
 @endsection
