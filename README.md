@@ -1,64 +1,232 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Knižnica - Library Management System
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A comprehensive library management system built with Laravel that enables schools to manage their book collections, handle user loans, and provide a seamless experience for both administrators and students.
 
-## About Laravel
+## 📚 Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### User Management
+- **User Authentication** - Secure login and registration system
+- **Email Verification** - Verify user accounts via email
+- **Password Reset** - Forgot password functionality
+- **Role-Based Access** - Admin and regular user roles
+- **User Profiles** - Manage personal information and view loan history
+- **School & Classroom Integration** - Users are associated with schools and classrooms
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Book Management
+- **CRUD Operations** - Create, read, update, and delete books
+- **Soft Deletes** - Books can be soft-deleted and restored
+- **Book Catalog** - Browse and search through available books
+- **Book Details** - View comprehensive information including author, genre, language, description, and availability
+- **Book Images** - Upload and display book cover images
+- **Comments & Ratings** - Users can rate and comment on books
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Loan System
+- **Book Reservations** - Users can reserve books for borrowing
+- **Loan Approval** - Admin approval workflow for loan requests
+- **User Confirmation** - Users must confirm receipt of reserved books
+- **Loan Renewal** - Extend loan periods
+- **Return Management** - Track and process book returns
+- **Reservation Time Limits** - Automatic cancellation of expired reservations
+- **Loan History** - View borrowing history for each user
 
-## Learning Laravel
+### Administrative Features
+- **Admin Dashboard** - Centralized management interface
+- **User Management** - View, edit, and delete users
+- **Book Management** - Manage entire book catalog
+- **Loan Management** - Oversee all active and pending loans
+- **Author Management** - Add and manage book authors
+- **Genre Management** - Organize books by categories
+- **Language Management** - Track books in different languages
+- **School Management** - Manage schools in the system
+- **Classroom Management** - Manage classrooms within schools
+- **Reports** - Generate system reports (feature available)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Additional Features
+- **Advanced Search** - Search functionality across the book catalog
+- **Responsive Design** - Built with TailwindCSS for modern UI
+- **Email Notifications** - Account verification and notifications
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🛠️ Technology Stack
 
-## Laravel Sponsors
+- **Backend**: Laravel 8.x (PHP 7.3+/8.0+)
+- **Frontend**: Blade Templates, TailwindCSS 2.x
+- **Authentication**: Laravel Sanctum, Laravel UI
+- **Database**: MySQL/PostgreSQL (via Eloquent ORM)
+- **Build Tools**: Laravel Mix, NPM
+- **Additional Packages**:
+  - Guzzle HTTP client
+  - Laravel CORS
+  - Laravel Tinker
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## 📋 Requirements
 
-### Premium Partners
+- PHP >= 7.3 or 8.0
+- Composer
+- Node.js & NPM
+- MySQL or PostgreSQL
+- Web Server (Apache/Nginx)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
+## 🚀 Installation
 
-## Contributing
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd Kniznica
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2. **Install PHP dependencies**
+   ```bash
+   composer install
+   ```
 
-## Code of Conduct
+3. **Install NPM dependencies**
+   ```bash
+   npm install
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4. **Environment Configuration**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-## Security Vulnerabilities
+5. **Configure Database**
+   
+   Edit `.env` file and set your database credentials:
+   ```
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=kniznica
+   DB_USERNAME=your_username
+   DB_PASSWORD=your_password
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+6. **Configure Mail Settings**
+   
+   Set up email settings in `.env` for account verification:
+   ```
+   MAIL_MAILER=smtp
+   MAIL_HOST=your_smtp_host
+   MAIL_PORT=587
+   MAIL_USERNAME=your_email
+   MAIL_PASSWORD=your_password
+   MAIL_ENCRYPTION=tls
+   MAIL_FROM_ADDRESS=your_email
+   MAIL_FROM_NAME="${APP_NAME}"
+   ```
 
-## License
+7. **Run Migrations**
+   ```bash
+   php artisan migrate
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+8. **Seed Database (Optional)**
+   ```bash
+   php artisan db:seed
+   ```
+
+9. **Build Frontend Assets**
+   ```bash
+   npm run dev
+   # or for production
+   npm run prod
+   ```
+
+10. **Start Development Server**
+    ```bash
+    php artisan serve
+    ```
+
+The application will be available at `http://localhost:8000`
+
+## 📱 Usage
+
+### For Regular Users
+1. Register for an account
+2. Verify your email address
+3. Browse the book catalog
+4. Reserve books for borrowing
+5. Confirm receipt of reserved books
+6. View your loan history and active loans
+7. Rate and comment on books you've read
+
+### For Administrators
+1. Log in with admin credentials
+2. Access the admin dashboard at `/adminHome`
+3. Manage users, books, authors, genres, languages, schools, and classrooms
+4. Approve or reject loan requests
+5. Process book returns
+6. View system reports
+
+## 🗂️ Project Structure
+
+```
+app/
+├── Http/Controllers/     # Application controllers
+├── Models/              # Eloquent models
+├── Policies/            # Authorization policies
+└── Mail/                # Mail templates
+
+database/
+├── migrations/          # Database migrations
+├── factories/           # Model factories
+└── seeders/            # Database seeders
+
+resources/
+├── views/              # Blade templates
+├── css/                # Stylesheets
+└── js/                 # JavaScript files
+
+routes/
+├── web.php             # Web routes
+└── api.php             # API routes
+```
+
+## 🔐 Default User Roles
+
+The system supports two user types:
+- **Admin** - Full access to all management features
+- **User** - Access to book browsing, reservations, and personal dashboard
+
+## 📝 Key Models
+
+- **User** - System users (students, teachers, admins)
+- **Book** - Book catalog entries
+- **Author** - Book authors
+- **Genre** - Book categories
+- **Language** - Book languages
+- **Loan** - Book borrowing records
+- **Comment** - Book reviews and ratings
+- **School** - Educational institutions
+- **Classroom** - Class groups within schools
+
+## 🧪 Testing
+
+Run the test suite:
+```bash
+php artisan test
+# or
+./vendor/bin/phpunit
+```
+
+## 📊 Development
+
+### Watch Mode
+For automatic asset compilation during development:
+```bash
+npm run watch
+# or for hot reload
+npm run hot
+```
+
+### Code Style
+The project follows Laravel coding standards and best practices.
+
+## 📄 License
+
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
